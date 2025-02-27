@@ -37,7 +37,6 @@ jobs:
       - name: Log pull request opened
         if: github.event_name == 'pull_request' && github.event.action == 'opened'
         run: |
-          echo "COMMIT_LOG_API: $COMMIT_LOG_API"
           pipenv run gitcommitlogger -r $(echo $REPOSITORY_URL) -t pull_request_opened -d $(echo $PR_CREATED_AT) -un $(echo $GITHUB_LOGIN) -o commit_stats.csv -u $(echo $COMMIT_LOG_API) -v
       - name: Log pull request closed and merged
         if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
