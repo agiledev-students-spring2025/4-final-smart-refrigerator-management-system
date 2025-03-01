@@ -10,6 +10,16 @@ To add a new feature to the existing app, first create a new branch with new fea
 We follow the standard Javascript code conventions. We use ESLint linter and Prettier code formatter to help standardize our code.
 
 ## Rules of contributing
+- Follow the project’s coding style and guidelines.
+- Team members will be assigned tasks during sprint planning or standup meetings.
+- Use meaningful commit messages and detailed PR descriptions.
+- Discuss new ideas with the team before implementing them.
+- Reach out to the team if you have any questions or need guidance. Don't waste time when running into a blocker and ask the chat.
+- Remember this is a group project so always stay in touch.
+- Present new ideas during sprint planning or add them to the backlog after team discussion.
+- Code will be contributed based on assigned tasks.
+- Do not commit directly to the main branch. Use pull requests.
+
 
 ## Local Environment Setup
 Follow these steps to set up the **Smart Refrigerator Management System (SRMS)** for local development:  
