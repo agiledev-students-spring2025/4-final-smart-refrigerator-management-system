@@ -12,7 +12,7 @@ We follow the standard Javascript code conventions. We use ESLint linter and Pre
 ## Rules of contributing
 - Follow the project’s coding style and guidelines.
 - Team members will be assigned tasks during sprint planning or standup meetings.
-- Use meaningful commit messages and detailed PR descriptions.
+- Use meaningful, single line commit messages and detailed PR descriptions.
 - Discuss new ideas with the team before implementing them.
 - Reach out to the team if you have any questions or need guidance. Don't waste time when running into a blocker and ask the chat.
 - Remember this is a group project so always stay in touch.
