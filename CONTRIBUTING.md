@@ -1,6 +1,24 @@
 # Guide to Contributing
 
 ## Team Norms
+Teams are ideally synchronous for planning work, including task allocation, for effiient task management and rapid team building. Team size remains around 5 members but user stories will lessen over time given the complexity of the project from sprint 0 wireframe.
+
+## Sprint cadence
+Around 2 weeks per sprint to maintain an ahievable but not too relaxed pace.
+
+## Daily standups
+One fully synchronous call every Wednesday for planning. And 2 smaller progress reports a week, friday and tuesday by messaging. MIA for a full week results in a report to management. Team may redistribute task if time is cruial for it.
+
+## Coding standards
+VScode is our code editor and code linter TBA.
+Credit to Professorr for the below...
+Don't over-engineer. Write minimum code to get things working end to end, only then iterate to improve. - Code for each task and spike must be peer-reviewed and pass tests before merging into the main branch of code.
+Always push working code, if you break the pipeline/build then fix it.
+Make granular commits, per task or per bug fix.
+Provide descriptive commit messages.
+Write self documenting code. Use descriptive variable and function names. Avoid unnecessary name shortening.
+Don't leave dead/commented out code behind. If you see such code, delete it.
+Write automated tests to cover critical integration points and functionality (once you learn how to do that).
 
 ## Git workflow that the team follows
 We follow the feature branch workflow.
