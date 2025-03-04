@@ -7,11 +7,11 @@ Teams are ideally synchronous for planning work, including task allocation, for 
 Around 2 weeks per sprint to maintain an ahievable but not too relaxed pace.
 
 ## Daily standups
-One fully synchronous call every Wednesday for planning. And 2 smaller progress reports a week, friday and tuesday by messaging. MIA for a full week results in a report to management. Team may redistribute task if time is cruial for it.
+One fully synchronous call every Wednesday for planning. And 2 smaller progress reports a week, friday and tuesday by messaging. All team members agree to inform the entire team of any difficulty completing their work when answering the Daily Standup three questions. MIA for a full week results in a report to management. Team may redistribute task if time is cruial for it.
 
 ## Coding standards
 VScode is our code editor and code linter TBA.
-Credit to Professorr for the below...
+Credit to Professor for the below...
 Don't over-engineer. Write minimum code to get things working end to end, only then iterate to improve. - Code for each task and spike must be peer-reviewed and pass tests before merging into the main branch of code.
 Always push working code, if you break the pipeline/build then fix it.
 Make granular commits, per task or per bug fix.
