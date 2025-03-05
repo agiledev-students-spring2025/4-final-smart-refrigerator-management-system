@@ -1,7 +1,7 @@
 # Guide to Contributing
 
 ## Team Norms
-Teams are ideally synchronous for planning work, including task allocation, for effiient task management and rapid team building. Team size remains around 5 members but user stories will lessen over time given the complexity of the project from sprint 0 wireframe.
+Teams are ideally synchronous for planning work, including task allocation, for efficient task management and rapid team building. Team size remains around 5 members but user stories will lessen over time given the complexity of the project from sprint 0 wireframe.
 
 ## Sprint cadence
 Around 2 weeks per sprint to maintain an ahievable but not too relaxed pace.
