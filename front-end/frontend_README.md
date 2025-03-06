@@ -1,4 +1,4 @@
-# This is the temporary instruction to how to run the frontend:
+# This is the temporary instruction for how to run the frontend:
 
 **Step 1: nevigate to the frontend directory:**<br>
 cd front-end
