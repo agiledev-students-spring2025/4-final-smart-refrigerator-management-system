@@ -1,0 +1,152 @@
+.inventory-container {
+    padding: 20px;
+    padding-bottom: 80px;
+    position: relative;
+  }
+  
+  .inventory-container h1 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+  }
+  
+  .compartment-section {
+    margin-bottom: 30px;
+  }
+  
+  .compartment-section h2 {
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .item-card {
+    background-color: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .item-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .item-image-container {
+    height: 120px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  
+  .item-card:hover .item-image {
+    transform: scale(1.05);
+  }
+  
+  .item-info {
+    padding: 12px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .item-info h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .expiry-date, .quantity {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+  
+  .expiry-date {
+    font-weight: 500;
+  }
+  
+  .item-card.expired .expiry-date {
+    color: var(--danger-color);
+    font-weight: bold;
+  }
+  
+  .item-card.expiring-soon .expiry-date {
+    color: var(--warning-color);
+    font-weight: bold;
+  }
+  
+  .add-item-button {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    z-index: 10;
+  }
+  
+  .add-item-button span {
+    font-size: 32px;
+    line-height: 1;
+  }
+  
+  .add-item-button:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.1);
+  }
+  
+  .empty-inventory {
+    margin-top: 40px;
+    text-align: center;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    border: 1px dashed var(--border-color);
+  }
+  
+  .empty-inventory p {
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+  }
+  
+  .empty-inventory p:first-child {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  
+  @media (max-width: 480px) {
+    .items-grid {
+      grid-template-columns: 1fr;
+    }
+  }
