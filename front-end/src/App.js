@@ -4,23 +4,31 @@ import { InventoryProvider } from './contexts/InventoryContext';
 import InventoryManagement from './components/InventoryManagement';
 import ItemDetails from './components/ItemDetails';
 import ScanItems from './components/ScanItems';
+import Navbar from './components/Navbar';
+import SettingProfile from './components/SettingProfile';
+import FridgeSetup from './components/FridgeSetUp';
 
 import './App.css';
 
 function App() {
   return (
+    <div>
     <InventoryProvider>
       <Router>
         <div className="app-container">
+          <Navbar></Navbar>
           <Routes>
             <Route path="/inventory" element={<InventoryManagement />} />
             <Route path="/inventory/:id" element={<ItemDetails />} />
             <Route path="/scan" element={<ScanItems />} />
             <Route path="*" element={<Navigate to="/inventory" replace />} />
+            <Route path="/settings" element={<SettingProfile />}></Route>
+            <Route path="/Fridge-Model" element={<FridgeSetup/>}></Route>
           </Routes>
         </div>
       </Router>
     </InventoryProvider>
+    </div>
   );
 }
 
