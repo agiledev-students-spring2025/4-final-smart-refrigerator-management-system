@@ -7,6 +7,7 @@ function Navbar() {
         <nav className = "navbar">
             <button className= "hamburger">☰</button>
             <Link to="/inventory" className = "logo"> Logo </Link>
+            <Link to="/scan">Scan Items</Link>
             <Link to ="/settings" className="profile">account profile</Link>
         </nav>
     )

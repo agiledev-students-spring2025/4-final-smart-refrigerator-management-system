@@ -2,6 +2,10 @@ import "./SettingProfile.css"
 import { useNavigate } from "react-router-dom";
 
 function SettingProfile() {
+    const handleLogout = () => {
+        console.log("Logged out");
+        navigate('/Login')
+    };
 
     const navigate = useNavigate();
 
@@ -16,7 +20,7 @@ function SettingProfile() {
                 <button className="option">Notifications</button>
                 <button className="option">Dietary Preferences</button>
                 <button className="option">Help & Support</button>
-                <button className="option">Logout</button>
+                <button onClick={handleLogout} className="option">Logout</button>
             </div>
         </div>
     )

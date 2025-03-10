@@ -1,0 +1,29 @@
+.login-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .login-container input {
+    display: block;
+    margin: 10px auto;
+    padding: 8px;
+    width: 200px;
+  }
+  
+  .login-container button {
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .logout-button {
+    margin-left: 20px;
+    background-color: red;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+  }
+  
