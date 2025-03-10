@@ -7,6 +7,7 @@ import ScanItems from './components/ScanItems';
 import Navbar from './components/Navbar';
 import SettingProfile from './components/SettingProfile';
 import FridgeSetup from './components/FridgeSetUp';
+import Login from './components/Login';
 
 import './App.css';
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="*" element={<Navigate to="/inventory" replace />} />
             <Route path="/settings" element={<SettingProfile />}></Route>
             <Route path="/Fridge-Model" element={<FridgeSetup/>}></Route>
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </Router>
