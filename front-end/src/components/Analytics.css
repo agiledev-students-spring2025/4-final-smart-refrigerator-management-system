@@ -1,3 +1,4 @@
+/* Summary Box */
 .summary-box {
     background: #eee;
     padding: 15px;
@@ -5,6 +6,7 @@
     margin-bottom: 20px;
 }
 
+/* Grid Layout for Compartments */
 .compartment-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -19,6 +21,7 @@
     border-radius: 5px;
 }
 
+/* Analytics Page Navigation Buttons */
 .analytics-links {
     display: flex;
     justify-content: center;
@@ -39,43 +42,28 @@
     background: #45a049;
 }
 
-.date-selector {
-    display: flex;
-    justify-content: space-between;
+/* Date Selector */
+.date-selector, .days-selector {
     margin-bottom: 15px;
-}
-
-.date-selector label {
     font-size: 14px;
     display: flex;
+    justify-content: space-between;
+}
+
+.date-selector label, .days-selector label {
+    /*display: flex;*/
     flex-direction: column;
     margin-right: 10px;
 }
 
-.date-selector input {
-    padding: 5px;
+.date-selector input, .days-selector select {
+    /*padding: 1px;*/
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-left: 5px;
 }
 
-.summary-box {
-    background: #eee;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.days-selector {
-    margin-bottom: 15px;
-    font-size: 14px;
-}
-
-.days-selector select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
+/* Shopping Button Styles */
 .shop-btn {
     display: block;
     width: 100%;
@@ -92,6 +80,7 @@
     background: #45a049;
 }
 
+/* Grid Layout for Item Cards */
 .item-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -112,102 +101,18 @@
     border-radius: 5px;
 }
 
-.summary-box {
-    background: #eee;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+/* Remove default list padding */
+ul {
+    padding-left: 15px;
+    list-style-position: inside; /* Ensures bullets stay inside the content area */
 }
 
-.item-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 15px;
+/* Add spacing to list items */
+ul li {
+    margin-bottom: 5px;
 }
 
-.item-card {
-    background: #f4f4f4;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.item-thumbnail img {
-    width: 80px;
-    height: 80px;
-    border-radius: 5px;
-}
-
-.analytics-links {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.analytics-btn {
-    padding: 10px 15px;
-    background: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.analytics-btn:hover {
-    background: #45a049;
-}
-
-.date-selector {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-}
-
-.date-selector label {
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-    margin-right: 10px;
-}
-
-.date-selector input {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.summary-box {
-    background: #eee;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.days-selector {
-    margin-bottom: 15px;
-    font-size: 14px;
-}
-
-.days-selector select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.shop-btn {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-    background: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.shop-btn:hover {
-    background: #45a049;
+.container {
+    max-width: 80%;
+    margin: 0 auto;
 }
