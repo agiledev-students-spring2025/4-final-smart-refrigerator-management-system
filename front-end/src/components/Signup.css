@@ -1,4 +1,4 @@
-.login-container {
+.signup-container {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
     height: 100vh;
 }
 
-.login-container form {
+.signup-container form {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -15,7 +15,16 @@
     max-width: 320px;
 }
 
-.login-container input {
+.signup-container label {
+    text-align: left;
+    width: 100%;
+    max-width: 320px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.signup-container input {
     padding: 10px;
     width: 100%;
     max-width: 320px;
@@ -24,7 +33,7 @@
     font-size: 16px;
 }
 
-.login-container button {
+.signup-container button {
     padding: 12px;
     width: 100%;
     max-width: 320px;
@@ -37,9 +46,13 @@
     transition: background-color 0.3s ease;
 }
 
+.signup-container button:hover {
+    background-color: darkblue;
+}
+
 h1 {
     font-size: 26px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 h2 {
@@ -47,9 +60,18 @@ h2 {
     margin-bottom: 15px;
 }
 
+p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
 .link {
     color: blue;
     cursor: pointer;
     text-decoration: none;
     font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
 }
