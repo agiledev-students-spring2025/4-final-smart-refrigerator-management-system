@@ -9,6 +9,7 @@ import SettingProfile from './components/SettingProfile';
 import FridgeSetup from './components/FridgeSetUp';
 import Login from './components/Login';
 import Analytics from "./components/Analytics";
+import WastePattern from "./components/WastePattern";
 
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/login" element={<Login />} />
 
             <Route path="/analytics" element={<Analytics />} />
+            <Route path="/waste-pattern" element={<WastePattern />} />
           </Routes>
         </div>
       </Router>
