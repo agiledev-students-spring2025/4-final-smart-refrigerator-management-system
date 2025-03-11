@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import SettingProfile from './components/SettingProfile';
 import FridgeSetup from './components/FridgeSetUp';
 import Login from './components/Login';
+import Analytics from "./components/Analytics";
 
 import './App.css';
 
@@ -26,6 +27,8 @@ function App() {
             <Route path="/settings" element={<SettingProfile />}></Route>
             <Route path="/Fridge-Model" element={<FridgeSetup/>}></Route>
             <Route path="/login" element={<Login />} />
+
+            <Route path="/analytics" element={<Analytics />} />
           </Routes>
         </div>
       </Router>

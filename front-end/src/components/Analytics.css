@@ -1,0 +1,40 @@
+.summary-box {
+    background: #eee;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.compartment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.compartment-card {
+    background: #f4f4f4;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.analytics-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.analytics-btn {
+    padding: 10px 15px;
+    background: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.analytics-btn:hover {
+    background: #45a049;
+}
