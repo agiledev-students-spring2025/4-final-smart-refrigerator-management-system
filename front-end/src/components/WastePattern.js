@@ -11,38 +11,38 @@ const WastePattern = () => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
-    // Helper function to calculate expired items within selected date range
+    // Helper function: Get expired items within the selected date range
     const getExpiredItems = () => {
         if (!startDate || !endDate) return [];
 
         const start = new Date(startDate);
         const end = new Date(endDate);
 
-        return Object.values(compartments)
-            .flat()
-            .filter((item) => {
+        return Object.entries(compartments).flatMap(([compartment, items]) =>
+            items.filter((item) => {
                 if (!item.expiryDate) return false;
                 const expiry = new Date(item.expiryDate);
                 return expiry >= start && expiry <= end;
-            });
+            }).map((item) => ({ ...item, compartment })) // Attach compartment info
+        );
     };
 
     const expiredItems = getExpiredItems();
     const totalExpired = expiredItems.length;
 
-    // Calculate category-wise waste percentage
-    const categoryWaste = expiredItems.reduce((acc, item) => {
-        const category = item.category || "Other";
-        acc[category] = (acc[category] || 0) + 1;
+    // Categorize expired items by fridge compartment
+    const compartmentWaste = expiredItems.reduce((acc, item) => {
+        const compartment = item.compartment || "Other";
+        acc[compartment] = (acc[compartment] || 0) + 1;
         return acc;
     }, {});
 
-    // Convert category data to percentage
-    const chartData = {
-        labels: Object.keys(categoryWaste),
+    // Convert category data to percentage for the pie chart
+    const wasteChartData = {
+        labels: Object.keys(compartmentWaste).map((label) => label.replace(/([A-Z])/g, " $1").trim()), // Format labels
         datasets: [
             {
-                data: Object.values(categoryWaste),
+                data: Object.values(compartmentWaste),
                 backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#9966FF"],
             },
         ],
@@ -68,12 +68,12 @@ const WastePattern = () => {
             <div className="summary-box">
                 <p><strong>Total Items Tracked:</strong> {totalExpired}</p>
                 <p><strong>Food Wasted:</strong> {totalExpired > 0 ? `${((totalExpired / Object.values(compartments).flat().length) * 100).toFixed(1)}%` : "0%"}</p>
-                <p><strong>Estimated Cost Lost:</strong> ${totalExpired * 5} {/* Example: Assume $5 per wasted item */}</p>
+                <p><strong>Estimated Cost Lost:</strong> ${totalExpired * 5} {/* Assume $5 per wasted item */}</p>
             </div>
 
-            {/* Pie Chart for Category Breakdown */}
-            <h3>Waste Breakdown:</h3>
-            {totalExpired > 0 ? <Pie data={chartData} /> : <p>No expired items in selected date range.</p>}
+            {/* Waste Breakdown Pie Chart */}
+            <h3>Waste Breakdown by Fridge Section:</h3>
+            {totalExpired > 0 ? <Pie data={wasteChartData} /> : <p>No expired items in selected date range.</p>}
         </div>
     );
 };

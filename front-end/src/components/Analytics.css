@@ -158,3 +158,29 @@
 .analytics-btn:hover {
     background: #45a049;
 }
+
+.date-selector {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.date-selector label {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.date-selector input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.summary-box {
+    background: #eee;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
