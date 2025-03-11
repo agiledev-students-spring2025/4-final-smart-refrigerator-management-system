@@ -184,3 +184,30 @@
     border-radius: 5px;
     margin-bottom: 20px;
 }
+
+.days-selector {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.days-selector select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.shop-btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.shop-btn:hover {
+    background: #45a049;
+}
