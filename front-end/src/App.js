@@ -9,6 +9,9 @@ import SettingProfile from './components/SettingProfile';
 import FridgeSetup from './components/FridgeSetUp';
 import Login from './components/Login';
 import Signup from "./components/Signup";
+import Analytics from "./components/Analytics";
+import WastePattern from "./components/WastePattern";
+import ShoppingRecommendation from "./components/ShoppingRecommendation";
 
 import './App.css';
 
@@ -28,6 +31,9 @@ function App() {
             <Route path="/Fridge-Model" element={<FridgeSetup/>}></Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/waste-pattern" element={<WastePattern />} />
+            <Route path="/shopping-recommendation" element={<ShoppingRecommendation />} />
           </Routes>
         </div>
       </Router>
