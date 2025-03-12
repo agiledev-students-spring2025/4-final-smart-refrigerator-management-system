@@ -7,7 +7,9 @@ function Navbar() {
         <nav className = "navbar">
             <button className= "hamburger">☰</button>
             <Link to="/inventory" className = "logo"> Logo </Link>
-            <Link to ="/settings" className="profile">account profile</Link>
+            <Link to ="/settings" className="profile">
+                <img src="front-end/src/icons/PersonIcon.svg" alt="Profile Image"></img>
+            </Link>
         </nav>
     )
 
