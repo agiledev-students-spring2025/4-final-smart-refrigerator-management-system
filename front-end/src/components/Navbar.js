@@ -8,7 +8,8 @@ function Navbar() {
             <button className= "hamburger">☰</button>
             <Link to="/inventory" className = "logo"> Logo </Link>
             <Link to="/analytics">Analytics</Link>
-            <Link to ="/settings" className="profile">account profile</Link>
+            <Link to ="/recipe-suggestions" className="suggestions">Recipe Suggestions</Link>
+            <Link to ="/settings" className="profile">Account Profile</Link>
         </nav>
     )
 

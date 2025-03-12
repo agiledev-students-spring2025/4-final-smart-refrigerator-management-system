@@ -38,7 +38,6 @@ function App() {
             <Route path="/shopping-recommendation" element={<ShoppingRecommendation />} />
             <Route path="/recipe-suggestions" element={<RecipeSuggestions />}></Route>
           </Routes>
-          <BottomNavBar></BottomNavBar> 
         </div>
       </Router>
     </InventoryProvider>
