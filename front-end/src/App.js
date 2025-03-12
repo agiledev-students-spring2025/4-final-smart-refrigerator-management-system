@@ -7,6 +7,13 @@ import ScanItems from './components/ScanItems';
 import Navbar from './components/Navbar';
 import SettingProfile from './components/SettingProfile';
 import FridgeSetup from './components/FridgeSetUp';
+import BottomNavBar from './components/BottomNavBar';
+import RecipeSuggestions from './components/RecipeSuggestions';
+import Login from './components/Login';
+import Signup from "./components/Signup";
+import Analytics from "./components/Analytics";
+import WastePattern from "./components/WastePattern";
+import ShoppingRecommendation from "./components/ShoppingRecommendation";
 
 import './App.css';
 
@@ -24,7 +31,14 @@ function App() {
             <Route path="*" element={<Navigate to="/inventory" replace />} />
             <Route path="/settings" element={<SettingProfile />}></Route>
             <Route path="/Fridge-Model" element={<FridgeSetup/>}></Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/waste-pattern" element={<WastePattern />} />
+            <Route path="/shopping-recommendation" element={<ShoppingRecommendation />} />
+            <Route path="/recipe-suggestions" element={<RecipeSuggestions />}></Route>
           </Routes>
+          <BottomNavBar></BottomNavBar> 
         </div>
       </Router>
     </InventoryProvider>
