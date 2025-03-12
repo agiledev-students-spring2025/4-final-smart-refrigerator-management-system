@@ -28,7 +28,7 @@
     padding: 12px;
     width: 100%;
     max-width: 320px;
-    background-color: blue;
+    background-color: #4d7745;
     color: white;
     border: none;
     border-radius: 5px;
@@ -37,9 +37,15 @@
     transition: background-color 0.3s ease;
 }
 
+.login-container button:hover {
+    background-color: #6ca461;
+}
+
+
 h1 {
+    color: #314c2c;
     font-size: 26px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 h2 {
@@ -48,8 +54,11 @@ h2 {
 }
 
 .link {
-    color: blue;
+    color: #4d7745;
     cursor: pointer;
     text-decoration: none;
     font-weight: bold;
+}
+.link:hover {
+    text-decoration: underline;
 }
