@@ -10,6 +10,7 @@ function Navbar() {
     };
 
     return (
+
         <nav className="navbar">
 
             {/* Hamburger Menu Button */}

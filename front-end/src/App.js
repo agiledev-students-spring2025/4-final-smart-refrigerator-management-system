@@ -7,6 +7,7 @@ import ScanItems from './components/ScanItems';
 import Navbar from './components/Navbar';
 import SettingProfile from './components/SettingProfile';
 import FridgeSetup from './components/FridgeSetUp';
+
 import RecipeSuggestions from './components/RecipeSuggestions';
 import Login from './components/Login';
 import Signup from "./components/Signup";
@@ -16,6 +17,7 @@ import ShoppingRecommendation from "./components/ShoppingRecommendation";
 import Welcome from "./components/Welcome";
 import Home from "./components/Home";
 
+
 import './App.css';
 
 
@@ -23,7 +25,9 @@ function App() {
   return (
     <InventoryProvider>
       <Router>
+
         <AppContent />
+
       </Router>
     </InventoryProvider>
   );
