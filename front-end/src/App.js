@@ -7,7 +7,7 @@ import ScanItems from './components/ScanItems';
 import Navbar from './components/Navbar';
 import SettingProfile from './components/SettingProfile';
 import FridgeSetup from './components/FridgeSetUp';
-
+import DietaryPreference from './components/DietaryPreference';
 import RecipeSuggestions from './components/RecipeSuggestions';
 import Login from './components/Login';
 import Signup from "./components/Signup";
@@ -53,6 +53,7 @@ function AppContent() {
         <Route path="/scan" element={<ScanItems />} />
         <Route path="/settings" element={<SettingProfile />} />
         <Route path="/Fridge-Model" element={<FridgeSetup />} />
+        <Route path="/DietaryPrefernece" element={<DietaryPreference />}/>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/analytics" element={<Analytics />} />
