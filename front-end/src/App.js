@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { InventoryProvider } from './contexts/InventoryContext';
 import InventoryManagement from './components/InventoryManagement';
 import ItemDetails from './components/ItemDetails';
@@ -7,7 +7,6 @@ import ScanItems from './components/ScanItems';
 import Navbar from './components/Navbar';
 import SettingProfile from './components/SettingProfile';
 import FridgeSetup from './components/FridgeSetUp';
-import BottomNavBar from './components/BottomNavBar';
 import RecipeSuggestions from './components/RecipeSuggestions';
 import Login from './components/Login';
 import Signup from "./components/Signup";
@@ -15,6 +14,7 @@ import Analytics from "./components/Analytics";
 import WastePattern from "./components/WastePattern";
 import ShoppingRecommendation from "./components/ShoppingRecommendation";
 import Welcome from "./components/Welcome";
+import Home from "./components/Home";
 
 import './App.css';
 
@@ -39,6 +39,7 @@ function AppContent() {
 
       <Routes>
         <Route path="/" element={<Welcome />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/inventory" element={<InventoryManagement />} />
         <Route path="/inventory/:id" element={<ItemDetails />} />
         <Route path="/scan" element={<ScanItems />} />
