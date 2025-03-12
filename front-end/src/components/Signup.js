@@ -11,7 +11,7 @@ function Signup({ setUser }) {
     const handleSignup = (e) => {
         e.preventDefault();
         if (name && email && password) {
-            navigate("/inventory");  // Redirect after successful signup
+            navigate("/home");  // Redirect after successful signup
         } else {
             alert("Please fill in all fields!");
         }
