@@ -1,0 +1,59 @@
+/* src/SearchBar.css */
+
+.searchbar-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .searchbar-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;  
+    margin-bottom: 15px;
+  }
+  
+  .searchbar-input {
+    padding: 8px;
+    width: 300px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .searchbar-input:focus {
+    border-color: #4caf50;  /* Green border on focus */
+  }
+  
+  .searchbar-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .searchbar-button:hover {
+    background-color: #45a049;  /* Darker green when hovering */
+  }
+  
+  .searchbar-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .searchbar-list li {
+    padding: 5px 0;
+    font-size: 14px;
+  }
+  
+  .searchbar-no-results {
+    color: #888;
+    font-style: italic;
+    padding: 10px;
+  }
+  

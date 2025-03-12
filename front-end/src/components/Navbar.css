@@ -1,9 +1,91 @@
-.navbar{
-    padding:20px;
+.navbar {
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #FFF;
-    border: 1px solid #000;
+    background: #b8dea1;
+}
+.navbar .left,
+.navbar .right {
+    flex: 1; /* This makes both sides take equal width */
+    display: flex;
+    align-items: center;
 }
 
+/* Right side aligns to the end */
+.navbar .right {
+    justify-content: flex-end;
+}
+
+/* Centered logo container */
+.navbar .center {
+    flex: 0;
+    display: flex;
+    justify-content: center;
+}
+
+
+.logo svg {
+    height: 40px;
+}
+
+
+/* Hamburger Menu */
+.hamburger {
+    font-size: 50px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Sidebar Menu */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden */
+    width: 250px;
+    height: 100vh;
+    background-color: #222;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: left 0.3s ease-in-out;
+}
+
+/* Show sidebar when active */
+.sidebar.show {
+    left: 0;
+}
+
+/* Close Button */
+.close-btn {
+    align-self: flex-end;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Sidebar Links */
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.sidebar a:hover {
+    background-color: #444;
+    border-radius: 5px;
+}
+
+
+.profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
