@@ -12,6 +12,7 @@ import Signup from "./components/Signup";
 import Analytics from "./components/Analytics";
 import WastePattern from "./components/WastePattern";
 import ShoppingRecommendation from "./components/ShoppingRecommendation";
+import Welcome from "./components/Welcome";
 
 import './App.css';
 
@@ -23,10 +24,11 @@ function App() {
         <div className="app-container">
           <Navbar></Navbar>
           <Routes>
+            <Route path="/" element={<Welcome />} />
             <Route path="/inventory" element={<InventoryManagement />} />
             <Route path="/inventory/:id" element={<ItemDetails />} />
             <Route path="/scan" element={<ScanItems />} />
-            <Route path="*" element={<Navigate to="/inventory" replace />} />
+            <Route path="*" element={<Navigate to="/Welcome" replace />} />
             <Route path="/settings" element={<SettingProfile />}></Route>
             <Route path="/Fridge-Model" element={<FridgeSetup/>}></Route>
             <Route path="/login" element={<Login />} />

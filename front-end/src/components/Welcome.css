@@ -1,0 +1,26 @@
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+/* Button Styling */
+.welcome-button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 18px;
+    color: white;
+    background-color: #4d7745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.welcome-button:hover {
+    background-color: #388e3c;
+}
