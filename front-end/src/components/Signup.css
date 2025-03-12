@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: #d1f2c7;
 }
 
 .signup-container form {

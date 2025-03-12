@@ -32,10 +32,14 @@ function App() {
 function AppContent() {
   const location = useLocation(); // Get current route
 
+  // Define pages where the navbar should be hidden
+  const hideNavbarRoutes = ["/", "/login", "/signup"];
+
   return (
     <div className="app-container">
-      {/* Show Navbar on all pages except Welcome */}
-      {location.pathname !== "/" && <Navbar />}
+      {/* Show Navbar only if the current path is NOT in hideNavbarRoutes */}
+      {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
+
 
       <Routes>
         <Route path="/" element={<Welcome />} />

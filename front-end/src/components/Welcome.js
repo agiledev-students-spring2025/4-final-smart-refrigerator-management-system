@@ -15,14 +15,20 @@ function Welcome() {
             <h1>Welcome to Smart Fridge System!</h1>
             <p>Track your food inventory and reduce waste effortlessly.</p>
 
-            {/* Button to go to Inventory Page */}
+            {/* Button to go to Home Page */}
             <button className="welcome-button" onClick={() => navigate('/home')}>
                 Get Started
             </button>
 
-            <p>New to this? Go to User Guide!</p>
-            <button className="guide-button">
-                User Guide
+            {/* Button to go to Login */}
+            <p>Already have an acount? Log in!</p>
+            <button className="guide-button" onClick={() => navigate('/login')}>
+                Log in
+            </button>
+
+            <p>New to this? Sign up!</p>
+            <button className="guide-button" onClick={() => navigate('/signup')}>
+                Sign up
             </button>
         </div>
     );
