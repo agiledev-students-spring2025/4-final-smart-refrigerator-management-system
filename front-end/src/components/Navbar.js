@@ -25,6 +25,7 @@ function Navbar() {
             <div className={`sidebar ${isOpen ? "show" : ""}`}>
                 <button className="close-btn" onClick={toggleMenu}>×</button>
                 <Link to="/analytics" onClick={toggleMenu}>Analytics</Link>
+                <Link to ="/recipe-suggestions" onClick={toggleMenu}>Recipe Suggestions</Link>
                 <Link to="/settings" className="profile" onClick={toggleMenu}>Account Profile</Link>
             </div>
         </nav>
