@@ -1,0 +1,50 @@
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #d1f2c7;
+    text-align: center;
+    padding-top: 30px; /* Add padding to push content down */
+}
+
+/* Move the logo upward */
+.welcome-container #logo-36 {
+    margin-bottom: 10px; /* Adjust to move closer or further from the text */
+    position: relative;
+    top: -30px; /* Moves the logo up */
+}
+
+/* Button Styling */
+.welcome-button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 18px;
+    color: white;
+    background-color: #4d7745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.welcome-button:hover {
+    background-color: #6ca461;
+}
+
+.guide-button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 18px;
+    color: white;
+    background-color: #c5a658;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.guide-button:hover {
+    background-color: #ffd670;
+}

@@ -1,0 +1,40 @@
+.form-collector, .header, .feature-select{
+    padding:20px; 
+    margin: 20px;
+    display:flex;
+    flex-direction: column;
+}
+
+.header, .button-group{
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+
+.submit-button.settings-save{
+    width:60%;
+}
+
+.settings-label{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.checkbox{
+    display: flex;
+    gap:10px;
+}
+
+.multi-select {
+    min-height: 100px;
+    min-width: 200px;
+}
+
+.form-group label:after {
+    content: " (hold Ctrl/Cmd to select multiple)";
+    font-size: 0.8em;
+    font-style: italic;
+    color: #666;
+}

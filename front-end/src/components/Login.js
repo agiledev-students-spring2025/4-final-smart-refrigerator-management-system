@@ -10,7 +10,7 @@ function Login({ setUser }) {
     const handleLogin = (e) => {
         e.preventDefault();
         if (email && password) {
-            navigate("/inventory");
+            navigate("/home");
         } else {
             alert("Invalid credentials!");
         }
