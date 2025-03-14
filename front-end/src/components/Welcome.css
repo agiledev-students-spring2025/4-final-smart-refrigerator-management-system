@@ -4,47 +4,55 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #d1f2c7;
+    background: linear-gradient(to bottom, #a5d7bea3 , #feecd3);
     text-align: center;
     padding-top: 30px; /* Add padding to push content down */
 }
 
+
 /* Move the logo upward */
-.welcome-container #logo-36 {
+.welcome-container #logo {
     margin-bottom: 10px; /* Adjust to move closer or further from the text */
     position: relative;
-    top: -30px; /* Moves the logo up */
+    top: -20px; /* Moves the logo up */
 }
 
-/* Button Styling */
+.welcome-container h1 {
+    color: #314c2c;
+    font-size: 20px;
+    font-family: "sans-serif";
+    margin-bottom: 5px;
+}
+
+.welcome-container p {
+    font-size: 12px; 
+    font-family:"Inter", "Roboto", sans-serif;
+}
+
 .welcome-button {
     margin-top: 20px;
     padding: 12px 24px;
-    font-size: 18px;
+    font-size: 16px;
+    font-family: "Inter", "Roboto", sans-serif;
     color: white;
     background-color: #4d7745;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.welcome-button:hover {
-    background-color: #6ca461;
 }
 
 .guide-button {
-    margin-top: 20px;
+    width: 110px;  
+    height: 40px;
+    margin-top: 8px;
     padding: 12px 24px;
-    font-size: 18px;
+    font-size: 16px;
     color: white;
-    background-color: #c5a658;
+    background-color: #ceb061;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.guide-button:hover {
-    background-color: #ffd670;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

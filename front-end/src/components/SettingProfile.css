@@ -30,8 +30,12 @@
 }
 
 
-.option{
-    padding: 15px 100px;
+.option {
+    height: 50px;
+    width: 300px; 
+    text-align: center; 
+    white-space: nowrap;
+    padding: 0px 20px;
     justify-content: center;
     align-items: center;
     background-color: var(--accent-color);
