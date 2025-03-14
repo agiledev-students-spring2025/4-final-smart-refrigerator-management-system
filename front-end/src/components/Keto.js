@@ -1,7 +1,6 @@
 // src/components/RecipeSuggestions.js
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";  
 import Searchbar from './Searchbar';
 import Dropdown from './Dropdown';
 import Recipe from './Recipe';
@@ -14,7 +13,7 @@ function RecipeSuggestions() {
 
   // Handle search term
   function handleSearch(term) {
-    setSearchTerm(term); 
+    setSearchTerm(term); // Update search term state
   }
 
   // Handle dropdown selection
@@ -31,33 +30,16 @@ function RecipeSuggestions() {
       <Dropdown onSelect={handleDropdownSelect} /> 
       
       <div className="Suggested-Recipes">
-        <h3>AI Suggested Recipes Based on Ingredients: </h3>
+        <h3>Keto </h3>
             <Recipe 
                 name="Mac n Cheese"
                 description="This baked mac and cheese is a family favorite recipe, loved by both children and adults. It uses a combination of cheeses, layered in the dish as well as melted into a rich and creamy cheese sauce, for the ultimate in cheesy deliciousness! Perfect for a comforting dinner or as a holiday side dish!"
                 ingredients="Salt, elbow pasta, unsalted butter, whole milk, half n half, cheddar, gruyere, smoked paprika"
                 imageUrl="https://picsum.photos/seed/1/200/200" 
             /> 
-
-            <div className="more-link-container">
-                <Link to="/AiRecipes" className="more-link">More...</Link>
-            </div>
         
       </div>
 
-      <div className="Suggested-Recipes">
-        <h3>Saved in My Favorite Recipes: </h3>
-            <Recipe 
-                name="Easy Chicken Stir Fry Recipe"
-                description="This easy Chicken Stir Fry recipe is loaded with fresh veggies and the most delicious sauce made with honey, soy sauce, and toasted sesame oil! "
-                ingredients="Toasted Sesame Oil, Soy Sauce, Chicken Broth, Corn Starch, Red Pepper Flakes"
-                imageUrl="https://picsum.photos/seed/1/200/200" 
-            /> 
-
-            <div className="more-link-container">
-                <Link to="/Saved" className="more-link">More...</Link>
-            </div>
-      </div>
     </div>
   );
 }

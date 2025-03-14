@@ -16,8 +16,12 @@ import WastePattern from "./components/WastePattern";
 import ShoppingRecommendation from "./components/ShoppingRecommendation";
 import Welcome from "./components/Welcome";
 import Home from "./components/Home";
-
-
+import Keto from './components/Keto';
+import Vegan from './components/Vegan';
+import Vegetarian from './components/Vegetarian';
+import AiRecipes from './components/AiRecipes'; 
+import Saved from './components/Saved';
+import FullRecipe from './components/FullRecipe';
 import './App.css';
 
 
@@ -60,6 +64,12 @@ function AppContent() {
         <Route path="/waste-pattern" element={<WastePattern />} />
         <Route path="/shopping-recommendation" element={<ShoppingRecommendation />} />
         <Route path="/recipe-suggestions" element={<RecipeSuggestions />}></Route>
+        <Route path="/keto" element={<Keto />}></Route>
+        <Route path="/vegan" element={<Vegan />}></Route>
+        <Route path="/vegetarian" element={<Vegetarian />}></Route>
+        <Route path="/AiRecipes" element={<AiRecipes />}></Route>
+        <Route path="/Saved" element={<Saved />}></Route>
+        <Route path="/full-recipe" element={<FullRecipe />}></Route>
       </Routes>
     </div>
   );

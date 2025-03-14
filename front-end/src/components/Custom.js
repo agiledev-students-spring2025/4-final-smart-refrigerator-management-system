@@ -1,0 +1,1 @@
+//Yeah this probably is a redundant idea, what delineates a custom filter from a search? 
