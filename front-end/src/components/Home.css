@@ -3,10 +3,12 @@
     flex-direction: column;
     align-items: center;
     padding: 16px;
-    max-width: 400px;
+    max-width: 450px;
     margin: 0 auto;
+    font-family: "Inter", "Roboto", sans-serif;
 }
 
+/* Logo Styling */
 .logo-container {
     width: 96px;
     height: 96px;
@@ -16,48 +18,53 @@
     margin-bottom: 16px;
 }
 
-.logo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
+/* Welcome Message */
 .welcome-message {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
+    color: #314c2c;
 }
 
-.fridge-activity {
-    margin-top: 16px;
+/* Fridge Activity Section with Background Card */
+.fridge-card {
+    background: #f8ebd877;
+    padding: 16px;
+    border-radius: 12px;
     width: 100%;
+    max-width: 400px;
     text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
-.fridge-activity h2 {
+.fridge-card h2 {
     font-size: 18px;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .activity-item {
     display: flex;
     align-items: center;
-    margin-top: 8px;
+    margin-top: 10px;
 }
 
 .activity-icon {
     width: 48px;
     height: 48px;
-    margin-right: 8px;
+    margin-right: 12px;
 }
 
+/* Recipe Recommendations */
 .recipe-recommendations {
     margin-top: 24px;
     width: 100%;
 }
 
 .recipe-recommendations h2 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
+    color: #314c2c;
 }
 
 .recipe-grid {
@@ -71,12 +78,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.recipe-item:hover {
+    transform: scale(1.05);
 }
 
 .recipe-thumbnail {
     width: 96px;
     height: 96px;
     object-fit: cover;
+    border-radius: 8px;
 }
 
 .recipe-name {
@@ -88,4 +105,3 @@
     font-size: 14px;
     color: gray;
 }
-  
