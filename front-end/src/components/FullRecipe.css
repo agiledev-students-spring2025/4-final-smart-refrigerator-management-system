@@ -1,10 +1,9 @@
-.recipe-image {
-    width: 175px !important;  
-    height: 175px !important;
+.recipe-full-image {
+    width: 175px ;  
+    height: 175px ;
     object-fit: cover; 
     margin: 0 auto; 
     display: block;
-    border-radius: 8px; 
     margin-top: 12px; 
 }
 

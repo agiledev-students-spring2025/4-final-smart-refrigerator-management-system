@@ -9,7 +9,7 @@ function FullRecipe() {
       
         <img
             src = "https://picsum.photos/seed/1/200/200" 
-            className="recipe-image"
+            className="recipe-full-image"
         />
 
         <h1>Mac n Cheese</h1>

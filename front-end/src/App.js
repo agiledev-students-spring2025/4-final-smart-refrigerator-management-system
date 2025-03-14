@@ -16,7 +16,6 @@ import WastePattern from "./components/WastePattern";
 import ShoppingRecommendation from "./components/ShoppingRecommendation";
 import Welcome from "./components/Welcome";
 import Home from "./components/Home";
-
 import Keto from './components/Keto';
 import Vegan from './components/Vegan';
 import Vegetarian from './components/Vegetarian';
