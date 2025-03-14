@@ -7,14 +7,18 @@ import ScanItems from './components/ScanItems';
 import Navbar from './components/Navbar';
 import SettingProfile from './components/SettingProfile';
 import FridgeSetup from './components/FridgeSetUp';
-import BottomNavBar from './components/BottomNavBar';
 import RecipeSuggestions from './components/RecipeSuggestions';
 import Login from './components/Login';
 import Signup from "./components/Signup";
 import Analytics from "./components/Analytics";
 import WastePattern from "./components/WastePattern";
 import ShoppingRecommendation from "./components/ShoppingRecommendation";
-
+import Keto from './components/Keto';
+import Vegan from './components/Vegan';
+import Vegetarian from './components/Vegetarian';
+import AiRecipes from './components/AiRecipes'; 
+import Saved from './components/Saved';
+import FullRecipe from './components/FullRecipe';
 import './App.css';
 
 function App() {
@@ -37,6 +41,12 @@ function App() {
             <Route path="/waste-pattern" element={<WastePattern />} />
             <Route path="/shopping-recommendation" element={<ShoppingRecommendation />} />
             <Route path="/recipe-suggestions" element={<RecipeSuggestions />}></Route>
+            <Route path="/keto" element={<Keto />}></Route>
+            <Route path="/vegan" element={<Vegan />}></Route>
+            <Route path="/vegetarian" element={<Vegetarian />}></Route>
+            <Route path="/AiRecipes" element={<AiRecipes />}></Route>
+            <Route path="/Saved" element={<Saved />}></Route>
+            <Route path="/full-recipe" element={<FullRecipe />}></Route>
           </Routes>
         </div>
       </Router>

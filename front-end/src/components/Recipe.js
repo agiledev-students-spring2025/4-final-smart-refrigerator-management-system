@@ -1,29 +1,29 @@
+// src/components/Recipe.js
 import React from 'react';
+import { Link } from 'react-router-dom';
+import FullRecipe from './FullRecipe';
 import './Recipe.css';
 
-const Recipe = () => {
-
+function Recipe({ name, description, ingredients, imageUrl, id }) {
+    //gonna have to edit so id is matched to each recipe and then pass id to FullRecipe to fetch from data and render on page
   return (
     <div className="recipe-grid">
-      <div className="recipe">
+      <Link to={`/full-recipe`} className="recipe">
         <div className="recipe-image-container">
           <img
-            src={`https://picsum.photos/seed/1/200/200`}
-            // https://www.momontimeout.com/easy-chicken-stir-fry-recipe/ stir fry
+            src={imageUrl}
+            alt={name}
             className="recipe-image"
           />
         </div>
         <div className="recipe-info">
-          <h3>Mac n Cheese</h3>
-          <p>
-            This baked mac and cheese is a family favorite recipe, perfect for a comforting dinner or as
-            a holiday side dish!
-          </p>
-          <p>Ingredients: Salt, elbow pasta, unsalted butter, whole milk, half n half, cheddar, gruyere, smoked paprika</p>
+          <h3>{name}</h3>
+          <p>{description}</p>
+          <p>Ingredients: {ingredients}</p>
         </div>
-      </div>
+      </Link>
     </div>
   );
-};
+}
 
 export default Recipe;

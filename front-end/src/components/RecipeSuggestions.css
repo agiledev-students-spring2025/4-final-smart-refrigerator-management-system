@@ -1,0 +1,29 @@
+/* src/components/RecipeSuggestions.css */
+
+.Suggested-Recipes {
+    position: relative; 
+    padding-bottom: 25px;
+}
+  
+.more-link-container {
+    position: absolute; 
+    bottom: 10px;
+    right: 10px;
+}
+  
+.more-link {
+    color: #6a6666;
+    font-weight: bold;
+    font-size: 1rem;
+}
+  
+.more-link:hover {
+    color: #000000;
+}
+   
+@media (max-width: 480px) {
+    .more-link {
+      font-size: 0.75rem; 
+    }
+}
+  

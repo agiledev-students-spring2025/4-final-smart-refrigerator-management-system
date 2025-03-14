@@ -1,0 +1,73 @@
+.digital-timer {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 48px;
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: fit-content;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .digital-timer h1 {
+    margin: 0;
+  }
+  
+  .time-inputs {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .time-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .time-input label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  .time-input input {
+    width: 60px;
+    padding: 8px;
+    text-align: center;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .time-input input:disabled {
+    background-color: #f0f0f0;
+  }
+  
+  .timer-controls {
+    margin-top: 20px;
+  }
+  
+  .timer-controls button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    transition: background-color 0.3s;
+  }
+  
+  .timer-controls button:hover {
+    background-color: #555;
+  }
+  
+  .timer-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
