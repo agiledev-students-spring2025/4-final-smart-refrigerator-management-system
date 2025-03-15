@@ -9,48 +9,49 @@
     margin: 20px auto;
     text-align: center;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
+    transition: transform 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
+}
   
-  .digital-timer h1 {
+.digital-timer h1 {
     margin: 0;
-  }
+}
   
-  .time-inputs {
+.time-inputs {
     margin-top: 20px;
     display: flex;
     justify-content: center;
     gap: 10px;
-  }
+}
   
-  .time-input {
+.time-input {
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
+}
   
-  .time-input label {
+.time-input label {
     font-size: 1rem;
     margin-bottom: 5px;
-  }
+}
   
-  .time-input input {
+.time-input input {
     width: 60px;
     padding: 8px;
     text-align: center;
     font-size: 1rem;
     border: 2px solid #ccc;
     border-radius: 5px;
-  }
+}
   
-  .time-input input:disabled {
+.time-input input:disabled {
     background-color: #f0f0f0;
-  }
+}
   
-  .timer-controls {
+.timer-controls {
     margin-top: 20px;
-  }
+}
   
-  .timer-controls button {
+.timer-controls button {
     padding: 10px 20px;
     margin: 0 10px;
     font-size: 1.2rem;
@@ -60,14 +61,104 @@
     background-color: #333;
     color: #fff;
     transition: background-color 0.3s;
-  }
+}
   
-  .timer-controls button:hover {
+.timer-controls button:hover {
     background-color: #555;
-  }
+}
   
-  .timer-controls button:disabled {
+.timer-controls button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
-  }
+}
+  
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .digital-timer {
+      font-size: 36px;
+      padding: 15px;
+      transform: scale(0.9); /* Slight scaling down */
+    }
+  
+    .time-inputs {
+      flex-direction: column;
+    }
+  
+    .time-input input {
+      width: 50px;
+      font-size: 0.9rem;
+    }
+  
+    .timer-controls button {
+      padding: 8px 16px;
+      font-size: 1rem;
+    }
+}
+  
+@media (max-width: 480px) {
+    .digital-timer {
+      font-size: 28px;
+      padding: 12px;
+      transform: scale(0.8); /* More noticeable scaling down */
+    }
+  
+    .time-inputs {
+      gap: 5px;
+    }
+  
+    .time-input input {
+      width: 45px;
+      font-size: 0.8rem;
+    }
+  
+    .timer-controls button {
+      padding: 6px 12px;
+      font-size: 0.9rem;
+    }
+}
+  
+@media (max-width: 320px) {
+    .digital-timer {
+      font-size: 16px;
+      padding: 8px;
+      transform: scale(0.6); /* Aggressive scaling down */
+    }
+  
+    .time-inputs {
+      gap: 3px;
+    }
+  
+    .time-input input {
+      width: 30px;
+      font-size: 0.5rem;
+    }
+  
+    .timer-controls button {
+      padding: 3px 7px;
+      font-size: 0.65rem;
+    }
+}
+  
+  /* Even smaller adjustments */
+@media (max-width: 250px) {
+    .digital-timer {
+      font-size: 14px;
+      padding: 4px;
+      transform: scale(0.45); 
+    }
+  
+    .time-inputs {
+      gap: 1px;
+    }
+  
+    .time-input input {
+      width: 30px;
+      font-size: 0.6rem;
+    }
+  
+    .timer-controls button {
+      padding: 4px 8px;
+      font-size: 0.7rem;
+    }
+}
   
