@@ -98,15 +98,15 @@ If you would like to contribute:
 1. Fork the repository
 2. Create a new feature branch 
 ```bash
-git checkout -b feature/awesome-feature
+git checkout -b new-feature
 ```
 3. Make your changes and commit 
 ```bash
-git commit -m "Add awesome feature"
+git commit -m "Add new feature"
 ```
 4. Push to your fork 
 ```bash
-git push origin feature/awesome-feature
+git push origin new-feature
 ```
 5. Submit a pull request to the main branch.
 
