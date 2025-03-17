@@ -3,6 +3,8 @@ import React from 'react';
 import Timer from './Timer';
 import './FullRecipe.css'; 
 
+//needs to use backend AI and database for real recipes/images
+
 function FullRecipe() {
   return (
     <div>

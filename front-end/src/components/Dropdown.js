@@ -38,6 +38,7 @@ function Dropdown({ onSelect }) {
     
   }
 
+  //custom might require AI to recognize needs of category so backend/database dietary restrictions (?)
   // Handle change event for custom input
   function handleCustomInputChange(event) {
     setCustomOption(event.target.value);
