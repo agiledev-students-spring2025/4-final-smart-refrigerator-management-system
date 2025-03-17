@@ -1,0 +1,37 @@
+
+.account-setting{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    gap:20px;
+    padding: 5px;
+    padding-bottom: 50px;
+    margin-bottom: 20px;
+}
+
+.account-change{
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+    padding:10px;
+    align-items: center;
+    background-color: var(--text-secondary);
+    width: 70%;
+}
+
+.account-change p{
+    color:aliceblue
+}
+
+.account-change button{
+    padding: 6px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 15px;
+}
+
+
+.profile-image img{
+    width: 200px;
+}
