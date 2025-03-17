@@ -1,6 +1,6 @@
 .digital-timer {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 48px;
+    font-size: 40px;
     background-color: #000;
     color: #fff;
     padding: 20px;
@@ -76,8 +76,8 @@
 @media (max-width: 768px) {
     .digital-timer {
       font-size: 36px;
-      padding: 15px;
-      transform: scale(0.9); /* Slight scaling down */
+      padding: 12px;
+      transform: scale(0.8); /* Slight scaling down */
     }
   
     .time-inputs {
