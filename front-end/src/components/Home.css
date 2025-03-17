@@ -8,6 +8,12 @@
     font-family: "Inter", "Roboto", sans-serif;
 }
 
+.home-container h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #314c2c;
+}
+
 /* Logo Styling */
 .logo-container {
     width: 96px;
@@ -23,48 +29,62 @@
     font-size: 26px;
     font-weight: bold;
     color: #314c2c;
-}
-
-/* Fridge Activity Section with Background Card */
-.fridge-card {
-    background: #f8ebd877;
-    padding: 16px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 400px;
-    text-align: left;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-}
-
-.fridge-card h2 {
-    font-size: 18px;
-    font-weight: 600;
     margin-bottom: 10px;
 }
 
-.activity-item {
+.fridge-summary {
     display: flex;
-    align-items: center;
-    margin-top: 10px;
+    flex-direction: column; /* Ensure title is on its own line */
+    align-items: flex-start; /* Align everything to the left */
+    gap: 10px; /* Space between title and cards */
+    margin-top: 20px;
+    width: 100%;
 }
 
-.activity-icon {
-    width: 48px;
-    height: 48px;
-    margin-right: 12px;
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    width: 100%;
 }
+
+.summary-card, .expiring-card{
+    background: #f8ebd877;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.summary-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4d7745;
+}
+
+.summary-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #4d7745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.summary-button:hover {
+    background-color: #6fac63;
+}
+
 
 /* Recipe Recommendations */
 .recipe-recommendations {
     margin-top: 24px;
     width: 100%;
-}
-
-.recipe-recommendations h2 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #314c2c;
 }
 
 .recipe-grid {
@@ -105,3 +125,4 @@
     font-size: 14px;
     color: gray;
 }
+

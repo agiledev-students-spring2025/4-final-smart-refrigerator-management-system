@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function SettingProfile() {
     const handleLogout = () => {
         console.log("Logged out");
-        navigate('/Login')
+        navigate('/')
     };
 
     const navigate = useNavigate();
