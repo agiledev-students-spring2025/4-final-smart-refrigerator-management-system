@@ -1,57 +1,46 @@
 /* src/components/Recipe.css */
 
-.recipe-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-}
-  
 .recipe {
-    background-color: var(--card-background);
-    border-radius: 12px;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
     text-decoration: none; 
-    color: var(--text-primary);
     display: flex;
     flex-direction: column;
-    transform: scale(0.8);
-    transform-origin: center;
+    align-items: center;
 }
-  
+
 .recipe:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
 }
   
-.recipe-image-container {
-    height: 90px;
-    overflow: hidden;
-    position: relative;
-}
-  
 .recipe-image {
-    width: 100%;
-    height: 100%;
+    width: 96px;
+    height: 96px;
     object-fit: cover;
-    transition: transform 0.5s;
+    border-radius: 2px;
 }
   
 .recipe-info {
     padding: 12px;
     flex-grow: 1;
+    text-align: center;
     display: flex;
     flex-direction: column;
     font-size: 0.85rem;
 }
   
-.recipe-info h3 {
-    font-size: 1rem;
+.recipe-info name {
     margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--text-primary);
+    font-weight: 500;
+    color: black;
 }
   
-.recipe-info p {
+.recipe-info time {
+    font-size: .8rem;
+    color: rgb(74, 74, 74);
     margin: 0;
 }
   
