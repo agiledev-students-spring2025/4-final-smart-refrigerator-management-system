@@ -6,8 +6,10 @@ import ItemDetails from './components/ItemDetails';
 import ScanItems from './components/ScanItems';
 import Navbar from './components/Navbar';
 import SettingProfile from './components/SettingProfile';
+import AccountSetting from './components/AccountSetting';
 import FridgeSetup from './components/FridgeSetUp';
 import DietaryPreference from './components/DietaryPreference';
+import HelpSupport from './components/HelpSupport';
 import RecipeSuggestions from './components/RecipeSuggestions';
 import Login from './components/Login';
 import Signup from "./components/Signup";
@@ -56,8 +58,10 @@ function AppContent() {
         <Route path="/inventory/:id" element={<ItemDetails />} />
         <Route path="/scan" element={<ScanItems />} />
         <Route path="/settings" element={<SettingProfile />} />
+        <Route path="/Account-Setting" element={<AccountSetting />} />
         <Route path="/Fridge-Model" element={<FridgeSetup />} />
         <Route path="/DietaryPrefernece" element={<DietaryPreference />}/>
+        <Route path="Help-Support" element={<HelpSupport />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/analytics" element={<Analytics />} />

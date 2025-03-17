@@ -1,0 +1,21 @@
+.help-container{
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap:100px;
+}
+
+.search-bar{
+    gap:20px;
+    display:flex;
+}
+
+.search-button{
+    padding:10px;
+    max-height: 40px;
+}
+
+input{
+    padding: 10px;
+}
