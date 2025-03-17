@@ -116,3 +116,21 @@ ul li {
     max-width: 80%;
     margin: 0 auto;
 }
+
+.back-btn {
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    padding: 10px 15px;
+    background: #ccc;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+}
+
+.back-btn:hover {
+    background: #bbb;
+}
