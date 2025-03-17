@@ -51,8 +51,7 @@ const WastePattern = () => {
                 <p><strong>Estimated Cost Lost:</strong> ${totalExpired * 5}</p>
             </div>
             <h3>Waste Breakdown by Fridge Section:</h3>
-            {totalExpired > 0 ? <Pie data={wasteChartData} /> : <p>No expired items in selected date range.</p>}
-
+            {totalExpired > 0 ? <Pie data={wasteChartData} /> : <p className="center-text">No expired items in selected date range.</p>}
             {/* Back to Analytics Button */}
             <button className="back-btn" onClick={() => navigate("/analytics")}>← Back to Analytics</button>
         </div>

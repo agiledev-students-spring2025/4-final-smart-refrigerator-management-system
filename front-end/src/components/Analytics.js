@@ -71,7 +71,7 @@ const Analytics = () => {
             {/* Items by Compartment (Pie Chart) */}
             <section>
                 <h3>Items by Compartment</h3>
-                {totalItems > 0 ? <Pie data={compartmentChartData} /> : <p>No items in compartments.</p>}
+                {totalItems > 0 ? <Pie data={compartmentChartData} /> : <p className="center-text">No items in compartments.</p>}
             </section>
 
             {/* Most Used Items */}

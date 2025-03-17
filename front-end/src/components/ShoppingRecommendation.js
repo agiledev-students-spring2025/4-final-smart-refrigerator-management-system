@@ -41,13 +41,13 @@ const ShoppingRecommendation = () => {
             </div>
             <h3>Must-Buy Items:</h3>
             <ul>
-                {mustBuyItems.length === 0 ? <p>No items expiring soon.</p> :
+                {mustBuyItems.length === 0 ? <p className="center-text">No items expiring soon.</p> :
                     mustBuyItems.map((item) => <li key={item.id}>{item.name} (Expires in {getDaysUntilExpiration(item.expiryDate)} days)</li>)
                 }
             </ul>
             <h3>Replenishment Suggestions:</h3>
             <ul>
-                {replenishSuggestions.length === 0 ? <p>No items expiring in the following 7 days.</p> :
+                {replenishSuggestions.length === 0 ? <p className="center-text">No items expiring in the following 7 days.</p> :
                     replenishSuggestions.map((item) => <li key={item.id}>{item.name} (Expires in {getDaysUntilExpiration(item.expiryDate)} days)</li>)
                 }
             </ul>

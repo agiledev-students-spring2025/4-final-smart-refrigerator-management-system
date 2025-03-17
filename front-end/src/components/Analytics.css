@@ -134,3 +134,10 @@ ul li {
 .back-btn:hover {
     background: #bbb;
 }
+
+.center-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 75px;
+}
