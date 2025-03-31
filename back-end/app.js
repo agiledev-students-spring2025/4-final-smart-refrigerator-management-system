@@ -2,6 +2,8 @@
 const express = require("express") // CommonJS import style!
 const cors = require("cors");
 const app = express() // instantiate an Express object
+const path = require('path');
+const itemsRoutes = require('./routes/items');
 
 app.use(express.json());
 app.use(cors({
@@ -10,10 +12,14 @@ app.use(cors({
   allowedHeaders: ["Content-Type"] // Allowed headers
 }));
 
+app.use(express.static(path.join(__dirname, '../public')));
+
 // we will put some server logic here later...
 app.get("/", (req, res) => {
-    res.send("Hello from Express!");
+    res.send("Smart Refrigerator Management System API");
   });  
+
+app.use('/api/items', itemsRoutes);
 
 let userName = "john white"
 
@@ -64,6 +70,14 @@ app.post("/Account-Setting/:field", (req,res)=> {
     res.status(500).json({ error: "Server error while updating user data" });
   }
 })
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    status: 'error',
+    message: 'Something went wrong'
+  });
+});
 
 // export the express app we created to make it available to other modules
 module.exports = app
