@@ -2,7 +2,6 @@ const assert = require("assert")
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('./app');
-const server = require('./server');
 
 chai.use(chaiHttp);
 const expect = chai.expect;
@@ -155,7 +154,7 @@ describe("Account-setting API", function(){
 })
 
 // Login Tests 
-describe("POST /api/login", () => {
+describe("Login API", () => {
   it("should login successfully with valid credentials", (done) => {
     chai.request(app)
       .post("/api/login")
@@ -190,9 +189,4 @@ describe("POST /api/login", () => {
         done();
       });
   });
-});
-
-
-after(function() {
-  server.close();
 });
