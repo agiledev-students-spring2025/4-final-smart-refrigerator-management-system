@@ -75,6 +75,9 @@ function AppContent({ setUser }) {
         <Route path="/AiRecipes" element={<AiRecipes />}></Route>
         <Route path="/Saved" element={<Saved />}></Route>
         <Route path="/full-recipe" element={<FullRecipe />}></Route>
+        
+        <Route path="/full-recipe/:id" element={<FullRecipe />} /> 
+
       </Routes>
     </div>
   );
