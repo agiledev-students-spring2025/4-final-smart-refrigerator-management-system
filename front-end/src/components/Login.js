@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Login.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 function Login({ setUser }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -75,14 +78,20 @@ function Login({ setUser }) {
                     whileFocus={{ scale: 1.05 }}
                 />
 
-                <motion.input 
-                    type="password" 
-                    placeholder="Password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    required
-                    whileFocus={{ scale: 1.05 }}
-                />
+                <div className="password-input-wrapper">
+                    <motion.input 
+                        type={showPassword ? "text" : "password"} 
+                        placeholder="Password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required
+                        whileFocus={{ scale: 1.05 }}
+                        className="password-input"
+                    />
+                    <span className="password-toggle-icon" onClick={() => setShowPassword(prev => !prev)}>
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                </div>
 
                 <motion.button 
                     type="submit"
