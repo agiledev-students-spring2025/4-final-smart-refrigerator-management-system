@@ -8,14 +8,29 @@ function Login({ setUser }) {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (email && password) {
-            setTimeout(() => navigate("/home"), 300); // Add small delay for smooth transition
-        } else {
-            alert("Invalid credentials!");
+      
+        try {
+          const response = await fetch("http://localhost:5001/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+          });
+      
+          const data = await response.json();
+      
+          if (response.ok) {
+            setUser(data.user);
+            navigate("/home");
+          } else {
+            alert(data.error || "Login failed");
+          }
+        } catch (err) {
+          alert("Server error");
         }
-    };
+      };
+      
 
     return (
         <motion.div 
@@ -72,7 +87,6 @@ function Login({ setUser }) {
                     type="submit"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95, backgroundColor: "#6ca461" }}
-                    onClick={() => navigate("/home")}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
                 >
                     Log In
