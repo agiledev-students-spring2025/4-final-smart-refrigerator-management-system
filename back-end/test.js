@@ -7,18 +7,6 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-// a set of tests of array functions
-describe("Array", function () {
-  // one particular unit test
-  describe("#indexOf()", function () {
-    // assert what should be returned
-    it("should return -1 when the value is not present", function () {
-      // test that assertion
-      assert.equal(-1, [1, 2, 3].indexOf(4))
-    })
-  })
-})
-
 // inventory API tests
 describe("Inventory API", function() {
   // Test getting all items
@@ -109,6 +97,62 @@ describe("GET /api/items/category/:category", function() {
   });
 });
 });
+
+//Account setting API test 
+describe("Account-setting API", function(){
+  describe("GET /api/items/Account-Setting/:field/", function() {
+    it("should get updated username", function(done){ 
+      chai.request(app)
+      .get('/api/items/Account-Setting/name')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('name');
+        //expect to match database --> next sprint
+        done();
+      });
+    })
+
+    it("should get updated email", function(done){ 
+      chai.request(app)
+      .get('/api/items/Account-Setting/email')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('email');
+        //expect to match database --> next sprint
+        done();
+      });
+    })
+
+    it("should get updated phone", function(done){ 
+      chai.request(app)
+      .get('/api/items/Account-Setting/phone')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('phone');
+        //expect to match database --> next sprint
+        done();
+      });
+    })
+  })
+
+  describe("POST /api/items/Account-Setting/:field/", function(){
+    it("should update user's name", function(done){
+      chai.request(app)
+      .post("/api/items/Account-Setting/name")
+      .send({value : "John Doe"})
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('name');
+        expect(res.body.name).to.equal('John Doe');
+        done();
+      })
+    })
+  })
+
+})
 
 
 after(function() {
