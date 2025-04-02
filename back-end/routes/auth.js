@@ -8,6 +8,8 @@ const router = express.Router();
  */
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
+  console.log("Login attempt:", req.body); // 🐞 See what the server receives
+
 
   // Mock user
   const mockUser = {

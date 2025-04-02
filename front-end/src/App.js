@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { InventoryProvider } from './contexts/InventoryContext';
 import InventoryManagement from './components/InventoryManagement';
@@ -28,18 +28,19 @@ import './App.css';
 
 
 function App() {
+  const [user, setUser] = useState(null);
   return (
     <InventoryProvider>
       <Router>
 
-        <AppContent />
+      <AppContent setUser={setUser} />
 
       </Router>
     </InventoryProvider>
   );
 }
 
-function AppContent() {
+function AppContent({ setUser }) {
   const location = useLocation(); // Get current route
 
   // Define pages where the navbar should be hidden
@@ -62,7 +63,7 @@ function AppContent() {
         <Route path="/Fridge-Model" element={<FridgeSetup />} />
         <Route path="/DietaryPrefernece" element={<DietaryPreference />}/>
         <Route path="Help-Support" element={<HelpSupport />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/waste-pattern" element={<WastePattern />} />
