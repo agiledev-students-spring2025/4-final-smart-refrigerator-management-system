@@ -46,6 +46,21 @@ function RecipeSuggestions() {
     setFilter(value); 
   }
 
+  // Filter recipes based on search term
+  function filterRecipes(recipes) {
+    if (!searchTerm) return recipes;
+    return recipes.filter(recipe => 
+      recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+
+  // Apply the filter to suggested and favorite recipes
+  const filteredSuggestedRecipes = filterRecipes(suggestedRecipes);
+  const filteredFavoriteRecipes = filterRecipes(favoriteRecipes);
+
+  //must edit filteredFavoriteRecipes back in and create diff data section
+
   return (
     <div className="recipe-suggestions-container">
       <h1>Recipe Suggestions</h1>
@@ -56,9 +71,9 @@ function RecipeSuggestions() {
       
       <div className="Suggested-Recipes">
         <h3>AI Suggested Recipes Based on Ingredients: </h3>
-        {suggestedRecipes.length > 0 ? (
+        {filteredSuggestedRecipes.length > 0 ? (
           <div className="recipe-grid">
-            {suggestedRecipes.map(recipe => (
+            {filteredSuggestedRecipes.map(recipe => (
               <Recipe 
                 key={recipe.id}
                 name={recipe.name}
@@ -78,9 +93,9 @@ function RecipeSuggestions() {
 
       <div className="Suggested-Recipes">
         <h3>Saved in My Favorite Recipes: </h3>
-        {favoriteRecipes.length > 0 ? (
+        {filteredSuggestedRecipes.length > 0 ? (
           <div className="recipe-grid">
-            {favoriteRecipes.map(recipe => (
+            {filteredSuggestedRecipes.map(recipe => (
               <Recipe 
                 key={recipe.id}
                 name={recipe.name}
