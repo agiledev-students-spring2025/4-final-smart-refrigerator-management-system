@@ -3,9 +3,9 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('./app');
 const server = require('./server');
-const expect = chai.expect;
 
 chai.use(chaiHttp);
+const expect = chai.expect;
 
 // inventory API tests
 describe("Inventory API", function() {
@@ -154,7 +154,45 @@ describe("Account-setting API", function(){
 
 })
 
+// Login Tests 
+describe("POST /api/login", () => {
+  it("should login successfully with valid credentials", (done) => {
+    chai.request(app)
+      .post("/api/login")
+      .send({ email: "john@example.com", password: "1234567890" })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property("message", "Login successful");
+        expect(res.body).to.have.property("user");
+        expect(res.body.user).to.have.property("email", "john@example.com");
+        done();
+      });
+  });
+
+  it("should fail login with invalid credentials", (done) => {
+    chai.request(app)
+      .post("/api/login")
+      .send({ email: "wrong@example.com", password: "wrongpass" })
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        expect(res.body).to.have.property("error", "Invalid credentials");
+        done();
+      });
+  });
+
+  it("should fail login if email or password is missing", function (done) {
+    chai.request(app)
+      .post("/api/login")
+      .send({ email: "" }) // missing password
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        expect(res.body).to.have.property("error");
+        done();
+      });
+  });
+});
+
 
 after(function() {
-server.close();
+  server.close();
 });
