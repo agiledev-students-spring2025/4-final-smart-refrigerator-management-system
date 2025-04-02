@@ -2,20 +2,39 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Login.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 function Login({ setUser }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (email && password) {
-            setTimeout(() => navigate("/home"), 300); // Add small delay for smooth transition
-        } else {
-            alert("Invalid credentials!");
-        }
-    };
+      
+        try {
+          const response = await fetch("http://localhost:5001/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+          });
+      
+          const data = await response.json();
+      
+          if (response.ok) {
+            setUser(data.user);
+            navigate("/home");
+          } else {
+            alert(data.error || "Login failed");
+          }
+        } catch (err) {
+            console.error("Login fetch error:", err.message);  // 👈 this will show the actual error text
+            alert("Server error");
+          }                  
+      };
+      
 
     return (
         <motion.div 
@@ -59,20 +78,25 @@ function Login({ setUser }) {
                     whileFocus={{ scale: 1.05 }}
                 />
 
-                <motion.input 
-                    type="password" 
-                    placeholder="Password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    required
-                    whileFocus={{ scale: 1.05 }}
-                />
+                <div className="password-input-wrapper">
+                    <motion.input 
+                        type={showPassword ? "text" : "password"} 
+                        placeholder="Password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required
+                        whileFocus={{ scale: 1.05 }}
+                        className="password-input"
+                    />
+                    <span className="password-toggle-icon" onClick={() => setShowPassword(prev => !prev)}>
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                </div>
 
                 <motion.button 
                     type="submit"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95, backgroundColor: "#6ca461" }}
-                    onClick={() => navigate("/home")}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
                 >
                     Log In

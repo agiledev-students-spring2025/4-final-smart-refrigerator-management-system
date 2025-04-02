@@ -4,6 +4,8 @@ const cors = require("cors");
 const app = express() // instantiate an Express object
 const path = require('path');
 const itemsRoutes = require('./routes/items');
+const authRoutes = require('./routes/auth');
+
 
 app.use(express.json());
 app.use(cors({
@@ -20,6 +22,7 @@ app.get("/", (req, res) => {
   });  
 
 app.use('/api/items', itemsRoutes);
+app.use('/api', authRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

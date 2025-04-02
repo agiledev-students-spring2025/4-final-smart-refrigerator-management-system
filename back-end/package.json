@@ -20,10 +20,10 @@
     "pug": "^3.0.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.9",
     "c8": "^8.0.0",
-    "chai": "^4.3.7",
-    "chai-http": "^4.3.0",
-    "mocha": "^10.2.0"
+    "chai": "^4.5.0",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.8.2",
+    "nodemon": "^3.1.9"
   }
 }
