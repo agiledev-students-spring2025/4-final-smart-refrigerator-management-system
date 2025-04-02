@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
+const API_BASE_URL = "http://localhost:5001/api/items";
+
 function AccountInfo ({field, isEditing, info, changeText, onSave}){
     const [newValue, setNewValue] = useState(info);
 
@@ -43,7 +45,7 @@ export default function AccountSetting () {
             setAccount({ ...account, isEditingName: true });
         }
         else{
-            axios.post("http://localhost:5001/Account-Setting/name", { value: newName })
+            axios.post(`${API_BASE_URL}/Account-Setting/name`, { value: newName })
                 .then((res) => {
                     setAccount({ ...account, name: res.data.name, isEditingName: false });
                 })
@@ -57,7 +59,7 @@ export default function AccountSetting () {
             setAccount({ ...account, isEditingEmail: true });
         }
         else{
-            axios.post("http://localhost:5001/Account-Setting/email", { value: newEmail })
+            axios.post(`${API_BASE_URL}/Account-Setting/email`, { value: newEmail })
                 .then((res) => {
                     setAccount({ ...account, email: res.data.email, isEditingEmail: false });
                 })
@@ -71,7 +73,7 @@ export default function AccountSetting () {
             setAccount({ ...account, isEditingPhone: true });
         }
         else{
-            axios.post("http://localhost:5001/Account-Setting/phone", { value: newPhone })
+            axios.post(`${API_BASE_URL}/Account-Setting/phone`, { value: newPhone })
                 .then((res) => {
                     setAccount({ ...account, phone: res.data.phone, isEditingPhone: false });
                 })
@@ -80,19 +82,19 @@ export default function AccountSetting () {
     }
 
     useEffect( () => {
-        axios.get("http://localhost:5001/Account-Setting/name")
+        axios.get(`${API_BASE_URL}/Account-Setting/name`)
             .then((res)=> {
                 setAccount(prev => ({ ...prev, name: res.data.name }))
             })
             .catch((err) => console.error(err))
 
-        axios.get("http://localhost:5001/Account-Setting/email")
+        axios.get(`${API_BASE_URL}/Account-Setting/email`)
             .then((res) => {
                 setAccount(prev => ({ ...prev, email: res.data.email }));
             })
             .catch((err) => console.error(err));
 
-        axios.get("http://localhost:5001/Account-Setting/phone")
+        axios.get(`${API_BASE_URL}/Account-Setting/phone`)
             .then((res) => {
                 setAccount(prev => ({ ...prev, phone: res.data.phone }));
             })
