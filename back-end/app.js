@@ -5,6 +5,7 @@ const app = express() // instantiate an Express object
 const path = require('path');
 const itemsRoutes = require('./routes/items');
 const authRoutes = require('./routes/auth');
+const recipeRoutes = require('./routes/recipes');
 
 
 app.use(express.json());
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 
 app.use('/api/items', itemsRoutes);
 app.use('/api', authRoutes);
+app.use('/api/recipes', recipeRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
