@@ -1,46 +1,73 @@
-// src/components/FullRecipe.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';  // Import useParams for dynamic routing
 import Timer from './Timer';
-import './FullRecipe.css'; 
-
-//needs to use backend AI and database for real recipes/images
+import './FullRecipe.css';
 
 function FullRecipe() {
+  const { id } = useParams();  // Get the dynamic ID from the URL
+  const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch recipe data based on ID from URL
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      try {
+        const response = await fetch(`http://localhost:5001/api/recipes/${id}`);
+        const data = await response.json();
+        if (response.ok) {
+          setRecipe(data.data);
+        } else {
+          setError('Recipe not found');
+        }
+      } catch (err) {
+        setError('Failed to fetch recipe');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecipe();
+  }, [id]);  // Re-run the effect if the ID changes
+
+  // Display loading message or error
+  if (loading) {
+    return <p>Loading recipe...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
   return (
     <div>
-      
-        <img
-            src = "https://picsum.photos/seed/1/200/200" 
+      {recipe && (
+        <>
+          <img
+            src={recipe.imageUrl}
+            alt={recipe.name}
             className="recipe-full-image"
-        />
+          />
+          <h1>{recipe.name}</h1>
+          <h4>Cook time: {recipe.time}</h4>
 
-        <h1>Mac n Cheese</h1>
-        <h4>Cook time: 40 min</h4>
+          <h3>Ingredients</h3>
+          <div className="ingredients-container">
+            {recipe.ingredients.map((ingredient, index) => (
+              <p key={index}>{ingredient}</p>
+            ))}
+          </div>
 
-        <h3>Ingredients</h3>
-        <div className="ingredients-container">
-          <p>Salt</p>
-          <p>Elbow Pasta</p>
-          <p>Unsalted Butter</p>
-          <p>Whole Milk</p>
-          <p>Half n Half</p>
-          <p>Cheddar</p>
-          <p>Gruyere</p>
-          <p>Smoked Paprika</p>
-        </div>
+          <h3>Cook</h3>
+          <div className="instructions-container">
+            {recipe.instructions.map((instruction, index) => (
+              <p key={index}>{instruction}</p>
+            ))}
+          </div>
 
-        <h3>Cook</h3>
-        <div className="instructions-container">
-          <p>1. Cook Pasta</p>
-          <p>2. Shred cheese</p>
-          <p>3. Put butter, whole milk, half n half and seasonings on low heat until boil</p>
-          <p>4. Add 2/3 of shredded cheese and mix until smooth</p>
-          <p>5. take off heat, strain pasta and add to cheese mixture</p>
-          <p>6. Add to baking dish and distribute shreeded cheese on top evenly</p>
-          <p>7. Cook in oven on bake 365 for 25 minutes</p>
-
-          <Timer></Timer>
-        </div>
+          <Timer />
+        </>
+      )}
     </div>
   );
 }
