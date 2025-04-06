@@ -308,4 +308,47 @@ router.post("/Account-Setting/:field", (req,res)=> {
   }
 })
 
+// add frequent items endpoint
+router.get('/frequent', (req, res) => {
+  const frequentItems = [
+    { id: 'f1', name: 'Eggs', quantity: '12 count', frequency: 'weekly', category: 'Dairy' },
+    { id: 'f2', name: 'Milk', quantity: '1 gallon', frequency: 'weekly', category: 'Dairy' },
+    { id: 'f3', name: 'Bread', quantity: '1 loaf', frequency: 'weekly', category: 'Bakery' }
+  ];
+  
+  res.json({
+    status: 'success',
+    data: frequentItems
+  });
+});
+
+// add starter/common items endpoint
+router.get('/starter', (req, res) => {
+  const starterItems = [
+    { id: 's1', name: 'Salt', category: 'Pantry', nonExpiring: true },
+    { id: 's2', name: 'Sugar', category: 'Pantry', nonExpiring: true },
+    { id: 's3', name: 'Flour', category: 'Pantry', expiresIn: '12 months' },
+    { id: 's4', name: 'Rice', category: 'Pantry', expiresIn: '24 months' },
+    { id: 's5', name: 'Olive Oil', category: 'Pantry', expiresIn: '24 months' }
+  ];
+  
+  res.json({
+    status: 'success',
+    data: starterItems
+  });
+});
+
+router.post('/quick-add', (req, res) => {
+  const { itemId, quantity } = req.body;
+  res.status(200).json({
+    status: 'success',
+    message: 'Item quickly added to inventory',
+    data: {
+      id: itemId,
+      quantity: quantity,
+      dateAdded: new Date().toISOString().split('T')[0]
+    }
+  });
+});
+
 module.exports = router;
