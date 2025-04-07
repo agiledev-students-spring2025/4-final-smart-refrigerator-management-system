@@ -190,3 +190,39 @@ describe("Login API", () => {
       });
   });
 });
+
+//Signup Tests
+describe("Signup API", () => {
+  it("should signup successfully with valid data", (done) => {
+    chai.request(app)
+      .post("/api/signup")
+      .send({
+        email: "newuser@example.com",
+        password: "securepassword",
+        name: "New User"
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(201);
+        expect(res.body).to.have.property("message", "Signup successful");
+        expect(res.body).to.have.property("user");
+        expect(res.body.user).to.have.property("email", "newuser@example.com");
+        expect(res.body.user).to.have.property("name", "New User");
+        done();
+      });
+  });
+
+  it("should fail if required fields are missing", (done) => {
+    chai.request(app)
+      .post("/api/signup")
+      .send({
+        email: "incomplete@example.com"
+        // missing name and password
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(400); // You'll need to implement this in your route
+        expect(res.body).to.have.property("error");
+        done();
+      });
+  });
+});
+
