@@ -16,7 +16,7 @@ const router = express.Router();
  */
 router.post('/login', (req, res) => {
   const { email, password } = req.body;
-  console.log("Login attempt:", req.body); // 🐞 See what the server receives
+  // console.log("Login attempt:", req.body); // 🐞 See what the server receives
 
   // Mock user
   const user = mockUsers.find(u => u.email === email && u.password === password);
@@ -42,7 +42,7 @@ router.post('/login', (req, res) => {
  */
 router.post('/signup', (req, res) => {
   const { email, password, name } = req.body;
-  console.log("Signup data received:", req.body); // 🐞 See what the server receives
+  // console.log("Signup data received:", req.body); // 🐞 See what the server receives
 
   // Input validation
   if (!email || !password || !name) {
@@ -73,7 +73,7 @@ router.post('/signup', (req, res) => {
  * @access  Public
  */
 router.post('/logout', (req, res) => {
-  console.log("Logout request received");
+  // console.log("Logout request received");
   // In a real app: clear session or token here
   res.status(200).json({ message: 'Logout successful' });
 });

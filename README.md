@@ -6,12 +6,19 @@
 
 - **Product Owner** - Jin Lee
 
-- **Scrum Master 1** - Veronica Zhao
+- **Scrum Master** - Veronica Zhao
+
+**Sprint 1:**
+
+- **Product Owner** -
+
+- **Scrum Master** - Sherry Liu
 
 **Sprint 2:**
-- **Product Owner** - Jin Lee
 
-- **Scrum Master 2** - Chelsea Hodgson
+- **Product Owner** -
+
+- **Scrum Master** - Chelsea Hodgson
 
 Our product vision: Making fridge management smarter—so you waste less, save more, and eat better.
 
