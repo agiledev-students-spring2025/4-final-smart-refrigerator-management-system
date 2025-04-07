@@ -28,10 +28,12 @@ function Navbar() {
 
             {/* Home page */}
             <div className="center">
-                <Link to="/home" className="logo">
-                    <img id="logo" src="/logo.svg" alt="Smart Fridge Logo" height = "50px"/>
-                </Link>
+            <Link to="/home" className="logo-link">
+                <img id="logo" src="/logo.svg" alt="Smart Fridge Logo" height="50px" />
+                <span className="home-text">Home</span>
+            </Link>
             </div>
+
 
 
             {/* Account Icon */}

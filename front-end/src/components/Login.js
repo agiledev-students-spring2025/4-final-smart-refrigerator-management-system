@@ -30,7 +30,7 @@ function Login({ setUser }) {
             alert(data.error || "Login failed");
           }
         } catch (err) {
-            console.error("Login fetch error:", err.message);  // 👈 this will show the actual error text
+            console.error("Login fetch error:", err.message); 
             alert("Server error");
           }                  
       };

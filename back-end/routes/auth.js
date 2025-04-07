@@ -13,7 +13,7 @@ router.post('/login', (req, res) => {
   // Mock user
   const mockUser = {
     email: 'john@example.com',
-    password: '1234567890'
+    password: '12345'
   };
 
   if (email === mockUser.email && password === mockUser.password) {
@@ -22,7 +22,7 @@ router.post('/login', (req, res) => {
       user: { email: mockUser.email }
     });
   } else {
-    res.status(401).json({ error: 'Invalid credentials' });
+    return res.status(401).json({ error: 'Invalid credentials' });
   }
 });
 
