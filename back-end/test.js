@@ -226,3 +226,17 @@ describe("Signup API", () => {
   });
 });
 
+describe('Auth API', () => {
+  describe('POST /api/logout', () => {
+    it('should logout successfully and return status 200', (done) => {
+      chai.request(app)
+        .post('/api/logout')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message').eql('Logout successful');
+          done();
+        });
+    });
+  });
+});
