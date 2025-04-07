@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useInventory } from "../contexts/InventoryContext";
@@ -26,6 +26,21 @@ const Home = () => {
         const days = getDaysUntilExpiration(item.expiryDate);
         return days !== null && days <= 3;
     });
+
+    // State to store recipe data
+    const [recipes, setRecipes] = useState([]);
+
+    // Fetch recipe data from backend
+    useEffect(() => {
+        fetch('http://localhost:5001/api/recipes') // This URL assumes your backend serves recipes here
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.status === 'success') {
+                    setRecipes(data.data);  // Assuming `data.data` is the array of recipes
+                }
+            })
+            .catch((error) => console.error('Error fetching recipes:', error));
+    }, []);
 
     return (
         <motion.div 
@@ -88,7 +103,6 @@ const Home = () => {
                 </div>
             </motion.div>
 
-
             {/* Recipe Recommendations */}
             <motion.div 
                 className="recipe-recommendations"
@@ -98,22 +112,26 @@ const Home = () => {
             >
                 <h2>Recipe Recommendations: </h2>
                 <div className="recipe-grid">
-                    {["Shrimp Pasta", "Basil Pasta", "Pesto Pasta", "Tomato Pasta"].map((recipe, index) => (
-                        <motion.div 
-                            key={index} 
-                            className="recipe-item"
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <img src="https://picsum.photos/200" alt={recipe} className="recipe-thumbnail" />
-                            <p className="recipe-name">{recipe}</p>
-                            <p className="recipe-time">Cook time: 10 min</p>
-                            {/* Add a Link to FullRecipe Page */}
-                            <Link to="/full-recipe" className="recipe-time">
-                                View Full Recipe
-                            </Link>
-                        </motion.div>
-                    ))}
+                    {recipes.length > 0 ? (
+                        recipes.map((recipe) => (
+                            <motion.div 
+                                key={recipe.id} 
+                                className="recipe-item"
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <img src={recipe.imageUrl || "https://picsum.photos/200"} alt={recipe.name} className="recipe-thumbnail" />
+                                <p className="recipe-name">{recipe.name}</p>
+                                <p className="recipe-time">Cook time: {recipe.time}</p>
+                                {/* Add a Link to FullRecipe Page */}
+                                <Link to={`/recipe/${recipe.id}`} className="recipe-time">
+                                    View Full Recipe
+                                </Link>
+                            </motion.div>
+                        ))
+                    ) : (
+                        <p>No recipe recommendations found.</p>
+                    )}
                 </div>
             </motion.div>
         </motion.div>
