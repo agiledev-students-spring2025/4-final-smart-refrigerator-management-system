@@ -22,7 +22,7 @@ function RecipeSuggestions() {
         const data = await response.json();
 
         if (response.ok) {
-          setRecipes(data.data); // Assuming the recipes are under data.data
+          setRecipes(data.data); 
         } else {
           setError('Failed to load recipes');
         }
@@ -71,11 +71,11 @@ function RecipeSuggestions() {
           filteredRecipes.length > 0 ? (
             filteredRecipes.map(recipe => (
               <Recipe 
-                key={recipe.id} // Make sure the recipe has a unique key
-                id={recipe.id}  // Pass the recipe's id
+                key={recipe.id}
+                id={recipe.id}  
                 name={recipe.name}
                 description={recipe.description}
-                ingredients={recipe.ingredients.join(', ')} // Join ingredients array to a string
+                ingredients={recipe.ingredients.join(', ')} 
                 imageUrl={recipe.imageUrl}
               />
             ))
