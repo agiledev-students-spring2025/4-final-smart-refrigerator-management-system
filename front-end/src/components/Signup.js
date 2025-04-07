@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Signup.css";
 import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 function Signup({ setUser }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleSignup = (e) => {
@@ -33,8 +35,22 @@ function Signup({ setUser }) {
             })
             .catch((err) => {
                 console.error("Signup error:", err);
-                alert("Signup failed! Please try again.");
-            });
+                
+                if (err.response) {
+                  const { status, data } = err.response;
+              
+                  if (status === 409) {
+                    alert(data.error || "Email already registered.");
+                  } else if (status === 400) {
+                    alert(data.error || "All fields are required.");
+                  } else {
+                    alert("Unexpected error: " + (data.error || "Please try again."));
+                  }
+              
+                } else {
+                  alert("Network error. Please check your connection.");
+                }
+            });              
         } else {
             alert("Please fill in all fields!");
         }
@@ -94,15 +110,20 @@ function Signup({ setUser }) {
                 />
 
                 <label htmlFor="password">Enter your password:</label>
-                <motion.input 
-                    type="password" 
-                    id="password" 
-                    placeholder="Password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    required 
-                    whileFocus={{ scale: 1.05 }}
-                />
+                <div className="password-input-wrapper">
+                    <motion.input 
+                        type={showPassword ? "text" : "password"} 
+                        placeholder="Password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required
+                        whileFocus={{ scale: 1.05 }}
+                        className="password-input"
+                    />
+                    <span className="password-toggle-icon" onClick={() => setShowPassword(prev => !prev)}>
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                </div>
 
                 <motion.button 
                     type="submit"

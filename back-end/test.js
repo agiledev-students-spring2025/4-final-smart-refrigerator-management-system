@@ -158,7 +158,7 @@ describe("Login API", () => {
   it("should login successfully with valid credentials", (done) => {
     chai.request(app)
       .post("/api/login")
-      .send({ email: "john@example.com", password: "1234567890" })
+      .send({ email: "john@example.com", password: "12345" })
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.have.property("message", "Login successful");
@@ -224,6 +224,34 @@ describe("Signup API", () => {
         done();
       });
   });
+
+  it("should fail to signup if email is already registered", (done) => {
+    const userData = {
+      email: "duplicate@example.com",
+      password: "mypassword",
+      name: "Duplicate User"
+    };
+  
+    // First signup should succeed
+    chai.request(app)
+      .post("/api/signup")
+      .send(userData)
+      .end((err, res) => {
+        expect(res).to.have.status(201);
+        expect(res.body).to.have.property("message", "Signup successful");
+  
+        // Second signup with same email should fail
+        chai.request(app)
+          .post("/api/signup")
+          .send(userData)
+          .end((err2, res2) => {
+            expect(res2).to.have.status(409);
+            expect(res2.body).to.have.property("error", "Email already registered");
+            done();
+          });
+      });
+  });
+  
 });
 
 describe('Auth API', () => {
