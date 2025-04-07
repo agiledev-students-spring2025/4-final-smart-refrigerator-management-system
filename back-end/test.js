@@ -6,6 +6,20 @@ const app = require('./app');
 chai.use(chaiHttp);
 const expect = chai.expect;
 
+// Test that hits the root / endpoint and checks the response
+describe("Root API", () => {
+  it("should return the welcome message", (done) => {
+    chai.request(app)
+      .get("/")
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.text).to.equal("Smart Refrigerator Management System API");
+        done();
+      });
+  });
+});
+
+
 // inventory API tests
 describe("Inventory API", function() {
   // Test getting all items
@@ -99,10 +113,10 @@ describe("GET /api/items/category/:category", function() {
 
 //Account setting API test 
 describe("Account-setting API", function(){
-  describe("GET /api/items/Account-Setting/:field/", function() {
+  describe("GET /api/Account-Setting/:field/", function() {
     it("should get updated username", function(done){ 
       chai.request(app)
-      .get('/api/items/Account-Setting/name')
+      .get('/api/Account-Setting/name')
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
@@ -114,7 +128,7 @@ describe("Account-setting API", function(){
 
     it("should get updated email", function(done){ 
       chai.request(app)
-      .get('/api/items/Account-Setting/email')
+      .get('/api/Account-Setting/email')
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
@@ -126,7 +140,7 @@ describe("Account-setting API", function(){
 
     it("should get updated phone", function(done){ 
       chai.request(app)
-      .get('/api/items/Account-Setting/phone')
+      .get('/api/Account-Setting/phone')
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
@@ -137,10 +151,10 @@ describe("Account-setting API", function(){
     })
   })
 
-  describe("POST /api/items/Account-Setting/:field/", function(){
+  describe("POST /api/Account-Setting/:field/", function(){
     it("should update user's name", function(done){
       chai.request(app)
-      .post("/api/items/Account-Setting/name")
+      .post("/api/Account-Setting/name")
       .send({value : "John Doe"})
       .end((err, res) => {
         expect(res).to.have.status(200);
@@ -153,40 +167,124 @@ describe("Account-setting API", function(){
 
 })
 
-// Login Tests 
-describe("Login API", () => {
-  it("should login successfully with valid credentials", (done) => {
-    chai.request(app)
-      .post("/api/login")
-      .send({ email: "john@example.com", password: "1234567890" })
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.have.property("message", "Login successful");
-        expect(res.body).to.have.property("user");
-        expect(res.body.user).to.have.property("email", "john@example.com");
-        done();
-      });
+// Auth API tests
+describe("Authorization API (Login, Signup, Logout)", function () {
+
+  // Login Tests 
+
+  // POST /api/login
+  describe("POST /api/login", () => {
+    it("should login successfully with valid credentials", (done) => {
+      chai.request(app)
+        .post("/api/login")
+        .send({ email: "john@example.com", password: "12345" })
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.property("message", "Login successful");
+          expect(res.body).to.have.property("user");
+          expect(res.body.user).to.have.property("email", "john@example.com");
+          done();
+        });
+    });
+
+    it("should fail login with invalid credentials", (done) => {
+      chai.request(app)
+        .post("/api/login")
+        .send({ email: "wrong@example.com", password: "wrongpass" })
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          expect(res.body).to.have.property("error", "Invalid credentials");
+          done();
+        });
+    });
+
+    it("should fail login if email or password is missing", function (done) {
+      chai.request(app)
+        .post("/api/login")
+        .send({ email: "" }) // missing password
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          expect(res.body).to.have.property("error");
+          done();
+        });
+    });
   });
 
-  it("should fail login with invalid credentials", (done) => {
-    chai.request(app)
-      .post("/api/login")
-      .send({ email: "wrong@example.com", password: "wrongpass" })
-      .end((err, res) => {
-        expect(res).to.have.status(401);
-        expect(res.body).to.have.property("error", "Invalid credentials");
-        done();
-      });
+  // Signup Tests 
+
+  // POST /api/signup
+  describe("POST /api/signup", () => {
+    it("should signup successfully with valid data", (done) => {
+      chai.request(app)
+        .post("/api/signup")
+        .send({
+          email: "newuser@example.com",
+          password: "securepassword",
+          name: "New User"
+        })
+        .end((err, res) => {
+          expect(res).to.have.status(201);
+          expect(res.body).to.have.property("message", "Signup successful");
+          expect(res.body).to.have.property("user");
+          expect(res.body.user).to.have.property("email", "newuser@example.com");
+          expect(res.body.user).to.have.property("name", "New User");
+          done();
+        });
+    });
+
+    it("should fail if required fields are missing", (done) => {
+      chai.request(app)
+        .post("/api/signup")
+        .send({ email: "incomplete@example.com" }) // missing name and password
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body).to.have.property("error");
+          done();
+        });
+    });
+
+    it("should fail to signup if email is already registered", (done) => {
+      const userData = {
+        email: "duplicate@example.com",
+        password: "mypassword",
+        name: "Duplicate User"
+      };
+
+      // First signup should succeed
+      chai.request(app)
+        .post("/api/signup")
+        .send(userData)
+        .end((err, res) => {
+          expect(res).to.have.status(201);
+          expect(res.body).to.have.property("message", "Signup successful");
+
+          // Second signup with same email should fail
+          chai.request(app)
+            .post("/api/signup")
+            .send(userData)
+            .end((err2, res2) => {
+              expect(res2).to.have.status(409);
+              expect(res2.body).to.have.property("error", "Email already registered");
+              done();
+            });
+        });
+    });
   });
 
-  it("should fail login if email or password is missing", function (done) {
-    chai.request(app)
-      .post("/api/login")
-      .send({ email: "" }) // missing password
-      .end((err, res) => {
-        expect(res).to.have.status(401);
-        expect(res.body).to.have.property("error");
-        done();
-      });
+  // Logout Tests
+
+  // POST /api/logout
+  describe("POST /api/logout", () => {
+    it("should logout successfully and return status 200", (done) => {
+      chai.request(app)
+        .post('/api/logout')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message').eql('Logout successful');
+          done();
+        });
+    });
   });
+
 });

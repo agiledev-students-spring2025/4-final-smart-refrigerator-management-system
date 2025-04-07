@@ -6,12 +6,19 @@
 
 - **Product Owner** - Jin Lee
 
-- **Scrum Master 1** - Veronica Zhao
+- **Scrum Master** - Veronica Zhao
+
+**Sprint 1:**
+
+- **Product Owner** -
+
+- **Scrum Master** - Sherry Liu
 
 **Sprint 2:**
-- **Product Owner** - Jin Lee
 
-- **Scrum Master 2** - Chelsea Hodgson
+- **Product Owner** -
+
+- **Scrum Master** - Chelsea Hodgson
 
 Our product vision: Making fridge management smarter—so you waste less, save more, and eat better.
 
@@ -41,12 +48,14 @@ We welcome contributions from developers, designers, and food sustainability adv
 
 ## Project Set Up
 
+This is a full-stack project with separate front-end and back-end directories. Follow the instructions below to get everything running locally.
+
 ### Prerequisites
 
 Make sure you have the following installed on your system before continuing:
 
 - **Node.js** (version 14+ or 16+ recommended)  
-- **npm** (comes bundled with Node) or **Yarn**  
+- **npm** (comes bundled with Node)
 - (Optional) **Git** for version control  
 
 **Check Versions**  
@@ -61,7 +70,12 @@ git --version
 1. Clone the repository
 ```bash
 git clone https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system.git
+cd 4-final-smart-refrigerator-management-system
 ```
+
+---
+
+### 🖥 Front-End Setup (React)
 
 2. Navigate into the front-end folder
 ```bash
@@ -72,24 +86,46 @@ cd front-end
 ```bash
 npm install
 ```
----
-### Running the Project Locally
 
-1. Start the local development server
+4. Start the front-end server
 ```bash
 npm start
 ```
 
-2. Open your browser
+The app will open at: http://localhost:3000
 
-Go to http://localhost:3000 and confirm the app is running. If you see the welcome page for our project, it means your setup worked.
+---
+### 🖥 Back-End Setup (Express.js)
+
+1. Open a new terminal tab or window
+
+2. Navigate into the back-end folder
+```bash
+cd back-end
+```
+
+3. Install dependencies
+```bash
+npm install
+```
+
+4. Start the back-end server
+```bash
+npm start
+```
+
+The API will run at: http://localhost:5001
 
 ---
 ### Testing 
-Run all tests
+Navigate to the back-end folder and run:
 ```bash
+cd back-end
 npm test
 ```
+
+Tests are written using **Mocha**, **Chai**, and **Chai HTTP**, with c8 for code coverage.
+
 ---
 ### Troubleshooting
 - If you see an error about missing dependencies, try npm install again.

@@ -15,18 +15,19 @@
     gap: 20px;
     padding:10px;
     align-items: center;
-    background-color: var(--text-secondary);
+    background-color: #f8ebd877;
     width: 70%;
+    border-radius: 12px;
 }
 
 .account-change p{
-    color:aliceblue
+    color:rgb(0, 0, 0)
 }
 
 .account-change button{
     padding: 6px;
     background-color: var(--primary-color);
-    color: white;
+    color: rgb(247, 247, 247);
     border: none;
     border-radius: 15px;
 }

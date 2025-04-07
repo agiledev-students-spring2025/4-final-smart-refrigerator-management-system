@@ -2,22 +2,60 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Signup.css";
+import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 function Signup({ setUser }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleSignup = (e) => {
         e.preventDefault();
+    
         if (name && email && password) {
-            // Trigger exit animation before navigating
-            setTimeout(() => navigate("/home"), 300);
+            axios.post("http://localhost:5001/api/signup", {
+                name,
+                email,
+                password
+            })
+            .then((res) => {
+                console.log("Signup successful:", res.data);
+    
+                // Optional: set the user in global state
+                if (setUser) {
+                    setUser(res.data.user);
+                }
+    
+                // Navigate after a short delay (if you want to animate)
+                setTimeout(() => navigate("/home"), 300);
+            })
+            .catch((err) => {
+                console.error("Signup error:", err);
+                
+                if (err.response) {
+                  const { status, data } = err.response;
+              
+                  if (status === 409) {
+                    alert(data.error || "Email already registered.");
+                  } else if (status === 400) {
+                    alert(data.error || "All fields are required.");
+                  } else {
+                    alert("Unexpected error: " + (data.error || "Please try again."));
+                  }
+              
+                } else {
+                  alert("Network error. Please check your connection.");
+                }
+            });              
         } else {
             alert("Please fill in all fields!");
         }
     };
+    
 
     return (
         <motion.div 
@@ -72,21 +110,25 @@ function Signup({ setUser }) {
                 />
 
                 <label htmlFor="password">Enter your password:</label>
-                <motion.input 
-                    type="password" 
-                    id="password" 
-                    placeholder="Password" 
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    required 
-                    whileFocus={{ scale: 1.05 }}
-                />
+                <div className="password-input-wrapper">
+                    <motion.input 
+                        type={showPassword ? "text" : "password"} 
+                        placeholder="Password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required
+                        whileFocus={{ scale: 1.05 }}
+                        className="password-input"
+                    />
+                    <span className="password-toggle-icon" onClick={() => setShowPassword(prev => !prev)}>
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
+                </div>
 
                 <motion.button 
                     type="submit"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95, backgroundColor: "#6ca461" }}
-                    onClick={() => navigate("/home")}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
                 >
                     Sign Up

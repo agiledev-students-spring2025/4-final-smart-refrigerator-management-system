@@ -1,12 +1,21 @@
 import "./SettingProfile.css"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SettingProfile() {
     const handleLogout = () => {
-        console.log("Logged out");
-        navigate('/')
-    };
-
+        axios.post("http://localhost:5001/api/logout")
+          .then(res => {
+            console.log(res.data.message); // "Logout successful"
+      
+            // Redirect to login page
+            navigate('/');
+          })
+          .catch(err => {
+            console.error("Logout failed", err);
+            alert("There was a problem logging out.");
+          });
+      };
     const navigate = useNavigate();
 
     return(

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5001/api/items";
+const API_BASE_URL = "http://localhost:5001/api";
 
 function AccountInfo ({field, isEditing, info, changeText, onSave}){
     const [newValue, setNewValue] = useState(info);
