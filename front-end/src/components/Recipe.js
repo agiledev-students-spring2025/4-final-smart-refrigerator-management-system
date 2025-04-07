@@ -12,7 +12,7 @@ function Recipe({ name, cookTime, imageUrl, id }) {
       />
       
       <div className="recipe-info">
-        <name>{name}</name>  {/* This makes it a semantic header */}
+        <name>{name}</name>  
         <time>{cookTime}</time>
       </div>
     </Link>
