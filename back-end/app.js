@@ -6,6 +6,8 @@ const path = require('path');
 const itemsRoutes = require('./routes/items');
 const authRoutes = require('./routes/auth');
 const recipeRoutes = require('./routes/recipes');
+const accountSeetingRoutes = require('./routes/accountSetting');
+const fridgeModelRoutes = require('./routes/fridgeModel');
 
 
 app.use(express.json());
@@ -23,6 +25,8 @@ app.get("/", (req, res) => {
   });  
 
 app.use('/api/items', itemsRoutes);
+app.use('/api', accountSeetingRoutes);
+app.use('/api', fridgeModelRoutes);
 app.use('/api', authRoutes);
 app.use('/api/recipes', recipeRoutes);
 

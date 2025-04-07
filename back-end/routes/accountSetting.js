@@ -43,7 +43,7 @@ router.get("/Account-Setting/:field", (req, res) => {
 
 /**
  * @route   POST /Account-Setting/:field
- * @desc    Get the field of the account setting
+ * @desc    Update the field of the account setting
  * @access  Public
  */
 router.post("/Account-Setting/:field", (req,res)=> {
@@ -58,5 +58,5 @@ router.post("/Account-Setting/:field", (req,res)=> {
       res.status(500).json({ error: "Server error while updating user data" });
     }
   })
-  
+
 module.exports = router;

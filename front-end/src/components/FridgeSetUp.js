@@ -12,7 +12,7 @@ function FridgeSetup() {
     const [checkedFreezer, setFreezer] = useState(false);
     const [checkedVegetableDrawer, setVegetable] = useState(false);
     
-    const API_BASE_URL = "http://localhost:5001/api/items";
+    const API_BASE_URL = "http://localhost:5001/api";
     
     // Load existing settings on component mount
     useEffect(() => {
