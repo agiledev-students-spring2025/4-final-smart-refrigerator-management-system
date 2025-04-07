@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Signup.css";
+import axios from "axios";
+
 
 function Signup({ setUser }) {
     const [name, setName] = useState("");
@@ -11,13 +13,33 @@ function Signup({ setUser }) {
 
     const handleSignup = (e) => {
         e.preventDefault();
+    
         if (name && email && password) {
-            // Trigger exit animation before navigating
-            setTimeout(() => navigate("/home"), 300);
+            axios.post("http://localhost:5001/api/signup", {
+                name,
+                email,
+                password
+            })
+            .then((res) => {
+                console.log("Signup successful:", res.data);
+    
+                // Optional: set the user in global state
+                if (setUser) {
+                    setUser(res.data.user);
+                }
+    
+                // Navigate after a short delay (if you want to animate)
+                setTimeout(() => navigate("/home"), 300);
+            })
+            .catch((err) => {
+                console.error("Signup error:", err);
+                alert("Signup failed! Please try again.");
+            });
         } else {
             alert("Please fill in all fields!");
         }
     };
+    
 
     return (
         <motion.div 
@@ -86,7 +108,6 @@ function Signup({ setUser }) {
                     type="submit"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95, backgroundColor: "#6ca461" }}
-                    onClick={() => navigate("/home")}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
                 >
                     Sign Up
