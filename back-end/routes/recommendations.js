@@ -11,8 +11,18 @@ router.get("/recommendations", (req, res) => {
 
     inventory.forEach(item => {
         const daysLeft = Math.ceil((new Date(item.expirationDate) - today) / (1000 * 60 * 60 * 24));
-        if (daysLeft >= 0 && daysLeft <= daysAhead) mustBuy.push(item.name);
-        else if (daysLeft > daysAhead && daysLeft <= daysAhead + 7) replenish.push(item.name);
+
+        if (daysLeft >= 0 && daysLeft <= daysAhead) {
+            mustBuy.push({
+                name: item.name,
+                daysUntilExpiration: daysLeft
+            });
+        } else if (daysLeft > daysAhead && daysLeft <= daysAhead + 7) {
+            replenish.push({
+                name: item.name,
+                daysUntilExpiration: daysLeft
+            });
+        }
     });
 
     res.json({ mustBuy, replenish });
