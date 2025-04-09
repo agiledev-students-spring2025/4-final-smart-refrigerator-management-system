@@ -15,16 +15,25 @@ const WastePattern = () => {
     useEffect(() => {
         if (!startDate || !endDate) return;
 
-        fetch(`http://localhost:5001/api/waste?startDate=${startDate}&endDate=${endDate}`)
-            .then(res => res.json())
-            .then(data => {
+        const fetchWaste = async () => {
+            try {
+                const res = await fetch(`http://localhost:5001/api/waste?startDate=${startDate}&endDate=${endDate}`);
+                const data = await res.json();
                 setTotalExpired(data.totalExpired);
                 setCompartmentWaste(data.breakdown);
-            });
 
-        fetch("http://localhost:5001/api/analytics")
-            .then(res => res.json())
-            .then(data => setTotalTracked(data.totalItems));
+                const res2 = await fetch("http://localhost:5001/api/analytics");
+                const a = await res2.json();
+                setTotalTracked(a.totalItems);
+            } catch (err) {
+                console.warn("Backend not available – showing empty waste data.");
+                setTotalExpired(0);
+                setCompartmentWaste({});
+                setTotalTracked(0);
+            }
+        };
+
+        fetchWaste();
     }, [startDate, endDate]);
 
     const wasteChartData = {

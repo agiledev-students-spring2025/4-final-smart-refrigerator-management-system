@@ -9,12 +9,20 @@ const ShoppingRecommendation = () => {
     const [replenishSuggestions, setReplenishSuggestions] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5001/api/recommendations?daysAhead=${daysAhead}`)
-            .then((res) => res.json())
-            .then((data) => {
+        const fetchRecommendations = async () => {
+            try {
+                const res = await fetch(`http://localhost:5001/api/recommendations?daysAhead=${daysAhead}`);
+                const data = await res.json();
                 setMustBuyItems(data.mustBuy || []);
                 setReplenishSuggestions(data.replenish || []);
-            });
+            } catch (err) {
+                console.warn("Backend not available – showing empty recs.");
+                setMustBuyItems([]);
+                setReplenishSuggestions([]);
+            }
+        };
+
+        fetchRecommendations();
     }, [daysAhead]);
 
     return (
@@ -46,7 +54,7 @@ const ShoppingRecommendation = () => {
             <h3>Replenishment Suggestions:</h3>
             <ul>
                 {replenishSuggestions.length === 0 ? (
-                    <p className="center-text">No items expiring in the following 7 days.</p>
+                    <p className="center-text">No Suggestions</p>
                 ) : (
                     replenishSuggestions.map((item, idx) => (
                         <li key={idx}>

@@ -13,10 +13,10 @@ const Analytics = () => {
     const [leastUsed, setLeastUsed] = useState([]);
 
     useEffect(() => {
-        // Fetch analytics summary
-        fetch("http://localhost:5001/api/analytics")
-            .then((res) => res.json())
-            .then((data) => {
+        const fetchAnalytics = async () => {
+            try {
+                const res = await fetch("http://localhost:5001/api/analytics");
+                const data = await res.json();
                 setTotalItems(data.totalItems);
                 setExpiringSoonCount(data.expiringSoon);
                 setExpiredCount(data.expired);
@@ -35,21 +35,41 @@ const Analytics = () => {
                         },
                     ],
                 });
-            });
+            } catch (err) {
+                console.warn("⚠️ Analytics API not reachable — fallback to empty data.");
+                setTotalItems(0);
+                setExpiringSoonCount(0);
+                setExpiredCount(0);
+                setCompartmentChartData({
+                    labels: [],
+                    datasets: [{ data: [] }]
+                });
+            }
+        };
 
-        // Fetch all items to display most/least used
-        fetch("http://localhost:5001/api/items")
-            .then(res => res.json())
-            .then(data => {
+        const fetchItems = async () => {
+            try {
+                const res = await fetch("http://localhost:5001/api/items");
+                const data = await res.json();
                 const items = Array.isArray(data.data) ? data.data : [];
+
                 const sorted = [...items].sort((a, b) => {
                     const expiryA = new Date(a.expirationDate);
                     const expiryB = new Date(b.expirationDate);
                     return expiryA - expiryB || parseInt(a.quantity) - parseInt(b.quantity);
                 });
+
                 setMostUsed(sorted.slice(0, 4));
                 setLeastUsed(sorted.slice(-4));
-            });
+            } catch (err) {
+                console.warn("⚠️ Items API not reachable — fallback to empty list.");
+                setMostUsed([]);
+                setLeastUsed([]);
+            }
+        };
+
+        fetchAnalytics();
+        fetchItems();
     }, []);
 
     const getDaysUntilExpiration = (expirationDate) => {
