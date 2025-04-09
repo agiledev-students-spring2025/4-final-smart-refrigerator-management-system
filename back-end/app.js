@@ -8,6 +8,9 @@ const authRoutes = require('./routes/auth');
 const recipeRoutes = require('./routes/recipes');
 const accountSeetingRoutes = require('./routes/accountSetting');
 const fridgeModelRoutes = require('./routes/fridgeModel');
+const analyticsRoutes = require('./routes/analytics');
+const wasteRoutes = require('./routes/waste');
+const recommendationsRoutes = require('./routes/recommendations');
 
 
 app.use(express.json());
@@ -29,6 +32,9 @@ app.use('/api', accountSeetingRoutes);
 app.use('/api', fridgeModelRoutes);
 app.use('/api', authRoutes);
 app.use('/api/recipes', recipeRoutes);
+app.use('/api', analyticsRoutes);
+app.use('/api', wasteRoutes);
+app.use('/api', recommendationsRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
