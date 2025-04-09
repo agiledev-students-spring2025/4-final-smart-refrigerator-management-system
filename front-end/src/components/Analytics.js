@@ -1,61 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useInventory } from "../contexts/InventoryContext";
 import "./Analytics.css";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 
 const Analytics = () => {
-    const { getItemsByCompartment } = useInventory();
-    const compartments = getItemsByCompartment();
+    const [totalItems, setTotalItems] = useState(0);
+    const [expiringSoonCount, setExpiringSoonCount] = useState(0);
+    const [expiredCount, setExpiredCount] = useState(0);
+    const [compartmentChartData, setCompartmentChartData] = useState({});
+    const [mostUsed, setMostUsed] = useState([]);
+    const [leastUsed, setLeastUsed] = useState([]);
 
-    // Get all items from compartments
-    const allItems = Object.values(compartments).flat();
+    useEffect(() => {
+        // Fetch analytics summary
+        fetch("http://localhost:5001/api/analytics")
+            .then((res) => res.json())
+            .then((data) => {
+                setTotalItems(data.totalItems);
+                setExpiringSoonCount(data.expiringSoon);
+                setExpiredCount(data.expired);
 
-    // Helper function: Days until expiration
-    const getDaysUntilExpiration = (expiryDate) => {
-        if (!expiryDate) return null;
+                const labels = Object.keys(data.byCompartment).map((label) =>
+                    label.replace(/([A-Z])/g, " $1").trim()
+                );
+                const values = Object.values(data.byCompartment);
+
+                setCompartmentChartData({
+                    labels,
+                    datasets: [
+                        {
+                            data: values,
+                            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#9966FF"],
+                        },
+                    ],
+                });
+            });
+
+        // Fetch all items to display most/least used
+        fetch("http://localhost:5001/api/items")
+            .then(res => res.json())
+            .then(data => {
+                const items = Array.isArray(data.data) ? data.data : [];
+                const sorted = [...items].sort((a, b) => {
+                    const expiryA = new Date(a.expirationDate);
+                    const expiryB = new Date(b.expirationDate);
+                    return expiryA - expiryB || parseInt(a.quantity) - parseInt(b.quantity);
+                });
+                setMostUsed(sorted.slice(0, 4));
+                setLeastUsed(sorted.slice(-4));
+            });
+    }, []);
+
+    const getDaysUntilExpiration = (expirationDate) => {
+        if (!expirationDate) return null;
         const today = new Date();
-        const expiry = new Date(expiryDate);
+        const expiry = new Date(expirationDate);
         return Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
     };
-
-    // Count total, expiring soon, and expired items
-    let totalItems = allItems.length;
-    let expiringSoonCount = 0;
-    let expiredCount = 0;
-
-    allItems.forEach((item) => {
-        const daysUntilExpiry = getDaysUntilExpiration(item.expiryDate);
-        if (daysUntilExpiry !== null) {
-            if (daysUntilExpiry < 0) expiredCount++;
-            if (daysUntilExpiry >= 0 && daysUntilExpiry <= 3) expiringSoonCount++;
-        }
-    });
-
-    // Convert compartments into chart data
-    const compartmentLabels = Object.keys(compartments);
-    const compartmentCounts = compartmentLabels.map((key) => compartments[key].length);
-
-    const compartmentChartData = {
-        labels: compartmentLabels.map((label) => label.replace(/([A-Z])/g, " $1").trim()), // Format labels
-        datasets: [
-            {
-                data: compartmentCounts,
-                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#9966FF"],
-            },
-        ],
-    };
-
-    // Sort items: Most used (expiring soon & low quantity) | Least used (long expiry & high quantity)
-    const sortedItems = [...allItems].sort((a, b) => {
-        const expiryA = new Date(a.expiryDate);
-        const expiryB = new Date(b.expiryDate);
-        return expiryA - expiryB || (a.quantity || 0) - (b.quantity || 0);
-    });
-
-    const mostUsed = sortedItems.slice(0, 4);
-    const leastUsed = sortedItems.slice(-4);
 
     return (
         <div className="container">
@@ -71,7 +73,11 @@ const Analytics = () => {
             {/* Items by Compartment (Pie Chart) */}
             <section>
                 <h3>Items by Compartment</h3>
-                {totalItems > 0 ? <Pie data={compartmentChartData} /> : <p className="center-text">No items in compartments.</p>}
+                {totalItems > 0 ? (
+                    <Pie data={compartmentChartData} />
+                ) : (
+                    <p className="center-text">No items in compartments.</p>
+                )}
             </section>
 
             {/* Most Used Items */}
@@ -81,10 +87,10 @@ const Analytics = () => {
                     {mostUsed.map((item) => (
                         <div className="item-card" key={item.id}>
                             <div className="item-thumbnail">
-                                <img src={`https://picsum.photos/seed/${item.id}/100/100`} alt={item.name} />
+                                <img src={item.imageUrl} alt={item.name} />
                             </div>
                             <p><strong>{item.name}</strong></p>
-                            <p>Expires in: {getDaysUntilExpiration(item.expiryDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expiryDate)} days`}</p>
+                            <p>Expires in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
                             <p>Qty: {item.quantity}</p>
                         </div>
                     ))}
@@ -98,10 +104,10 @@ const Analytics = () => {
                     {leastUsed.map((item) => (
                         <div className="item-card" key={item.id}>
                             <div className="item-thumbnail">
-                                <img src={`https://picsum.photos/seed/${item.id}/100/100`} alt={item.name} />
+                                <img src={item.imageUrl} alt={item.name} />
                             </div>
                             <p><strong>{item.name}</strong></p>
-                            <p>Expires in: {getDaysUntilExpiration(item.expiryDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expiryDate)} days`}</p>
+                            <p>Expires in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
                             <p>Qty: {item.quantity}</p>
                         </div>
                     ))}
