@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useInventory } from "../contexts/InventoryContext";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Analytics.css";
 import { Pie } from "react-chartjs-2";
@@ -7,35 +6,42 @@ import "chart.js/auto";
 
 const WastePattern = () => {
     const navigate = useNavigate();
-    const { getItemsByCompartment } = useInventory();
-    const compartments = getItemsByCompartment();
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [totalExpired, setTotalExpired] = useState(0);
+    const [compartmentWaste, setCompartmentWaste] = useState({});
+    const [totalTracked, setTotalTracked] = useState(0); // For percentage
 
-    const getExpiredItems = () => {
-        if (!startDate || !endDate) return [];
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        return Object.entries(compartments).flatMap(([compartment, items]) =>
-            items.filter((item) => {
-                if (!item.expiryDate) return false;
-                const expiry = new Date(item.expiryDate);
-                return expiry >= start && expiry <= end;
-            }).map((item) => ({ ...item, compartment }))
-        );
-    };
+    useEffect(() => {
+        if (!startDate || !endDate) return;
 
-    const expiredItems = getExpiredItems();
-    const totalExpired = expiredItems.length;
-    const compartmentWaste = expiredItems.reduce((acc, item) => {
-        const compartment = item.compartment || "Other";
-        acc[compartment] = (acc[compartment] || 0) + 1;
-        return acc;
-    }, {});
+        const fetchWaste = async () => {
+            try {
+                const res = await fetch(`http://localhost:5001/api/waste?startDate=${startDate}&endDate=${endDate}`);
+                const data = await res.json();
+                setTotalExpired(data.totalExpired);
+                setCompartmentWaste(data.breakdown);
+
+                const res2 = await fetch("http://localhost:5001/api/analytics");
+                const a = await res2.json();
+                setTotalTracked(a.totalItems);
+            } catch (err) {
+                console.warn("Backend not available – showing empty waste data.");
+                setTotalExpired(0);
+                setCompartmentWaste({});
+                setTotalTracked(0);
+            }
+        };
+
+        fetchWaste();
+    }, [startDate, endDate]);
 
     const wasteChartData = {
-        labels: Object.keys(compartmentWaste).map((label) => label.replace(/([A-Z])/g, " $1").trim()),
-        datasets: [{ data: Object.values(compartmentWaste), backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#9966FF"] }],
+        labels: Object.keys(compartmentWaste).map(label => label.replace(/([A-Z])/g, " $1").trim()),
+        datasets: [{
+            data: Object.values(compartmentWaste),
+            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#9966FF"]
+        }]
     };
 
     return (
@@ -47,12 +53,15 @@ const WastePattern = () => {
             </div>
             <div className="summary-box">
                 <p><strong>Total Items Tracked:</strong> {totalExpired}</p>
-                <p><strong>Food Wasted:</strong> {totalExpired > 0 ? `${((totalExpired / Object.values(compartments).flat().length) * 100).toFixed(1)}%` : "0%"}</p>
+                <p><strong>Food Wasted:</strong> {totalExpired > 0 && totalTracked > 0 ? `${((totalExpired / totalTracked) * 100).toFixed(1)}%` : "0%"}</p>
                 <p><strong>Estimated Cost Lost:</strong> ${totalExpired * 5}</p>
             </div>
             <h3>Waste Breakdown by Fridge Section:</h3>
-            {totalExpired > 0 ? <Pie data={wasteChartData} /> : <p className="center-text">No expired items in selected date range.</p>}
-            {/* Back to Analytics Button */}
+            {totalExpired > 0 ? (
+                <Pie data={wasteChartData} />
+            ) : (
+                <p className="center-text">No expired items in selected date range.</p>
+            )}
             <button className="back-btn" onClick={() => navigate("/analytics")}>← Back to Analytics</button>
         </div>
     );

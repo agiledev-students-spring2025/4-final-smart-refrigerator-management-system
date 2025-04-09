@@ -1,31 +1,29 @@
-import React, { useState } from "react";
-import { useInventory } from "../contexts/InventoryContext";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Analytics.css";
 
 const ShoppingRecommendation = () => {
     const navigate = useNavigate();
-    const { getItemsByCompartment } = useInventory();
-    const compartments = getItemsByCompartment();
     const [daysAhead, setDaysAhead] = useState(7);
+    const [mustBuyItems, setMustBuyItems] = useState([]);
+    const [replenishSuggestions, setReplenishSuggestions] = useState([]);
 
-    const getDaysUntilExpiration = (expiryDate) => {
-        if (!expiryDate) return null;
-        const today = new Date();
-        const expiry = new Date(expiryDate);
-        return Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
-    };
+    useEffect(() => {
+        const fetchRecommendations = async () => {
+            try {
+                const res = await fetch(`http://localhost:5001/api/recommendations?daysAhead=${daysAhead}`);
+                const data = await res.json();
+                setMustBuyItems(data.mustBuy || []);
+                setReplenishSuggestions(data.replenish || []);
+            } catch (err) {
+                console.warn("Backend not available – showing empty recs.");
+                setMustBuyItems([]);
+                setReplenishSuggestions([]);
+            }
+        };
 
-    const allItems = Object.values(compartments).flat();
-    const mustBuyItems = allItems.filter((item) => {
-        const daysUntilExpiry = getDaysUntilExpiration(item.expiryDate);
-        return daysUntilExpiry !== null && daysUntilExpiry <= daysAhead && daysUntilExpiry >= 0;
-    });
-
-    const replenishSuggestions = allItems.filter((item) => {
-        const daysUntilExpiry = getDaysUntilExpiration(item.expiryDate);
-        return daysUntilExpiry !== null && daysUntilExpiry > daysAhead && daysUntilExpiry <= daysAhead + 7;
-    });
+        fetchRecommendations();
+    }, [daysAhead]);
 
     return (
         <div className="container">
@@ -39,22 +37,36 @@ const ShoppingRecommendation = () => {
                     </select> days
                 </label>
             </div>
+
             <h3>Must-Buy Items:</h3>
             <ul>
-                {mustBuyItems.length === 0 ? <p className="center-text">No items expiring soon.</p> :
-                    mustBuyItems.map((item) => <li key={item.id}>{item.name} (Expires in {getDaysUntilExpiration(item.expiryDate)} days)</li>)
-                }
+                {mustBuyItems.length === 0 ? (
+                    <p className="center-text">No items expiring soon.</p>
+                ) : (
+                    mustBuyItems.map((item, idx) => (
+                        <li key={idx}>
+                            {item.name} (Expires in {item.daysUntilExpiration} days)
+                        </li>
+                    ))
+                )}
             </ul>
+
             <h3>Replenishment Suggestions:</h3>
             <ul>
-                {replenishSuggestions.length === 0 ? <p className="center-text">No items expiring in the following 7 days.</p> :
-                    replenishSuggestions.map((item) => <li key={item.id}>{item.name} (Expires in {getDaysUntilExpiration(item.expiryDate)} days)</li>)
-                }
+                {replenishSuggestions.length === 0 ? (
+                    <p className="center-text">No Suggestions</p>
+                ) : (
+                    replenishSuggestions.map((item, idx) => (
+                        <li key={idx}>
+                            {item.name} (Expires in {item.daysUntilExpiration} days)
+                        </li>
+                    ))
+                )}
             </ul>
+
             <button className="shop-btn" onClick={() => window.open("https://www.amazon.com", "_blank")}>Directed to Amazon</button>
             <button className="shop-btn" onClick={() => window.open("https://www.ubereats.com", "_blank")}>Directed to Uber Eats</button>
 
-            {/* Back to Analytics Button */}
             <button className="back-btn" onClick={() => navigate("/analytics")}>← Back to Analytics</button>
         </div>
     );
