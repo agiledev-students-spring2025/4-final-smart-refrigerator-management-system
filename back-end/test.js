@@ -288,3 +288,54 @@ describe("Authorization API (Login, Signup, Logout)", function () {
   });
 
 });
+
+
+describe("Analytics API", () => {
+    it("should return analytics summary", (done) => {
+        chai.request(app)
+            .get("/api/analytics")
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property("totalItems");
+                expect(res.body).to.have.property("expiringSoon");
+                expect(res.body).to.have.property("expired");
+                expect(res.body).to.have.property("byCompartment");
+                done();
+            });
+    });
+});
+
+describe("Waste Pattern API", () => {
+    it("should return waste breakdown for a valid date range", (done) => {
+        chai.request(app)
+            .get("/api/waste")
+            .query({ startDate: "2025-04-01", endDate: "2025-04-15" })
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property("totalExpired");
+                expect(res.body).to.have.property("breakdown").that.is.an("object");
+                done();
+            });
+    });
+
+    it("should return empty data when no dates are provided", (done) => {
+        chai.request(app)
+            .get("/api/waste")
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                done();
+            });
+    });
+});
+describe("Recommendations API", () => {
+    it("should return mustBuy and replenish arrays", (done) => {
+        chai.request(app)
+            .get("/api/recommendations?daysAhead=7")
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.have.property("mustBuy").that.is.an("array");
+                expect(res.body).to.have.property("replenish").that.is.an("array");
+                done();
+            });
+    });
+});
