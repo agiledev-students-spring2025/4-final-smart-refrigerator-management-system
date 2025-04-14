@@ -8,30 +8,37 @@ const mockUsers = [
 
 const express = require('express');
 const router = express.Router();
+const User = require('../models/User');
 
 /**
  * @route   POST /api/login
  * @desc    Mock login route
  * @access  Public
  */
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   // console.log("Login attempt:", req.body); // 🐞 See what the server receives
 
-  // Mock user
-  const user = mockUsers.find(u => u.email === email && u.password === password);
+  try{
+    const user = await User.findOne({email});
 
-  if (!user) {
-    return res.status(401).json({ error: 'Invalid credentials' });
-  }
-  
+    if(!user || user.password !== password){
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
   res.status(200).json({
     message: 'Login successful',
     user: {
       email: user.email,
       name: user.name
     }
-  });  
+  });
+  }
+  catch(err) {
+    console.error("Login error:", err);
+    res.status(500).json({error:'server error during login'})
+  }
+
 });
 
 
@@ -40,7 +47,7 @@ router.post('/login', (req, res) => {
  * @desc    Mock signup route
  * @access  Public
  */
-router.post('/signup', (req, res) => {
+router.post('/signup', async (req, res) => {
   const { email, password, name } = req.body;
   // console.log("Signup data received:", req.body); // 🐞 See what the server receives
 
@@ -48,14 +55,15 @@ router.post('/signup', (req, res) => {
   if (!email || !password || !name) {
     return res.status(400).json({ error: 'All fields are required' });
   }
-
-  const existingUser = mockUsers.find(user => user.email === email);
-  if (existingUser) {
-    return res.status(409).json({ error: 'Email already registered' });
-  }
+  try{
+    const existingUser = await User.findOne({email});
+    if (existingUser) {
+      return res.status(409).json({ error: 'Email already registered' });
+    }
   
-  const newUser = { email, password, name };
-  mockUsers.push(newUser);
+  
+  const newUser = new User({ email, password, name });
+  await newUser.save();
   
   res.status(201).json({
     message: 'Signup successful',
@@ -64,7 +72,11 @@ router.post('/signup', (req, res) => {
       name: newUser.name
     }
   });
-  
+}
+  catch (error){
+    console.error("Error during signup:", error);
+    res.status(500).json({ error: 'Server error during signup' });
+  }
 });
   
 /**

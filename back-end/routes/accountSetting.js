@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const User = require("../models/User");
 
 /**
  * @route   GET /Account-Setting/:field
  * @desc    Get the field of the account setting
  * @access  Public
  */
-router.get("/Account-Setting/:field", (req, res) => {
+router.get("/Account-Setting/:field", async (req, res) => {
     try {
       const { field } = req.params;
       
