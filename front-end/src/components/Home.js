@@ -3,11 +3,46 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useInventory } from "../contexts/InventoryContext";
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-    const userName = "John White";
+    const navigate = useNavigate(); // ✅ To redirect if token is invalid
+    const [userName, setUserName] = useState(""); // ✅ Dynamic name
     const { getItemsByCompartment } = useInventory();
     const compartments = getItemsByCompartment();
+
+    // ✅ Fetch user profile on page load
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                navigate("/login");
+                return;
+            }
+
+            try {
+                const res = await fetch("http://localhost:5001/api/profile", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    setUserName(data.user.name); // ✅ Set dynamic name
+                } else {
+                    localStorage.removeItem("token");
+                    navigate("/login");
+                }
+            } catch (err) {
+                console.error("Error fetching profile:", err);
+                localStorage.removeItem("token");
+                navigate("/login");
+            }
+        };
+
+        fetchUserProfile();
+    }, [navigate]);
 
     // Flatten all items from compartments
     const allItems = Object.values(compartments).flat();

@@ -24,16 +24,33 @@ function Login({ setUser }) {
           const data = await response.json();
       
           if (response.ok) {
-            setUser(data.user);
-            navigate("/home");
+            localStorage.setItem("token", data.token);
+      
+            // Fetch user profile using the token
+            const token = localStorage.getItem("token");
+      
+            const profileRes = await fetch("http://localhost:5001/api/profile", {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+      
+            if (profileRes.ok) {
+              const profileData = await profileRes.json();
+              setUser(profileData.user); // ✅ Save to global state
+              navigate("/home");
+            } else {
+              alert("Token invalid or expired.");
+              localStorage.removeItem("token");
+            }
           } else {
             alert(data.error || "Login failed");
           }
         } catch (err) {
-            console.error("Login fetch error:", err.message); 
-            alert("Server error");
-          }                  
-      };
+          console.error("Login fetch error:", err.message);
+          alert("Server error");
+        }
+      };      
       
 
     return (
