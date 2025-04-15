@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cors({
   origin: "http://localhost:3000", // Allow requests from your React app
   methods: ["GET", "POST", "PUT", "DELETE"], // Allowed request methods
-  allowedHeaders: ["Content-Type"] // Allowed headers
+  allowedHeaders: ["Content-Type", "Authorization"] // add "Authorization"
 }));
 
 app.use(express.static(path.join(__dirname, '../public')));
