@@ -13,48 +13,60 @@ function Signup({ setUser }) {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
     
         if (name && email && password) {
-            axios.post("http://localhost:5001/api/signup", {
-                name,
-                email,
-                password
-            })
-            .then((res) => {
-                console.log("Signup successful:", res.data);
+            try {
+                const res = await axios.post("http://localhost:5001/api/signup", {
+                    name,
+                    email,
+                    password
+                });
     
-                // Optional: set the user in global state
-                if (setUser) {
-                    setUser(res.data.user);
-                }
+                // ✅ Save token to localStorage
+                localStorage.setItem("token", res.data.token);
     
-                // Navigate after a short delay (if you want to animate)
-                setTimeout(() => navigate("/home"), 300);
-            })
-            .catch((err) => {
-                console.error("Signup error:", err);
-                
-                if (err.response) {
-                  const { status, data } = err.response;
-              
-                  if (status === 409) {
-                    alert(data.error || "Email already registered.");
-                  } else if (status === 400) {
-                    alert(data.error || "All fields are required.");
-                  } else {
-                    alert("Unexpected error: " + (data.error || "Please try again."));
-                  }
-              
+                // ✅ Optionally fetch user profile to validate token
+                const profileRes = await axios.get("http://localhost:5001/api/profile", {
+                    headers: {
+                        Authorization: `Bearer ${res.data.token}`
+                    }
+                });
+    
+                if (profileRes.status === 200) {
+                    // ✅ Update global state
+                    if (setUser) {
+                        setUser(profileRes.data.user);
+                    }
+                    // ✅ Redirect to home
+                    navigate("/home");
                 } else {
-                  alert("Network error. Please check your connection.");
+                    alert("Token verification failed.");
+                    localStorage.removeItem("token");
                 }
-            });              
+    
+            } catch (err) {
+                console.error("Signup error:", err);
+    
+                if (err.response) {
+                    const { status, data } = err.response;
+    
+                    if (status === 409) {
+                        alert(data.error || "Email already registered.");
+                    } else if (status === 400) {
+                        alert(data.error || "All fields are required.");
+                    } else {
+                        alert("Unexpected error: " + (data.error || "Please try again."));
+                    }
+                } else {
+                    alert("Network error. Please check your connection.");
+                }
+            }
         } else {
             alert("Please fill in all fields!");
         }
-    };
+    };    
     
 
     return (

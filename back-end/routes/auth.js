@@ -6,8 +6,6 @@ const User = require('../models/User');
 const verifyToken = require('../middleware/authMiddleware');
 
 const router = express.Router();
-
-// Secret key from .env
 const JWT_SECRET = process.env.JWT_SECRET;
 
 /**
@@ -25,13 +23,15 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ error: errors.array()[0].msg });
     }
 
     const { email, password, name } = req.body;
 
     try {
       const existingUser = await User.findOne({ email });
+      console.log("🔍 Found user:", existingUser);  // TEMP DEBUG
+
       if (existingUser) {
         return res.status(409).json({ error: 'Email already registered' });
       }
@@ -71,17 +71,17 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ error: errors.array()[0].msg });
     }
 
     const { email, password } = req.body;
 
     try {
       const user = await User.findOne({ email });
-      if (!user) return res.status(401).json({ error: 'Invalid credentials' });
+      if (!user) return res.status(401).json({ error: 'Invalid email, please sign up first' });
 
       const passwordMatch = await bcrypt.compare(password, user.password);
-      if (!passwordMatch) return res.status(401).json({ error: 'Invalid credentials' });
+      if (!passwordMatch) return res.status(401).json({ error: 'Invalid password' });
 
       const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
