@@ -25,7 +25,7 @@ function Welcome() {
                 transition={{ duration: 0.5 }}
             />
 
-            {/* Heading Animation */}
+            {/* Heading */}
             <motion.h1 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ function Welcome() {
                 Welcome to Smart Fridge System!
             </motion.h1>
 
-            {/* Paragraph Animation */}
+            {/* Description */}
             <motion.p 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ function Welcome() {
                 Track your food inventory and reduce waste effortlessly.
             </motion.p>
 
-            {/* Get Started Button */}
+            {/* Get Started */}
             <motion.button 
                 className="welcome-button"
                 whileHover={{ scale: 1.05 }}
@@ -54,15 +54,17 @@ function Welcome() {
                 Get Started
             </motion.button>
 
-            {/* Login Button */}
+            {/* Guest Mode text */}
             <motion.p 
+                className="small-text guest-text"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
             >
-                Already have an account? Log in!
+                Continue as Guest
             </motion.p>
 
+            {/* Login Button */}
             <motion.button 
                 className="guide-button"
                 whileHover={{ scale: 1.05 }}
@@ -73,26 +75,38 @@ function Welcome() {
                 Log in
             </motion.button>
 
-            {/* Signup Button */}
+            {/* Login Text */}
             <motion.p 
+                className="small-text"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
             >
-                New to this? Sign up!
+                Have an account?
             </motion.p>
 
+            {/* Signup Button */}
             <motion.button 
                 className="guide-button"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95, backgroundColor: "#ffd670" }}
                 onClick={() => navigate("/signup")}
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
-
             >
                 Sign up
             </motion.button>
+
+            {/* Signup Text*/}
+            <motion.p 
+                className="small-text"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+            >
+                New here?
+            </motion.p>
         </motion.div>
+
     );
 }
 

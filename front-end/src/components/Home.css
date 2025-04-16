@@ -126,3 +126,44 @@
     color: gray;
 }
 
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+  
+  .overlay-card {
+    background: linear-gradient(to bottom, #a5d7bea3 , #feecd3);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    width: 80%;            /* Use % for responsive width */
+    max-width: 500px;      /* Prevent it from getting too large on big screens */
+    min-width: 300px;      /* Optional: for very small screens */
+    height: auto;          /* You can set a fixed height if you prefer */
+  }
+  
+  
+  .overlay-card p {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #000000;
+  }
+  
+  .overlay-card button {
+    background: none;
+    border: none;
+    color: #5a8950;
+    font-size: 1.2rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
