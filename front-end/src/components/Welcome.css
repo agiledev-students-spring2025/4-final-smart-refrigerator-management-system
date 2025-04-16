@@ -56,3 +56,15 @@
     justify-content: center;
     align-items: center;
 }
+
+.small-text {
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 8px;
+    text-align: center;
+}
+
+/* Add this specific style for the guest message */
+.guest-text {
+    margin-bottom: 15px; 
+}
