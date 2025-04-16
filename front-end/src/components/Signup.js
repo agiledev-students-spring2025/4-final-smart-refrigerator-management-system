@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import "./Signup.css";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 
 
 function Signup({ setUser }) {
@@ -77,6 +78,10 @@ function Signup({ setUser }) {
             exit={{ opacity: 0, scale: 0.9 }} 
             transition={{ duration: 0.3, ease: "easeOut" }}
         >
+            <div className="back-button" onClick={() => navigate("/")}>
+                <FaArrowLeft /> Back
+            </div>
+
             <motion.h1 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}

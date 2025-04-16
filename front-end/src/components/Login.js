@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Login.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
+
 
 
 function Login({ setUser }) {
@@ -62,6 +64,10 @@ function Login({ setUser }) {
             transition={{ duration: 0.3, ease: "easeOut" }}
         >
             {/* Title Animation */}
+            <div className="back-button" onClick={() => navigate("/")}>
+                <FaArrowLeft /> Back
+            </div>
+
             <motion.h1 
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
