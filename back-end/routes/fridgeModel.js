@@ -7,7 +7,7 @@ const router = express.Router();
  * @access  Public
  */
 router.get("/Fridge-Model", (req, res) => {
-    console.log("🔵 Fridge-Model route was hit!");
+    console.log("Fridge-Model route was hit!");
     try {
       // Mock data for example
       const fridgeSettings = {
