@@ -4,40 +4,6 @@ const User = require("../models/User");
 const verifyToken = require('../middleware/authMiddleware');
 const bcrypt = require('bcrypt');
 
-/**
- * @route   GET /Account-Setting/:field
- * @desc    Get the field of the account setting
- * @access  Public
- */
-router.get("/Account-Setting/:field", async (req, res) => {
-    try {
-      const { field } = req.params;
-      
-      // Define allowed fields
-      const allowedFields = ["name", "email", "phone"];
-      
-      if (!allowedFields.includes(field)) {
-        return res.status(400).json({ error: "Invalid field" });
-      }
-      
-       const user = await User.findOne({ userEmail });
-       if(!user){
-        return res.status(404).json({ error: 'User not found' });
-       }
-      
-      // Check if the field exists for this user
-      if (userSettings[field] === undefined) {
-        return res.status(404).json({ error: `${field} not found` });
-      }
-      
-      // Return just the requested field
-      res.json({ [field]: userSettings[field] });
-      
-    } catch (error) {
-      console.error(`Error fetching ${req.params.field}:`, error);
-      res.status(500).json({ error: "Server error while fetching user data" });
-    }
-  });
 
 /**
  * @route   POST /Account-Setting/:field
@@ -55,6 +21,12 @@ const validateField = (field) => {
       return [body('value').notEmpty().withMessage('Name is required')];
     case 'phone':
       return [body('value').isMobilePhone().withMessage('Please enter a valid phone number')];
+    case 'dietary':
+      return [
+          body('value.dietType').notEmpty().withMessage('Diet type is required'),
+          body('value.nutritionGoals').notEmpty().withMessage('Nutrition goal is required'),
+          body('value.allergies').isArray().withMessage('Allergies must be an array'),
+        ];
     default:
       return [];
   }
@@ -81,10 +53,14 @@ router.post("/Account-Setting/:field",
         value = await bcrypt.hash(value, 10);
       }
 
+      const update = field === "dietary"
+        ? { dietary: value }
+        : { [field]: value };
+
       const updatedUser = await User.findByIdAndUpdate(
-        req.user.userId,                            // from the verified token
-        { [field]: value },                         // dynamically update one field
-        { new: true, runValidators: true }          // return updated doc
+        req.user.userId, 
+        update,                       
+        { new: true, runValidators: true }         
       ).select("name email phone");
 
       if (!updatedUser) {

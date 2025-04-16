@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./FridgeSetUp.css"
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 function DietaryPreference() {
@@ -9,6 +11,25 @@ function DietaryPreference() {
     const [selectedAllergies, setAllergies] = useState('');
     const [selectedValues, setSelectedValues] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+      
+        axios.get("http://localhost:5001/api/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        })
+          .then(res => {
+            const dietary = res.data.user.dietary || {};
+            setDiet(dietary.dietType || '');
+            setAllergies(dietary.nutritionGoals || '');
+            setSelectedValues(dietary.allergies || []);
+          })
+          .catch(err => {
+            console.error("Error loading dietary preferences:", err);
+          });
+      }, []);
     
     const SelectField = ({label, description, id, name, value, options, onChange }) => {
         return (
@@ -26,12 +47,39 @@ function DietaryPreference() {
         );
     };
 
+    const handleSave = () => {
+        const token = localStorage.getItem("token");
+      
+        const dietaryData = {
+          dietType: selectedDiet,
+          nutritionGoals: selectedAllergies,
+          allergies: selectedValues
+        };
+      
+        axios.post(
+          "http://localhost:5001/api/Account-Setting/dietary",
+          { value: dietaryData },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          }
+        )
+          .then(res => {
+            console.log("Saved dietary preferences:", res.data);
+            navigate("/settings");
+          })
+          .catch(err => {
+            console.error("Error saving dietary preferences:", err);
+          });
+      };
+
     const SelectMultipleField = ({label, description, id, name, value, options, onChange }) => {
         const handleChange = (event) => {
             const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
             onChange(selectedOptions);
         };
-    
+
         return (
             <div className="form-group">
             <label htmlFor={id}>{label}</label>
@@ -98,7 +146,7 @@ function DietaryPreference() {
                 />
             </div>
             <div className="button-group">
-                <button className="submit-button settings-save" onClick={()=> navigate("/settings")}>Save</button>
+                <button className="submit-button settings-save" onClick={handleSave}>Save</button>
             </div>
         </div>
     )
