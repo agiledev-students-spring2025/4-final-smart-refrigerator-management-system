@@ -11,46 +11,62 @@ function FridgeSetup() {
     const [checkedHumidity, setHumidity] = useState(false);
     const [checkedFreezer, setFreezer] = useState(false);
     const [checkedVegetableDrawer, setVegetable] = useState(false);
+    const [checkedIceMaker, setIceMaker] = useState(false);
+    const [checkedTouchscreen, setTouchscreen] = useState(false);
     
     const API_BASE_URL = "http://localhost:5001/api";
     
-    // Load existing settings on component mount
     useEffect(() => {
-        axios.get(`${API_BASE_URL}/Fridge-Model`)
+        const token = localStorage.getItem("token");
+
+        axios.get(`${API_BASE_URL}/profile`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
             .then(res => {
-                const data = res.data;
-                setBrand(data.brand || '');
-                setModel(data.model || '');
+                const data = res.data.user.fridgeModel || {};
+                setBrand(data.fridgeBrand || '');
+                setModel(data.modelName || '');
                 
-                if (data.features) {
-                    setHumidity(data.features.humidity || false);
-                    setFreezer(data.features.freezer || false);
-                    setVegetable(data.features.vegetableDrawer || false);
-                }
+                const features = data.Features || {};
+                setHumidity(features.humidity || false);
+                setFreezer(features.freezer || false);
+                setVegetable(features.vegetableDrawer || false);
+                setIceMaker(features.iceMaker || false);
+                setTouchscreen(features.touchscreenPanel || false);
+                
             })
             .catch(err => console.error("Error loading fridge settings:", err));
     }, []);
     
     // Handle form submission
     const handleSave = () => {
+        const token = localStorage.getItem("token");
+
         const fridgeData = {
-            brand: selectedBrand,
-            model: selectedModel,
-            features: {
+            fridgeBrand: selectedBrand,
+            modelName: selectedModel,
+            Features: {
                 humidity: checkedHumidity,
-                freezer: checkedFreezer,
-                vegetableDrawer: checkedVegetableDrawer
+                freezerCompartment: checkedFreezer,
+                vegetableDrawer: checkedVegetableDrawer,
+                iceMaker: checkedIceMaker,
+                touchscreenPanel: checkedTouchscreen,
             }
         };
         
-        axios.post(`${API_BASE_URL}/Fridge-Model`, fridgeData)
+        axios.post(`${API_BASE_URL}/Fridge-Model`, fridgeData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+              },
+        })
             .then(res => {
                 console.log("Saved successfully:", res.data);
                 navigate("/settings");
             })
             .catch(err => {
                 console.error("Error saving fridge settings:", err);
-                // Add error handling here (e.g., show an error message)
             });
     };
 
@@ -128,6 +144,25 @@ function FridgeSetup() {
                 onChange={() => setVegetable(!checkedVegetableDrawer)}
                 />
                 <label htmlFor="VegetableDrawer">Vegetable Drawer</label>
+            </div>
+            <div className="checkbox">
+                <input
+                type="checkbox"
+                id="IceMaker"
+                checked={checkedIceMaker}
+                onChange={() => setIceMaker(!checkedIceMaker)}
+                />
+                <label htmlFor="IceMaker">Ice Maker</label>
+                </div>
+
+            <div className="checkbox">
+                <input
+                type="checkbox"
+                id="TouchscreenPanel"
+                checked={checkedTouchscreen}
+                onChange={() => setTouchscreen(!checkedTouchscreen)}
+                />
+            <label htmlFor="TouchscreenPanel">Touchscreen Panel</label>
             </div>
         </div>
         <div className="button-group">
