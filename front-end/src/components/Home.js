@@ -16,9 +16,9 @@ const Home = () => {
         const fetchUserProfile = async () => {
             const token = localStorage.getItem("token");
             if (!token) {
-                navigate("/login");
+                setUserName("Guest");
                 return;
-            }
+            }            
 
             try {
                 const res = await fetch("http://localhost:5001/api/profile", {
@@ -61,9 +61,17 @@ const Home = () => {
         const days = getDaysUntilExpiration(item.expiryDate);
         return days !== null && days <= 3;
     });
+    const [showFridgeEmptyMessage, setShowFridgeEmptyMessage] = useState(totalItems === 0);
+
 
     // State to store recipe data
     const [recipes, setRecipes] = useState([]);
+
+    useEffect(() => {
+        if (totalItems === 0) {
+            setShowFridgeEmptyMessage(true);
+        }
+    }, [totalItems]);
 
     // Fetch recipe data from backend
     useEffect(() => {
@@ -101,7 +109,7 @@ const Home = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
             >
-                Welcome, {userName}!
+                Welcome, {userName || "Guest"}!
             </motion.h1>
 
             <motion.div 
@@ -110,6 +118,16 @@ const Home = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
             >
+
+            {showFridgeEmptyMessage && (
+            <div className="overlay">
+                <div className="overlay-card">
+                <p>Your fridge is empty！Add some food to get started!</p>
+                <button onClick={() => setShowFridgeEmptyMessage(false)}>Got it</button>
+                </div>
+            </div>
+            )}
+
                 <h2>Your Fridge Activities:</h2>
 
                 {/* Wrap cards in a new flex container */}
