@@ -1,26 +1,3 @@
-// const inventory = require('../mockData/items'); //remove later
-//
-// router.get("/waste", (req, res) => {
-//     const { startDate, endDate } = req.query;
-//     const start = new Date(startDate);
-//     const end = new Date(endDate);
-//
-//     const filtered = inventory.filter(item => {
-//         const expiry = new Date(item.expirationDate);
-//         return expiry >= start && expiry <= end;
-//     });
-//
-//     const breakdown = {};
-//     filtered.forEach(item => {
-//         const c = item.storageLocation || "other";
-//         breakdown[c] = (breakdown[c] || 0) + 1;
-//     });
-//
-//     res.json({ totalExpired: filtered.length, breakdown });
-// });
-//
-// module.exports = router;
-
 const express = require("express");
 const router = express.Router();
 const Item = require("../models/Item"); // Use teammate's model
@@ -42,7 +19,7 @@ router.get("/", async (req, res) => {
 
         const breakdown = {};
         expiredItems.forEach(item => {
-            const c = item.storageLocation || "other";
+            const c = item.name || "other";
             breakdown[c] = (breakdown[c] || 0) + 1;
         });
 
