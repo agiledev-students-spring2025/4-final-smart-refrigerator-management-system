@@ -9,8 +9,8 @@ const WastePattern = () => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [totalExpired, setTotalExpired] = useState(0);
-    const [compartmentWaste, setCompartmentWaste] = useState({});
-    const [totalTracked, setTotalTracked] = useState(0); // For percentage
+    const [categoryItemMap, setCategoryItemMap] = useState({});
+    const [totalTracked, setTotalTracked] = useState(0);
 
     useEffect(() => {
         if (!startDate || !endDate) return;
@@ -20,7 +20,7 @@ const WastePattern = () => {
                 const res = await fetch(`http://localhost:5001/api/waste?startDate=${startDate}&endDate=${endDate}`);
                 const data = await res.json();
                 setTotalExpired(data.totalExpired);
-                setCompartmentWaste(data.breakdown);
+                setCategoryItemMap(data.breakdown || {});
 
                 const res2 = await fetch("http://localhost:5001/api/analytics");
                 const a = await res2.json();
@@ -28,7 +28,7 @@ const WastePattern = () => {
             } catch (err) {
                 console.warn("Backend not available – showing empty waste data.");
                 setTotalExpired(0);
-                setCompartmentWaste({});
+                setCategoryItemMap({});
                 setTotalTracked(0);
             }
         };
@@ -36,10 +36,13 @@ const WastePattern = () => {
         fetchWaste();
     }, [startDate, endDate]);
 
+    const labels = Object.keys(categoryItemMap);
+    const dataValues = labels.map(label => categoryItemMap[label].length);
+
     const wasteChartData = {
-        labels: Object.keys(compartmentWaste).map(label => label.replace(/([A-Z])/g, " $1").trim()),
+        labels,
         datasets: [{
-            data: Object.values(compartmentWaste),
+            data: dataValues,
             backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#9966FF"]
         }]
     };
@@ -52,13 +55,31 @@ const WastePattern = () => {
                 <label>End Date: <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} /></label>
             </div>
             <div className="summary-box">
-                <p><strong>Total Items Tracked:</strong> {totalExpired}</p>
-                <p><strong>Food Wasted:</strong> {totalExpired > 0 && totalTracked > 0 ? `${((totalExpired / totalTracked) * 100).toFixed(1)}%` : "0%"}</p>
+                <p><strong>Total Items Tracked:</strong> {totalTracked}</p>
+                <p><strong>Food Wasted:</strong> {totalTracked ? `${((totalExpired / totalTracked) * 100).toFixed(1)}%` : "0%"}</p>
                 <p><strong>Estimated Cost Lost:</strong> ${totalExpired * 5}</p>
             </div>
-            <h3>Waste Breakdown by Fridge Section:</h3>
+            <h3>Waste Breakdown by Category:</h3>
             {totalExpired > 0 ? (
-                <Pie data={wasteChartData} />
+                <Pie
+                    data={wasteChartData}
+                    options={{
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label;
+                                        const items = categoryItemMap[label] || [];
+                                        return [
+                                            `${items.length} item(s)`,
+                                            ...items.map(name => `- ${name}`)
+                                        ];
+                                    }
+                                }
+                            }
+                        }
+                    }}
+                />
             ) : (
                 <p className="center-text">No expired items in selected date range.</p>
             )}
