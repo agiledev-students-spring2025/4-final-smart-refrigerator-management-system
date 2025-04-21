@@ -8,9 +8,10 @@ const recipeData = JSON.parse(fs.readFileSync(seedFilePath, 'utf-8'));
 
 const seedRecipes = async () => {
   try {
-    await Recipe.deleteMany({});
-    await Recipe.insertMany(recipeData);
-    console.log('🍽️ Recipes inserted successfully!');
+    // Comment in only when updating the database
+    //await Recipe.deleteMany({});
+    //await Recipe.insertMany(recipeData);
+    //console.log('🍽️ Recipes inserted successfully!');
   } catch (err) {
     console.error('❌ Seeding recipes failed:', err);
   }
