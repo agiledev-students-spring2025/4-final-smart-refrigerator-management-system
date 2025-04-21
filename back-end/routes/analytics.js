@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const inventory = require('../mockData/items'); //remove this after db implement
+const inventory = require('../prepopulated_Data/items'); //remove this after db implement
 
 
 router.get("/analytics", (req, res) => {

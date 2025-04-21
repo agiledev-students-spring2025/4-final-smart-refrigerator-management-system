@@ -36,6 +36,7 @@ app.use('/api/recipes', recipeRoutes);
 app.use('/api', analyticsRoutes);
 app.use('/api', wasteRoutes);
 app.use('/api', recommendationsRoutes);
+app.use('/api/guest', require('./routes/guest'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

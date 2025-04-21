@@ -3,10 +3,7 @@ const Item = require('../models/Item');
 
 const seedStarterItems = async (userId) => {
   try {
-    const existingItems = await Item.countDocuments({ 
-      isStarterItem: true,
-      owner: userId
-    });
+    const existingItems = await Item.countDocuments({ isStarterItem: true });
     
     if (existingItems === 0) {
       const starterItems = [
@@ -18,7 +15,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: true,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 1000 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         { 
           name: 'Black Pepper',
@@ -27,7 +24,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: true,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 1000 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         { 
           name: 'Olive Oil',
@@ -36,7 +33,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         { 
           name: 'Soy Sauce',
@@ -45,7 +42,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 730 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         
         // baking supplies
@@ -56,7 +53,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: true,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 1000 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         { 
           name: 'Flour',
@@ -65,7 +62,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         { 
           name: 'Baking Soda',
@@ -74,7 +71,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: true,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 1000 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         
         // grains & pasta
@@ -85,7 +82,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 730 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         { 
           name: 'Pasta',
@@ -94,7 +91,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 730 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         
         // refrigerated items
@@ -105,7 +102,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         { 
           name: 'Eggs',
@@ -114,7 +111,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 28 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         { 
           name: 'Milk',
@@ -123,7 +120,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         
         // canned goods
@@ -134,7 +131,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 1095 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         { 
           name: 'Canned Tomatoes',
@@ -143,7 +140,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 730 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         },
         { 
           name: 'Chicken Broth',
@@ -152,7 +149,7 @@ const seedStarterItems = async (userId) => {
           nonExpiring: false,
           isStarterItem: true,
           expirationDate: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000),
-          owner: userId
+           
         }
       ];
       
