@@ -80,10 +80,10 @@ function RecipeSuggestions() {
           <div className="recipe-grid">
             {filteredSuggestedRecipes.map(recipe => (
               <Recipe 
-                key={recipe.id}
-                id={recipe.id}
+                key={recipe._id}
+                _id={recipe._id}
                 name={recipe.name}
-                cookTime={recipe.time}
+                time={recipe.time}
                 imageUrl={recipe.imageUrl} 
               />
             ))}
@@ -103,10 +103,10 @@ function RecipeSuggestions() {
           <div className="recipe-grid">
             {filteredFavoriteRecipes.map(recipe => (
               <Recipe 
-                key={recipe.id}
-                id={recipe.id}
+                key={recipe._id}
+                _id={recipe._id}
                 name={recipe.name}
-                cookTime={recipe.time}
+                time={recipe.time}
                 imageUrl={recipe.imageUrl} 
               />
             ))}

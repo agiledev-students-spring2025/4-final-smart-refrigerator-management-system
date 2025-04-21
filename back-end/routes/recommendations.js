@@ -20,6 +20,7 @@ router.get("/", async (req, res) => {
         items.forEach(item => {
             const daysLeft = Math.ceil((new Date(item.expirationDate) - today) / (1000 * 60 * 60 * 24));
 
+
             if (daysLeft >= 0 && daysLeft <= daysAhead) {
                 mustBuy.push({
                     name: item.name,

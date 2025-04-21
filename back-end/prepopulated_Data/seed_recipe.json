@@ -1,0 +1,700 @@
+[
+  {
+    "id": "1",
+    "name": "Mac n Cheese",
+    "ingredients": [
+      {
+        "name": "Salt",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Elbow Pasta",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Unsalted Butter",
+        "quantity": "2 tbsp"
+      },
+      {
+        "name": "Whole Milk",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "Half n Half",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "Cheddar",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "Gruyere",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "Smoked Paprika",
+        "quantity": "1 tsp"
+      }
+    ],
+    "time": "10m",
+    "instructions": [
+      "1. Cook Pasta",
+      "2. Shred cheese",
+      "3. Put butter, whole milk, half n half and seasonings on low heat until boil",
+      "4. Add 2/3 of shredded cheese and mix until smooth",
+      "5. take off heat, strain pasta and add to cheese mixture",
+      "6. Add to baking dish and distribute shreeded cheese on top evenly",
+      "7. Cook in oven on bake 365 for 25 minutes"
+    ],
+    "imageUrl": "https://picsum.photos/200/200"
+  },
+  {
+    "id": "2",
+    "name": "Candied Yams",
+    "ingredients": [
+      {
+        "name": "Brown Sugar",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Yams",
+        "quantity": "3 whole"
+      },
+      {
+        "name": "Cinnamon",
+        "quantity": "2 tsp"
+      },
+      {
+        "name": "Butter",
+        "quantity": "3 tbsp"
+      }
+    ],
+    "time": "15m",
+    "instructions": [
+      "1. Oven Bake 365F",
+      "2. Mix Cinnamon and Sugar",
+      "3. Put yams in butter and then coat with dry mixture",
+      "4. Bake yams for 5 minutes"
+    ],
+    "imageUrl": "https://picsum.photos/200/300"
+  },
+  {
+    "id": "3",
+    "name": "Creme Brulee (Easy)",
+    "ingredients": [
+      {
+        "name": "Sugar",
+        "quantity": "2 tbsp"
+      },
+      {
+        "name": "Vanilla Ice Cream",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "2 Egg Yolks",
+        "quantity": "2"
+      },
+      {
+        "name": "Water",
+        "quantity": "100ml"
+      }
+    ],
+    "time": "45m",
+    "instructions": [
+      "1. Oven Bake 365F",
+      "2. Beat melted and cooled vanilla ice cream with 2 egg yolks",
+      "3. Create a water bath in a larger tin than the ramekin for creme brulee",
+      "4. Place ramekin with ice cream mix atop water bath and bake for 30m",
+      "5. Let cool in firdge for 3 hours",
+      "6. Add sugar on top and lightly scorch to taste"
+    ],
+    "imageUrl": "https://picsum.photos/200/500"
+  },
+  {
+    "id": "4",
+    "name": "Spaghetti Bolognese",
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Ground Beef",
+        "quantity": "100g"
+      },
+      {
+        "name": "Tomato Sauce",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Onion",
+        "quantity": "1 whole"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "1 pinch"
+      }
+    ],
+    "time": "43m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/400"
+  },
+  {
+    "id": "5",
+    "name": "Grilled Cheese Sandwich",
+    "ingredients": [
+      {
+        "name": "Bread",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Cheddar Cheese",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Butter",
+        "quantity": "2 cups"
+      }
+    ],
+    "time": "49m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/200"
+  },
+  {
+    "id": "6",
+    "name": "Chicken Stir Fry",
+    "ingredients": [
+      {
+        "name": "Chicken Breast",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Soy Sauce",
+        "quantity": "100g"
+      },
+      {
+        "name": "Bell Pepper",
+        "quantity": "1 pinch"
+      },
+      {
+        "name": "Broccoli",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "1 whole"
+      }
+    ],
+    "time": "49m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/250"
+  },
+  {
+    "id": "7",
+    "name": "Beef Tacos",
+    "ingredients": [
+      {
+        "name": "Taco Shells",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Ground Beef",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Lettuce",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Cheddar Cheese",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Salsa",
+        "quantity": "2 cups"
+      }
+    ],
+    "time": "38m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/300"
+  },
+  {
+    "id": "8",
+    "name": "Vegetable Curry",
+    "ingredients": [
+      {
+        "name": "Potato",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Carrot",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Coconut Milk",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Curry Powder",
+        "quantity": "100g"
+      },
+      {
+        "name": "Onion",
+        "quantity": "1 slice"
+      }
+    ],
+    "time": "35m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/350"
+  },
+  {
+    "id": "9",
+    "name": "Pancakes",
+    "ingredients": [
+      {
+        "name": "Flour",
+        "quantity": "1 pinch"
+      },
+      {
+        "name": "Egg",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Milk",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Butter",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Sugar",
+        "quantity": "200ml"
+      }
+    ],
+    "time": "26m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/400"
+  },
+  {
+    "id": "10",
+    "name": "Avocado Toast",
+    "ingredients": [
+      {
+        "name": "Bread",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Avocado",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Lemon Juice",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Salt",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Pepper",
+        "quantity": "100g"
+      }
+    ],
+    "time": "47m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/200"
+  },
+  {
+    "id": "11",
+    "name": "Miso Soup",
+    "ingredients": [
+      {
+        "name": "Miso Paste",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Tofu",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Seaweed",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Green Onion",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Water",
+        "quantity": "1 slice"
+      }
+    ],
+    "time": "28m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/250"
+  },
+  {
+    "id": "12",
+    "name": "Chocolate Chip Cookies",
+    "ingredients": [
+      {
+        "name": "Flour",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Chocolate Chips",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Butter",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Egg",
+        "quantity": "1 whole"
+      },
+      {
+        "name": "Sugar",
+        "quantity": "1/2 cup"
+      }
+    ],
+    "time": "10m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/300"
+  },
+  {
+    "id": "13",
+    "name": "Lemon Garlic Salmon",
+    "ingredients": [
+      {
+        "name": "Salmon",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Lemon",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Parsley",
+        "quantity": "1 tsp"
+      }
+    ],
+    "time": "18m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/350"
+  },
+  {
+    "id": "14",
+    "name": "Mushroom Risotto",
+    "ingredients": [
+      {
+        "name": "Arborio Rice",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Mushrooms",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Onion",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Parmesan",
+        "quantity": "1 tsp"
+      }
+    ],
+    "time": "36m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/400"
+  },
+  {
+    "id": "15",
+    "name": "Shrimp Scampi",
+    "ingredients": [
+      {
+        "name": "Shrimp",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Butter",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Lemon Juice",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Parsley",
+        "quantity": "200ml"
+      }
+    ],
+    "time": "26m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/200"
+  },
+  {
+    "id": "16",
+    "name": "Quinoa Salad",
+    "ingredients": [
+      {
+        "name": "Quinoa",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Cucumber",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Tomato",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Feta Cheese",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": "200ml"
+      }
+    ],
+    "time": "33m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/250"
+  },
+  {
+    "id": "17",
+    "name": "Stuffed Peppers",
+    "ingredients": [
+      {
+        "name": "Bell Pepper",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Rice",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Ground Beef",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Tomato Sauce",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Onion",
+        "quantity": "1 slice"
+      }
+    ],
+    "time": "36m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/300"
+  },
+  {
+    "id": "18",
+    "name": "French Toast",
+    "ingredients": [
+      {
+        "name": "Bread",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Egg",
+        "quantity": "1 whole"
+      },
+      {
+        "name": "Milk",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Cinnamon",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Maple Syrup",
+        "quantity": "1 pinch"
+      }
+    ],
+    "time": "35m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/350"
+  },
+  {
+    "id": "19",
+    "name": "Baked Ziti",
+    "ingredients": [
+      {
+        "name": "Ziti Pasta",
+        "quantity": "100g"
+      },
+      {
+        "name": "Marinara Sauce",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Mozzarella Cheese",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Ricotta",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Parmesan",
+        "quantity": "200ml"
+      }
+    ],
+    "time": "30m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/400"
+  },
+  {
+    "id": "20",
+    "name": "Chicken Alfredo",
+    "ingredients": [
+      {
+        "name": "Fettuccine",
+        "quantity": "1 whole"
+      },
+      {
+        "name": "Chicken",
+        "quantity": "100g"
+      },
+      {
+        "name": "Heavy Cream",
+        "quantity": "100g"
+      },
+      {
+        "name": "Parmesan",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "1 lb"
+      }
+    ],
+    "time": "20m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/200"
+  }
+]

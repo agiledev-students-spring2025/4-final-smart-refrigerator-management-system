@@ -6,30 +6,58 @@ export const useInventory = () => useContext(InventoryContext);
 
 export const InventoryProvider = ({ children }) => {
   const [inventory, setInventory] = useState([]);
-  
-  useEffect(() => {
-    const savedInventory = localStorage.getItem('foodInventory');
-    if (savedInventory) {
-      try {
-        setInventory(JSON.parse(savedInventory));
-      } catch (error) {
-        console.error('Error parsing inventory from localStorage:', error);
-        setInventory([]);
-      }
-    }
-  }, []);
-  
-  useEffect(() => {
-    localStorage.setItem('foodInventory', JSON.stringify(inventory));
-  }, [inventory]);
-  
+  const [isGuest, setIsGuest] = useState(false);
+
+    // ✅ Fetch from backend on mount
+    useEffect(() => {
+      const fetchInventory = async () => {
+        const token = localStorage.getItem('token');
+        let endpoint;
+        let options = {};
+    
+        if (token) {
+          endpoint = 'http://localhost:5001/api/items';
+          options.headers = { Authorization: `Bearer ${token}` };
+          setIsGuest(false);
+        } else {
+          endpoint = 'http://localhost:5001/api/guest/starter';
+          setIsGuest(true);
+        }
+    
+        try {
+          const res = await fetch(endpoint, options);
+          if (res.ok) {
+            const data = await res.json();
+            setInventory(data.data || []);
+          } else {
+            throw new Error("Fetch failed");
+          }
+        } catch (error) {
+          console.warn('Backend fetch failed. Falling back to localStorage.');
+          const savedInventory = localStorage.getItem('foodInventory');
+          if (savedInventory) {
+            try {
+              setInventory(JSON.parse(savedInventory));
+            } catch (error) {
+              console.error('Error parsing fallback inventory:', error);
+              setInventory([]);
+            }
+          }
+        }
+      };
+    
+      fetchInventory();
+    }, []);    
+
   const addItem = (item) => {
     const newItem = {
       ...item,
       id: Date.now().toString(),
       createdAt: new Date().toISOString(),
     };
-    setInventory(prev => [...prev, newItem]);
+    const updated = [...inventory, newItem];
+    setInventory(updated);
+    localStorage.setItem('foodInventory', JSON.stringify(updated)); 
     return newItem;
   };
   
