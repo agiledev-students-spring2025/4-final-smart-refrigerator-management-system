@@ -1,4 +1,3 @@
-// src/mockData/items.js
 const mockItems = [
     {
       id: '1',
