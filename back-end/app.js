@@ -1,8 +1,8 @@
 // import and instantiate express
 require('dotenv').config();
-const express = require("express") // CommonJS import style!
+const express = require("express") 
 const cors = require("cors");
-const app = express() // instantiate an Express object
+const app = express() 
 const path = require('path');
 const itemsRoutes = require('./routes/items');
 const authRoutes = require('./routes/auth');
@@ -45,6 +45,7 @@ app.use((err, req, res, next) => {
     message: 'Something went wrong'
   });
 });
+
 
 // export the express app we created to make it available to other modules
 module.exports = app
