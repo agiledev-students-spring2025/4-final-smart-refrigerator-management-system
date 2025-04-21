@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const inventory = require('../mockData/items'); //remove later
+const inventory = require('../prepopulated_Data/items'); //remove later
 
 router.get("/waste", (req, res) => {
     const { startDate, endDate } = req.query;
