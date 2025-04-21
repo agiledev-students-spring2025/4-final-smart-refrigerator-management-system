@@ -1,27 +1,3 @@
-// const express = require("express");
-// const router = express.Router();
-// const inventory = require('../mockData/items'); //remove this after db implement
-//
-//
-// router.get("/analytics", (req, res) => {
-//     const today = new Date();
-//     const totalItems = inventory.length;
-//     let expired = 0, expiringSoon = 0;
-//     const compartmentCounts = {};
-//
-//     inventory.forEach(item => {
-//         const days = Math.ceil((new Date(item.expirationDate) - today) / (1000 * 60 * 60 * 24));
-//         if (days < 0) expired++;
-//         if (days >= 0 && days <= 3) expiringSoon++;
-//         const c = item.storageLocation || "other";
-//         compartmentCounts[c] = (compartmentCounts[c] || 0) + 1;
-//     });
-//
-//     res.json({ totalItems, expiringSoon, expired, byCompartment: compartmentCounts });
-// });
-//
-// module.exports = router;
-
 const express = require("express");
 const router = express.Router();
 const Item = require("../models/Item"); // Use this once it's available
@@ -51,23 +27,18 @@ router.get("/", async (req, res) => {
             byCategory[group._id || "other"] = group.count;
         });
 
-        res.json({ totalItems, expiringSoon, expired, byCategory });
+        const items = await Item.find({});
+        const sorted = [...items].sort((a, b) => {
+            const expiryA = new Date(a.expirationDate);
+            const expiryB = new Date(b.expirationDate);
+            return expiryA - expiryB || parseInt(a.quantity) - parseInt(b.quantity);
+        });
 
-        // const byCompartmentAgg = await Item.aggregate([
-        //     {
-        //         $group: {
-        //             _id: "$storageLocation",
-        //             count: { $sum: 1 }
-        //         }
-        //     }
-        // ]);
-        //
-        // const byCompartment = {};
-        // byCompartmentAgg.forEach(group => {
-        //     byCompartment[group._id || "other"] = group.count;
-        // });
-        //
-        // res.json({ totalItems, expiringSoon, expired, byCompartment });
+        const mostUsed = sorted.slice(0, 4);
+        const leastUsed = sorted.slice(-4);
+
+        res.json({ totalItems, expiringSoon, expired, byCategory, mostUsed, leastUsed });
+
     } catch (err) {
         console.error("Analytics error:", err);
         res.status(500).json({ error: "Analytics route failed" });
