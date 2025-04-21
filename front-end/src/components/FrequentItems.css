@@ -1,0 +1,92 @@
+.frequent-items-container {
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .frequent-items-container h2 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .frequent-items-container p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .frequent-items-loading, 
+  .frequent-items-error {
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .frequent-items-loading {
+    background-color: #e9f5ff;
+    color: #0066cc;
+  }
+  
+  .frequent-items-error {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  .frequent-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .frequent-item-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+  }
+  
+  .frequent-item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+  
+  .item-details h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+  
+  .item-details p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .quick-add-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+  }
+  
+  .quick-add-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .quick-add-btn.added {
+    background-color: #8bc34a;
+    cursor: default;
+  }
+  
+  @media (max-width: 600px) {
+    .frequent-items-grid {
+      grid-template-columns: 1fr;
+    }
+  }
