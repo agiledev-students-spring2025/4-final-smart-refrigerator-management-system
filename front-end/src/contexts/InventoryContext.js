@@ -145,7 +145,7 @@ export const InventoryProvider = ({ children }) => {
         return true;
       }
       
-      const response = await fetch(`${API_URL}/items/${id}`, {
+      const response = await fetch(`http://localhost:5001/api/items/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`
