@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
     const navigate = useNavigate(); // ✅ To redirect if token is invalid
     const [userName, setUserName] = useState(""); // ✅ Dynamic name
+    const [analyticsLoaded, setAnalyticsLoaded] = useStat
     const [compartments, setCompartments] = useState({});
-
 
     // ✅ Fetch user profile on page load
     useEffect(() => {
@@ -43,8 +43,6 @@ const Home = () => {
         fetchUserProfile();
     }, [navigate]);
 
-    // Flatten all items from compartments
-    const allItems = Object.values(compartments).flat();
 
     useEffect(() => {
         const fetchInventory = async () => {
@@ -83,26 +81,29 @@ const Home = () => {
         fetchInventory();
     }, []);
     
-
-    // Function to calculate days until expiration
-    const getDaysUntilExpiration = (item) => {
-        const expiryDate = item.expiryDate || item.expirationDate;
-        if (!expiryDate) return null;
-        const today = new Date();
-        const expiry = new Date(expiryDate);
-        return Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
-    };
-
     
 
     // Get inventory stats
-    const [showFridgeEmptyMessage, setShowFridgeEmptyMessage] = useState(false);
-    const totalItems = allItems.length;    
-    const expiringSoonItems = allItems.filter(item => {
-        const days = getDaysUntilExpiration(item);
-        return days !== null && days <= 3;
-    });
-    
+
+    const [totalItems, setTotalItems] = useState(0);
+    const [expiringSoon, setExpiringSoon] = useState(0);
+
+    useEffect(() => {
+        fetch("http://localhost:5001/api/analytics")
+            .then((res) => res.json())
+            .then((data) => {
+                setTotalItems(data.totalItems);
+                setExpiringSoon(data.expiringSoon);
+                setAnalyticsLoaded(true);
+            })
+            .catch((err) => {
+                console.error("Error fetching analytics:", err);
+                setAnalyticsLoaded(true);
+            });
+    }, []);
+
+    const [showFridgeEmptyMessage, setShowFridgeEmptyMessage] = useState(totalItems === 0);
+
 
     // State to store recipe data
     const [recipes, setRecipes] = useState([]);
@@ -158,14 +159,23 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: 0.4 }}
             >
 
-            {showFridgeEmptyMessage && (
-            <div className="overlay">
-                <div className="overlay-card">
-                <p>Your fridge is empty！Add some food to get started!</p>
-                <button onClick={() => setShowFridgeEmptyMessage(false)}>Got it</button>
+            {analyticsLoaded && totalItems === 0 && showFridgeEmptyMessage && (
+                <div className="overlay">
+                    <div className="overlay-card">
+                        <p>Your fridge is empty！Add some food to get started!</p>
+                        <button onClick={() => setShowFridgeEmptyMessage(false)}>Got it</button>
+                    </div>
                 </div>
-            </div>
             )}
+
+            {/*{showFridgeEmptyMessage && (*/}
+            {/*<div className="overlay">*/}
+            {/*    <div className="overlay-card">*/}
+            {/*    <p>Your fridge is empty！Add some food to get started!</p>*/}
+            {/*    <button onClick={() => setShowFridgeEmptyMessage(false)}>Got it</button>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+            {/*)}*/}
 
                 <h2>Your Fridge Activities:</h2>
 
@@ -183,13 +193,14 @@ const Home = () => {
                     </motion.div>
 
                     {/* Expiring Soon Card */}
-                    <motion.div 
+                    <motion.div
                         className="summary-card expiring-card"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
+                        whileHover={{scale: 1.05}}
+                        transition={{duration: 0.3}}
                     >
                         <h2>Expiring Soon</h2>
-                        <p className="summary-number">{expiringSoonItems.length}</p>
+                        {/*<p className="summary-number">{expiringSoonItems.length}</p>*/}
+                        <p className="summary-number">{expiringSoon}</p>
                         <Link to="/analytics" className="summary-button">View Analytics</Link>
                     </motion.div>
                 </div>
