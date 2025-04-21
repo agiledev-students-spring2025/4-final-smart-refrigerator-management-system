@@ -32,7 +32,7 @@ router.get('/', auth, async (req, res) => {
  */
 router.get('/:id', auth, async (req, res) => {
   try {
-    const item = mockItems.find(item => item.id === req.params.id);
+    const item = await Item.findById(req.params.id);
   
     if (!item) {
       return res.status(404).json({
@@ -41,7 +41,7 @@ router.get('/:id', auth, async (req, res) => {
       });
     }
     
-    if (item.owner.toString() !== req.user.userId) {
+    if (item.owner && item.owner.toString() !== req.user.userId) {
       return res.status(401).json({
         status: 'error',
         message: 'User not authorized'
@@ -165,7 +165,7 @@ router.put('/:id', auth, async (req, res) => {
       });
     }
     
-    if (item.owner.toString() !== req.user.userId) {
+    if (item.owner && item.owner.toString() !== req.user.userId) {
       return res.status(401).json({
         status: 'error',
         message: 'User not authorized'
@@ -214,7 +214,7 @@ router.delete('/:id', auth, async (req, res) => {
       });
     }
 
-    if (item.owner.toString() !== req.user.userId) {
+    if (item.owner && item.owner.toString() !== req.user.userId) {
       return res.status(401).json({
         status: 'error',
         message: 'User not authorized'
@@ -247,7 +247,7 @@ router.delete('/:id', auth, async (req, res) => {
  * @desc    Get items expiring within 7 days
  * @access  Private
  */
-router.get('/expiring/soon', async (req, res) => {
+router.get('/expiring/soon', auth, async (req, res) => {
   try {
     const today = new Date();
     const oneWeekLater = new Date(today);
@@ -454,7 +454,7 @@ router.post('/quick-add', auth, async (req, res) => {
       });
     }
     
-    if (item.owner.toString() !== req.user.userId) {
+    if (item.owner && item.owner.toString() !== req.user.userId) {
       return res.status(401).json({
         status: 'error',
         message: 'User not authorized'
