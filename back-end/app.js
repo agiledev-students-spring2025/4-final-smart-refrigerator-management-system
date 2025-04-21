@@ -33,9 +33,9 @@ app.use('/api', accountSeetingRoutes);
 app.use('/api', fridgeModelRoutes);
 app.use('/api', authRoutes);
 app.use('/api/recipes', recipeRoutes);
-app.use('/api', analyticsRoutes);
-app.use('/api', wasteRoutes);
-app.use('/api', recommendationsRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/waste', wasteRoutes);
+app.use('/api/recommendations', recommendationsRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

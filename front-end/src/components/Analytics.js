@@ -21,10 +21,10 @@ const Analytics = () => {
                 setExpiringSoonCount(data.expiringSoon);
                 setExpiredCount(data.expired);
 
-                const labels = Object.keys(data.byCompartment).map((label) =>
+                const labels = Object.keys(data.byCategory).map((label) =>
                     label.replace(/([A-Z])/g, " $1").trim()
                 );
-                const values = Object.values(data.byCompartment);
+                const values = Object.values(data.byCategory);
 
                 setCompartmentChartData({
                     labels,
@@ -92,11 +92,11 @@ const Analytics = () => {
 
             {/* Items by Compartment (Pie Chart) */}
             <section>
-                <h3>Items by Compartment</h3>
+                <h3>Items by Category</h3>
                 {totalItems > 0 ? (
                     <Pie data={compartmentChartData} />
                 ) : (
-                    <p className="center-text">No items in compartments.</p>
+                    <p className="center-text">No items.</p>
                 )}
             </section>
 
