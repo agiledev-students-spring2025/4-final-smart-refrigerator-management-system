@@ -4,7 +4,8 @@ const Item = require('../models/Item');
 const seedStarterItems = async () => {
   try {
     // Remove previously seeded starter items to ensure fresh demo data
-    await Item.deleteMany({ isStarterItem: true });
+    // Comment in only when updating the database
+    // await Item.deleteMany({ isStarterItem: true });
 
     const today = new Date();
     const getFutureDate = (daysFromToday) => {
@@ -145,7 +146,7 @@ const seedStarterItems = async () => {
       }
     ];
 
-    await Item.insertMany(starterItems);
+    // await Item.insertMany(starterItems);
     console.log('✅ Starter items seeded successfully');
   } catch (err) {
     console.error('❌ Error seeding starter items:', err);
