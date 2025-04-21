@@ -11,6 +11,7 @@ const Analytics = () => {
     const [compartmentChartData, setCompartmentChartData] = useState({});
     const [mostUsed, setMostUsed] = useState([]);
     const [leastUsed, setLeastUsed] = useState([]);
+    const [categoryItemMap, setCategoryItemMap] = useState({});
 
     useEffect(() => {
         const fetchAnalytics = async () => {
@@ -21,10 +22,8 @@ const Analytics = () => {
                 setExpiringSoonCount(data.expiringSoon);
                 setExpiredCount(data.expired);
 
-                const labels = Object.keys(data.byCategory).map((label) =>
-                    label.replace(/([A-Z])/g, " $1").trim()
-                );
-                const values = Object.values(data.byCategory);
+                const labels = Object.keys(data.byCategory);
+                const values = labels.map(label => data.byCategory[label].length);
 
                 setCompartmentChartData({
                     labels,
@@ -35,6 +34,8 @@ const Analytics = () => {
                         },
                     ],
                 });
+
+                setCategoryItemMap(data.byCategory); // sets up tooltip data
 
                 setMostUsed(data.mostUsed || []);
                 setLeastUsed(data.leastUsed || []);
@@ -77,8 +78,25 @@ const Analytics = () => {
             <section>
                 <h3>Items by Category</h3>
                 {totalItems > 0 ? (
-                    <Pie data={compartmentChartData} />
-                ) : (
+                    <Pie
+                        data={compartmentChartData}
+                        options={{
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            const category = context.label.toLowerCase();
+                                            const items = categoryItemMap[category] || [];
+                                            return [
+                                                `${items.length} item(s)`,
+                                                ...items.map(name => `- ${name}`)
+                                            ];
+                                        }
+                                    }
+                                }
+                            }
+                        }}
+                    />                ) : (
                     <p className="center-text">No items.</p>
                 )}
             </section>

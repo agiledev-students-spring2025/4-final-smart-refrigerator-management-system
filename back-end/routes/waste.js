@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Item = require("../models/Item"); // Use teammate's model
+const Item = require("../models/Item");
 
 router.get("/", async (req, res) => {
     try {
@@ -19,8 +19,9 @@ router.get("/", async (req, res) => {
 
         const breakdown = {};
         expiredItems.forEach(item => {
-            const c = item.name || "other";
-            breakdown[c] = (breakdown[c] || 0) + 1;
+            const key = item.category || "other";
+            if (!breakdown[key]) breakdown[key] = [];
+            breakdown[key].push(item.name);
         });
 
         res.json({ totalExpired: expiredItems.length, breakdown });

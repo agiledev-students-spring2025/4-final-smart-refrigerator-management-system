@@ -18,16 +18,15 @@ router.get("/", async (req, res) => {
             expirationDate: { $lt: today }
         });
 
-        const byCategoryAgg = await Item.aggregate([
-            { $group: { _id: "$category", count: { $sum: 1 } } }
-        ]);
-
+        const items = await Item.find({});
         const byCategory = {};
-        byCategoryAgg.forEach(group => {
-            byCategory[group._id || "other"] = group.count;
+        items.forEach(item => {
+            const category = item.category || "other";
+            if (!byCategory[category]) byCategory[category] = [];
+            byCategory[category].push(item.name);
         });
 
-        const items = await Item.find({});
+        // const items = await Item.find({});
         const sorted = [...items].sort((a, b) => {
             const expiryA = new Date(a.expirationDate);
             const expiryB = new Date(b.expirationDate);
