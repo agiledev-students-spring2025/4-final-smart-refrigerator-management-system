@@ -12,7 +12,10 @@ const RecipeSchema = new mongoose.Schema({
   instructions: { type: [String], required: true },
   imageUrl: {
     type: String,
-  }
+  },
+  favorite: {type: Boolean, default: false},
+  filter: { type: String}
 });
+
 
 module.exports = mongoose.model('Recipe', RecipeSchema);

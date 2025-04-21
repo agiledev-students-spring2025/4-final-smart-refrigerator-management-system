@@ -67,4 +67,23 @@ router.get('/recipes/search', async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  console.log("Received PUT request to update recipe favorite status", req.params.id);
+  try {
+    const recipe = await Recipe.findByIdAndUpdate(
+      req.params.id,
+      { favorite: req.body.favorite },
+      { new: true } // Returns the updated recipe
+    );
+    if (!recipe) {
+      return res.status(404).json({ status: 'error', message: 'Recipe not found' });
+    }
+    res.json({ status: 'success', data: recipe });
+  } catch (err) {
+    res.status(500).json({ status: 'error', message: err.message });
+  }
+});
+
+
+
 module.exports = router;
