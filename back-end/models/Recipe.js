@@ -12,7 +12,6 @@ const RecipeSchema = new mongoose.Schema({
   instructions: { type: [String], required: true },
   imageUrl: {
     type: String,
-    default: "https://source.unsplash.com/400x300/?food"
   }
 });
 

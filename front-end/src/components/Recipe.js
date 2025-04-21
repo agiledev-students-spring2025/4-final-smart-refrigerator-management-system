@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom'; 
 import './Recipe.css';
 
-function Recipe({ name, cookTime, imageUrl, id }) {
+function Recipe({  _id, name, time, imageUrl }) {
   return (
-    <Link to={`/recipe/${id}`} className="recipe"> {/* Ensure id is passed correctly */}
+    <Link to={`/recipe/${_id}`} className="recipe">
       <img
         src={imageUrl}
         alt={name}
@@ -13,7 +13,7 @@ function Recipe({ name, cookTime, imageUrl, id }) {
       
       <div className="recipe-info">
         <name>{name}</name>  
-        <time>{cookTime}</time>
+        <time>{time}</time>
       </div>
     </Link>
   );

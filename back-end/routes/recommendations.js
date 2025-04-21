@@ -1,31 +1,45 @@
 const express = require("express");
 const router = express.Router();
-const inventory = require('../prepopulated_Data/items'); //remove later
+const Item = require("../models/Item"); 
 
-router.get("/recommendations", (req, res) => {
-    const daysAhead = parseInt(req.query.daysAhead || 7);
-    const today = new Date();
+router.get("/recommendations", async (req, res) => {
+    try {
+        const daysAhead = parseInt(req.query.daysAhead || 7);
+        const today = new Date();
 
-    const mustBuy = [];
-    const replenish = [];
+        // Fetch items that haven't expired
+        const items = await Item.find({
+            $or: [
+                { expirationDate: { $exists: true, $gte: today } },
+                { expiryDate: { $exists: true, $gte: today } }
+            ]
+        });
 
-    inventory.forEach(item => {
-        const daysLeft = Math.ceil((new Date(item.expirationDate) - today) / (1000 * 60 * 60 * 24));
+        const mustBuy = [];
+        const replenish = [];
 
-        if (daysLeft >= 0 && daysLeft <= daysAhead) {
-            mustBuy.push({
-                name: item.name,
-                daysUntilExpiration: daysLeft
-            });
-        } else if (daysLeft > daysAhead && daysLeft <= daysAhead + 7) {
-            replenish.push({
-                name: item.name,
-                daysUntilExpiration: daysLeft
-            });
-        }
-    });
+        items.forEach(item => {
+            const rawDate = item.expirationDate || item.expiryDate;
+            const daysLeft = Math.ceil((new Date(rawDate) - today) / (1000 * 60 * 60 * 24));
 
-    res.json({ mustBuy, replenish });
+            if (daysLeft >= 0 && daysLeft <= daysAhead) {
+                mustBuy.push({
+                    name: item.name,
+                    daysUntilExpiration: daysLeft
+                });
+            } else if (daysLeft > daysAhead && daysLeft <= daysAhead + 7) {
+                replenish.push({
+                    name: item.name,
+                    daysUntilExpiration: daysLeft
+                });
+            }
+        });
+
+        res.json({ mustBuy, replenish });
+    } catch (err) {
+        console.error("Recommendations error:", err);
+        res.status(500).json({ error: "Internal server error" });
+    }
 });
 
 module.exports = router;

@@ -52,11 +52,13 @@ function FullRecipe() {
           <h4>Cook time: {recipe.time}</h4>
 
           <h3>Ingredients</h3>
-          <div className="ingredients-container">
-            {recipe.ingredients.map((ingredient, index) => (
-              <p key={index}>{ingredient}</p>
+          <ul className="ingredients-container">
+            {recipe.ingredients.map(({ _id, quantity, name }, idx) => (
+              <li key={_id || idx}>
+                {quantity} {name}
+              </li>
             ))}
-          </div>
+          </ul>
 
           <h3>Cook</h3>
           <div className="instructions-container">
