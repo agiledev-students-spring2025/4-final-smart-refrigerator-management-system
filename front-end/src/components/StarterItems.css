@@ -1,0 +1,125 @@
+.starter-items-container {
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .starter-items-container h2 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .starter-items-container p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .starter-items-loading, 
+  .starter-items-error {
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .starter-items-loading {
+    background-color: #e9f5ff;
+    color: #0066cc;
+  }
+  
+  .starter-items-error {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  .starter-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .starter-item-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 16px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .starter-item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+  
+  .starter-item-card.selected {
+    background-color: #e8f5e9;
+    border: 2px solid #4caf50;
+  }
+  
+  .starter-item-card h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+  
+  .starter-item-card p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .selection-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #757575;
+    transition: all 0.2s ease;
+  }
+  
+  .starter-item-card.selected .selection-indicator {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .add-selected-btn {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .add-selected-btn:hover {
+    background-color: #1976d2;
+  }
+  
+  .add-selected-btn:disabled {
+    background-color: #bdbdbd;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 600px) {
+    .starter-items-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .starter-items-grid {
+      grid-template-columns: 1fr;
+    }
+  }
