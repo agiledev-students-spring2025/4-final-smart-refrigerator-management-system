@@ -2,13 +2,15 @@
 require('dotenv').config();
 const server = require("./app") // load up the web server
 const connectDB = require('./mongo');
+const seedStarterItems = require('./utils/seedStarterItems');
 const port = 5001 // the port to listen to for incoming requests
 
 // call express's listen function to start listening to the port
 let listener;
 
 // First connect to MongoDB, then start server
-connectDB().then(() => {
+connectDB().then(async() => {
+  console.log('MongoDB connected, seeding starter items...');
   listener = server.listen(port, function () {
     console.log(`Server running on port: ${port}`);
   });

@@ -1,4 +1,3 @@
-// src/mockData/items.js
 const mockRecipes = [
     {
       id: '1',
