@@ -357,47 +357,137 @@ router.post('/scan', auth, async (req, res) => {
   }
 });
 
-// add frequent items endpoint
-router.get('/frequent', (req, res) => {
-  const frequentItems = [
-    { id: 'f1', name: 'Eggs', quantity: '12 count', frequency: 'weekly', category: 'Dairy' },
-    { id: 'f2', name: 'Milk', quantity: '1 gallon', frequency: 'weekly', category: 'Dairy' },
-    { id: 'f3', name: 'Bread', quantity: '1 loaf', frequency: 'weekly', category: 'Bakery' }
-  ];
-  
-  res.json({
-    status: 'success',
-    data: frequentItems
-  });
+// @route   GET /api/items/frequent
+// @desc    Get frequent items for the logged-in user
+// @access  Private
+router.get('/frequent', auth, async (req, res) => {
+  try {
+    const frequentItems = await Item.find({
+      owner: req.user.userId,
+      $or: [
+        { frequency: { $in: ['daily', 'weekly'] } },
+        { purchaseCount: { $gt: 3 } }
+      ]
+    }).sort({ purchaseCount: -1 }).limit(10);
+    
+    res.json({
+      status: 'success',
+      data: frequentItems
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({
+      status: 'error',
+      message: 'Server Error'
+    });
+  }
 });
 
-// add starter/common items endpoint
-router.get('/starter', (req, res) => {
-  const starterItems = [
-    { id: 's1', name: 'Salt', category: 'Pantry', nonExpiring: true },
-    { id: 's2', name: 'Sugar', category: 'Pantry', nonExpiring: true },
-    { id: 's3', name: 'Flour', category: 'Pantry', expiresIn: '12 months' },
-    { id: 's4', name: 'Rice', category: 'Pantry', expiresIn: '24 months' },
-    { id: 's5', name: 'Olive Oil', category: 'Pantry', expiresIn: '24 months' }
-  ];
-  
-  res.json({
-    status: 'success',
-    data: starterItems
-  });
-});
-
-router.post('/quick-add', (req, res) => {
-  const { itemId, quantity } = req.body;
-  res.status(200).json({
-    status: 'success',
-    message: 'Item quickly added to inventory',
-    data: {
-      id: itemId,
-      quantity: quantity,
-      dateAdded: new Date().toISOString().split('T')[0]
+// @route   GET /api/items/starter
+// @desc    Get starter/common items templates
+// @access  Private
+router.get('/starter', auth, async (req, res) => {
+  try {
+    const starterItems = await Item.find({
+      isStarterItem: true
+    }).sort({ name: 1 });
+    
+    if (starterItems.length === 0) {
+      const defaultStarterItems = [
+        { 
+          name: 'Salt', 
+          category: 'condiments', 
+          quantity: '1 container',
+          nonExpiring: true,
+          isStarterItem: true,
+          owner: req.user.userId
+        },
+        { 
+          name: 'Sugar', 
+          category: 'condiments', 
+          quantity: '1 bag',
+          nonExpiring: true,
+          isStarterItem: true,
+          owner: req.user.userId
+        },
+      ];
+      
+      await Item.insertMany(defaultStarterItems);
+      
+      const createdStarterItems = await Item.find({
+        isStarterItem: true,
+        owner: req.user.userId
+      });
+      
+      res.json({
+        status: 'success',
+        data: createdStarterItems
+      });
+    } else {
+      res.json({
+        status: 'success',
+        data: starterItems
+      });
     }
-  });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({
+      status: 'error',
+      message: 'Server Error'
+    });
+  }
+});
+
+// @route   POST /api/items/quick-add
+// @desc    Quickly add or update item quantity
+// @access  Private
+router.post('/quick-add', auth, async (req, res) => {
+  const { itemId, quantity } = req.body;
+  
+  try {
+    let item = await Item.findById(itemId);
+    
+    if (!item) {
+      return res.status(404).json({
+        status: 'error',
+        message: 'Item not found'
+      });
+    }
+    
+    if (item.owner.toString() !== req.user.userId) {
+      return res.status(401).json({
+        status: 'error',
+        message: 'User not authorized'
+      });
+    }
+    
+    item = await Item.findByIdAndUpdate(
+      itemId,
+      { 
+        $set: { quantity },
+        $inc: { purchaseCount: 1 }
+      },
+      { new: true }
+    );
+    
+    res.json({
+      status: 'success',
+      message: 'Item quickly added to inventory',
+      data: item
+    });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({
+        status: 'error',
+        message: 'Item not found'
+      });
+    }
+    res.status(500).json({
+      status: 'error',
+      message: 'Server Error'
+    });
+  }
 });
 
 module.exports = router;

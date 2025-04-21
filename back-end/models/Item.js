@@ -7,6 +7,11 @@ const ItemSchema = new mongoose.Schema({
   expirationDate: {type: Date, required: true},
   purchaseDate: {type: Date, default: Date.now},
   storageLocation: {type: String, enum: ['main', 'door', 'freezer', 'crisper', 'deli drawer', 'other'], default: 'main'},
+  frequency: {type: String, enum: ['daily', 'weekly', 'monthly', 'rarely', null], default: null},
+  isStarterItem: {type: Boolean, default: false},
+  nonExpiring: {type: Boolean,default: false},
+  expiresIn: {type: String, default: null},
+  purchaseCount: {type: Number, default: 0},
   notes: {type: String, trim: true},
   imageUrl: {type: String},
   owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}
