@@ -146,7 +146,7 @@ const seedStarterItems = async () => {
       }
     ];
 
-    await Item.insertMany(starterItems);
+    // await Item.insertMany(starterItems);
     console.log('✅ Starter items seeded successfully');
   } catch (err) {
     console.error('❌ Error seeding starter items:', err);

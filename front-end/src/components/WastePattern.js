@@ -6,8 +6,14 @@ import "chart.js/auto";
 
 const WastePattern = () => {
     const navigate = useNavigate();
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    const formatDate = (date) => date.toISOString().split("T")[0]; // YYYY-MM-DD
+
+    const today = new Date();
+    const nextWeek = new Date();
+    nextWeek.setDate(today.getDate() + 7);
+
+    const [startDate, setStartDate] = useState(formatDate(today));
+    const [endDate, setEndDate] = useState(formatDate(nextWeek));
     const [totalExpired, setTotalExpired] = useState(0);
     const [categoryItemMap, setCategoryItemMap] = useState({});
     const [totalTracked, setTotalTracked] = useState(0);
