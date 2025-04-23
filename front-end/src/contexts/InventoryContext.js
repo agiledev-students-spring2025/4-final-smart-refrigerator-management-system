@@ -20,12 +20,12 @@ export const InventoryProvider = ({ children }) => {
 
       if (token) {
         // for logged-in users, fetch their specific inventory items
-        endpoint = `${API_URL}/items`;
+        endpoint = `${API_BASE_URL}/items`;
         options.headers = { Authorization: `Bearer ${token}` };
         setIsGuest(false);
       } else {
         // for guest users, fetch starter items
-        endpoint = `${API_URL}/guest/starter`;
+        endpoint = `${API_BASE_URL}/guest/starter`;
         setIsGuest(true);
       }
 
@@ -62,7 +62,7 @@ export const InventoryProvider = ({ children }) => {
     };
 
     fetchInventory();
-  }, [API_URL]);
+  }, [API_BASE_URL]);
 
   const addItem = async (itemData) => {
     try {
