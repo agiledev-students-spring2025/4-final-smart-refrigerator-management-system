@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { useInventory } from "../contexts/InventoryContext";
+import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
-import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-    const navigate = useNavigate(); // ✅ To redirect if token is invalid
-    const [userName, setUserName] = useState(""); // ✅ Dynamic name
-    const { getItemsByCompartment } = useInventory();
-    const compartments = getItemsByCompartment();
+    const navigate = useNavigate();
+    const [userName, setUserName] = useState("");
+    const [totalItems, setTotalItems] = useState(0);
+    const [expiringSoon, setExpiringSoon] = useState(0);
+    const [analyticsLoaded, setAnalyticsLoaded] = useState(false);
+    const [showFridgeEmptyMessage, setShowFridgeEmptyMessage] = useState(false);
+    const [recipes, setRecipes] = useState([]);
 
-    // ✅ Fetch user profile on page load
     useEffect(() => {
         const fetchUserProfile = async () => {
             const token = localStorage.getItem("token");
             if (!token) {
                 setUserName("Guest");
                 return;
-            }            
+            }
 
             try {
                 const res = await fetch("http://localhost:5001/api/profile", {
@@ -29,7 +29,7 @@ const Home = () => {
 
                 if (res.ok) {
                     const data = await res.json();
-                    setUserName(data.user.name); // ✅ Set dynamic name
+                    setUserName(data.user.name);
                 } else {
                     localStorage.removeItem("token");
                     navigate("/login");
@@ -44,56 +44,43 @@ const Home = () => {
         fetchUserProfile();
     }, [navigate]);
 
-    // Flatten all items from compartments
-    const allItems = Object.values(compartments).flat();
-
-    // Function to calculate days until expiration
-    const getDaysUntilExpiration = (expiryDate) => {
-        if (!expiryDate) return null;
-        const today = new Date();
-        const expiry = new Date(expiryDate);
-        return Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
-    };
-
-    // Get inventory stats
-    const totalItems = allItems.length;
-    const expiringSoonItems = allItems.filter(item => {
-        const days = getDaysUntilExpiration(item.expiryDate);
-        return days !== null && days <= 3;
-    });
-    const [showFridgeEmptyMessage, setShowFridgeEmptyMessage] = useState(totalItems === 0);
-
-
-    // State to store recipe data
-    const [recipes, setRecipes] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:5001/api/analytics")
+            .then((res) => res.json())
+            .then((data) => {
+                setTotalItems(data.totalItems);
+                setExpiringSoon(data.expiringSoon);
+                setAnalyticsLoaded(true);
+            })
+            .catch((err) => {
+                console.error("Error fetching analytics:", err);
+                setAnalyticsLoaded(true);
+            });
+    }, []);
 
     useEffect(() => {
-        if (totalItems === 0) {
-            setShowFridgeEmptyMessage(true);
-        }
+        setShowFridgeEmptyMessage(totalItems === 0);
     }, [totalItems]);
 
-    // Fetch recipe data from backend
     useEffect(() => {
-        fetch('http://localhost:5001/api/recipes') // This URL assumes your backend serves recipes here
+        fetch('http://localhost:5001/api/recipes')
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 'success') {
-                    setRecipes(data.data);  // Assuming `data.data` is the array of recipes
+                    setRecipes(data.data);
                 }
             })
             .catch((error) => console.error('Error fetching recipes:', error));
     }, []);
 
     return (
-        <motion.div 
+        <motion.div
             className="home-container"
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
         >
-            {/* Logo Animation */}
-            <motion.div 
+            <motion.div
                 className="logo-container"
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
@@ -102,8 +89,7 @@ const Home = () => {
                 <img id="logo" src="/logo.svg" alt="Smart Fridge Logo" />
             </motion.div>
 
-            {/* Welcome Message */}
-            <motion.h1 
+            <motion.h1
                 className="welcome-message"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -112,28 +98,25 @@ const Home = () => {
                 Welcome, {userName || "Guest"}!
             </motion.h1>
 
-            <motion.div 
+            <motion.div
                 className="fridge-summary"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
             >
-
-            {showFridgeEmptyMessage && (
-            <div className="overlay">
-                <div className="overlay-card">
-                <p>Your fridge is empty！Add some food to get started!</p>
-                <button onClick={() => setShowFridgeEmptyMessage(false)}>Got it</button>
-                </div>
-            </div>
-            )}
+                {analyticsLoaded && totalItems === 0 && showFridgeEmptyMessage && (
+                    <div className="overlay">
+                        <div className="overlay-card">
+                            <p>Your fridge is empty！Add some food to get started!</p>
+                            <button onClick={() => setShowFridgeEmptyMessage(false)}>Got it</button>
+                        </div>
+                    </div>
+                )}
 
                 <h2>Your Fridge Activities:</h2>
 
-                {/* Wrap cards in a new flex container */}
                 <div className="summary-cards">
-                    {/* Total Items Card */}
-                    <motion.div 
+                    <motion.div
                         className="summary-card"
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.3 }}
@@ -143,21 +126,19 @@ const Home = () => {
                         <Link to="/inventory" className="summary-button">View Inventory</Link>
                     </motion.div>
 
-                    {/* Expiring Soon Card */}
-                    <motion.div 
+                    <motion.div
                         className="summary-card expiring-card"
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.3 }}
                     >
                         <h2>Expiring Soon</h2>
-                        <p className="summary-number">{expiringSoonItems.length}</p>
+                        <p className="summary-number">{expiringSoon}</p>
                         <Link to="/analytics" className="summary-button">View Analytics</Link>
                     </motion.div>
                 </div>
             </motion.div>
 
-            {/* Recipe Recommendations */}
-            <motion.div 
+            <motion.div
                 className="recipe-recommendations"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -167,8 +148,8 @@ const Home = () => {
                 <div className="recipe-grid">
                     {recipes.length > 0 ? (
                         recipes.map((recipe) => (
-                            <motion.div 
-                                key={recipe.id} 
+                            <motion.div
+                                key={recipe._id}
                                 className="recipe-item"
                                 whileHover={{ scale: 1.05 }}
                                 transition={{ duration: 0.3 }}
@@ -176,8 +157,7 @@ const Home = () => {
                                 <img src={recipe.imageUrl || "https://picsum.photos/200"} alt={recipe.name} className="recipe-thumbnail" />
                                 <p className="recipe-name">{recipe.name}</p>
                                 <p className="recipe-time">Cook time: {recipe.time}</p>
-                                {/* Add a Link to FullRecipe Page */}
-                                <Link to={`/recipe/${recipe.id}`} className="recipe-time">
+                                <Link to={`/recipe/${recipe._id}`} className="recipe-time">
                                     View Full Recipe
                                 </Link>
                             </motion.div>

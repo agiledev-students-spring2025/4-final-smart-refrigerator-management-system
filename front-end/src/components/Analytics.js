@@ -11,6 +11,7 @@ const Analytics = () => {
     const [compartmentChartData, setCompartmentChartData] = useState({});
     const [mostUsed, setMostUsed] = useState([]);
     const [leastUsed, setLeastUsed] = useState([]);
+    const [categoryItemMap, setCategoryItemMap] = useState({});
 
     useEffect(() => {
         const fetchAnalytics = async () => {
@@ -21,10 +22,8 @@ const Analytics = () => {
                 setExpiringSoonCount(data.expiringSoon);
                 setExpiredCount(data.expired);
 
-                const labels = Object.keys(data.byCompartment).map((label) =>
-                    label.replace(/([A-Z])/g, " $1").trim()
-                );
-                const values = Object.values(data.byCompartment);
+                const labels = Object.keys(data.byCategory);
+                const values = labels.map(label => data.byCategory[label].length);
 
                 setCompartmentChartData({
                     labels,
@@ -35,6 +34,11 @@ const Analytics = () => {
                         },
                     ],
                 });
+
+                setCategoryItemMap(data.byCategory); // sets up tooltip data
+
+                setMostUsed(data.mostUsed || []);
+                setLeastUsed(data.leastUsed || []);
             } catch (err) {
                 console.warn("⚠️ Analytics API not reachable — fallback to empty data.");
                 setTotalItems(0);
@@ -44,32 +48,12 @@ const Analytics = () => {
                     labels: [],
                     datasets: [{ data: [] }]
                 });
-            }
-        };
-
-        const fetchItems = async () => {
-            try {
-                const res = await fetch("http://localhost:5001/api/items");
-                const data = await res.json();
-                const items = Array.isArray(data.data) ? data.data : [];
-
-                const sorted = [...items].sort((a, b) => {
-                    const expiryA = new Date(a.expirationDate);
-                    const expiryB = new Date(b.expirationDate);
-                    return expiryA - expiryB || parseInt(a.quantity) - parseInt(b.quantity);
-                });
-
-                setMostUsed(sorted.slice(0, 4));
-                setLeastUsed(sorted.slice(-4));
-            } catch (err) {
-                console.warn("⚠️ Items API not reachable — fallback to empty list.");
                 setMostUsed([]);
                 setLeastUsed([]);
             }
         };
 
         fetchAnalytics();
-        fetchItems();
     }, []);
 
     const getDaysUntilExpiration = (expirationDate) => {
@@ -90,13 +74,30 @@ const Analytics = () => {
                 <p><strong>Expired Items:</strong> {expiredCount}</p>
             </div>
 
-            {/* Items by Compartment (Pie Chart) */}
+            {/* Items by Category (Pie Chart) */}
             <section>
-                <h3>Items by Compartment</h3>
+                <h3>Items by Category</h3>
                 {totalItems > 0 ? (
-                    <Pie data={compartmentChartData} />
-                ) : (
-                    <p className="center-text">No items in compartments.</p>
+                    <Pie
+                        data={compartmentChartData}
+                        options={{
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (context) {
+                                            const category = context.label.toLowerCase();
+                                            const items = categoryItemMap[category] || [];
+                                            return [
+                                                `${items.length} item(s)`,
+                                                ...items.map(name => `- ${name}`)
+                                            ];
+                                        }
+                                    }
+                                }
+                            }
+                        }}
+                    />                ) : (
+                    <p className="center-text">No items.</p>
                 )}
             </section>
 
@@ -105,9 +106,9 @@ const Analytics = () => {
                 <h3>Most Used Items:</h3>
                 <div className="item-grid">
                     {mostUsed.map((item) => (
-                        <div className="item-card" key={item.id}>
+                        <div className="item-card" key={item._id}>
                             <div className="item-thumbnail">
-                                <img src={item.imageUrl} alt={item.name} />
+                                <img src={item.imageUrl || "https://picsum.photos/100"} alt={item.name} />
                             </div>
                             <p><strong>{item.name}</strong></p>
                             <p>Expires in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
@@ -122,9 +123,9 @@ const Analytics = () => {
                 <h3>Least Used Items:</h3>
                 <div className="item-grid">
                     {leastUsed.map((item) => (
-                        <div className="item-card" key={item.id}>
+                        <div className="item-card" key={item._id}>
                             <div className="item-thumbnail">
-                                <img src={item.imageUrl} alt={item.name} />
+                                <img src={item.imageUrl || "https://picsum.photos/100"} alt={item.name} />
                             </div>
                             <p><strong>{item.name}</strong></p>
                             <p>Expires in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>

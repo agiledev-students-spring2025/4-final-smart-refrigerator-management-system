@@ -56,14 +56,19 @@ Ensure you have the following installed:
 - **Node.js 16+**
 - **MangoDB**
 - **Docker**
-- **Git**  
-- etc...
+- **Git**
 
 ### Clone the Repository  
 ```sh
 git clone https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system
 ```
-
+### Environment Setup
+Create a .env file in the back-end directory with the following variables:
+```sh
+MONGO_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_jwt_secret
+PORT=5001
+```
 ### Setups
 #### **1. Create a virtual environment**
 ```sh
@@ -82,6 +87,7 @@ docker run --name mongodb_dockerhub -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME
 ```sh
 cd back-end
 npm install
+cp .env.example .env  # Then edit .env with your credentials
 npm start
 ```
 #### **5. Front-end Setup**
@@ -90,11 +96,41 @@ cd front-end
 npm install
 npm start
 ```
+## Database Information
+We use MongoDB Atlas for our database. Collections include: Users, Items, Recipes, Compartments. Local development can use either MongoDB Atlas or a local MongoDB instance. Never commit database credentials to version control
+
 ## Testing
 ```sh
 pytest
 npm test
 ```
+---
+## API Endpoints
+#### Authentication
+- POST /api/signup: Register a new user
+- POST /api/login: Log in a user
+- GET /api/profile: Get the logged-in user's profile
+
+#### Items
+
+- GET /api/items: Get all items for the logged-in user
+- GET /api/items/:id: Get a specific item
+- POST /api/items: Add a new item
+- PUT /api/items/:id: Update an item
+- DELETE /api/items/:id: Delete an item
+
+#### Recipes
+
+- GET /api/recipes: Get all recipes
+- GET /api/recipes/:id: Get a specific recipe
+- GET /api/recipes/search: Search recipes
+
+#### Analytics
+
+- GET /api/analytics: Get inventory analytics
+- GET /api/waste: Get waste pattern data
+- GET /api/recommendations: Get shopping recommendations
+
 ## API Access
-- Backend API:
-- Frontend API:
+- Backend API: http://localhost:5001
+- Frontend API: http://localhost:3000

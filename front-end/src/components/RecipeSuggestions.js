@@ -25,7 +25,7 @@ function RecipeSuggestions() {
       })
       .catch(error => console.error('Error fetching suggested recipes:', error));
 
-    // Fetch favorite recipes,, will need to update both once real database seperates the recipe categories
+    // Fetch all recipes, but we will filter favorites in the frontend
     fetch('http://localhost:5001/api/recipes')
       .then(response => response.json())
       .then(data => {
@@ -57,15 +57,45 @@ function RecipeSuggestions() {
   // Filter recipes based on search term
   function filterRecipes(recipes) {
     if (!searchTerm) return recipes;
-    return recipes.filter(recipe => 
-      recipe.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
+  
+    const lowerSearch = searchTerm.toLowerCase();
+  
+    return recipes.filter(recipe => {
+      // Check recipe name
+      const nameMatches = recipe.name && recipe.name.toLowerCase().includes(lowerSearch);
+  
+      // Check ingredients
+      let ingredientMatches = false;
+      if (Array.isArray(recipe.ingredients)) {
+        ingredientMatches = recipe.ingredients.some(ingredient => {
+          if (typeof ingredient === 'string') {
+            return ingredient.toLowerCase().includes(lowerSearch);
+          } else if (ingredient && typeof ingredient.name === 'string') {
+            return ingredient.name.toLowerCase().includes(lowerSearch);
+          }
+          return false;
+        });
+      }
+  
+      if (nameMatches || ingredientMatches) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
+  
 
   // Apply the filter to suggested and favorite recipes
   const filteredSuggestedRecipes = filterRecipes(suggestedRecipes);
   const filteredFavoriteRecipes = filterRecipes(favoriteRecipes);
+
+  // Filter favorite recipes to only show those where "favorite" is true
+  const filteredFavoriteRecipesOnly = filteredFavoriteRecipes.filter(recipe => recipe.favorite === true);
+
+  // Only show the first 4 recipes in the grid for both suggested and favorite recipes
+  const limitedSuggestedRecipes = filteredSuggestedRecipes.slice(0, 4);
+  const limitedFavoriteRecipes = filteredFavoriteRecipesOnly.slice(0, 4);
 
   return (
     <div className="recipe-suggestions-container">
@@ -76,14 +106,14 @@ function RecipeSuggestions() {
 
       <div className="Suggested-Recipes">
         <h3>AI Suggested Recipes Based on Ingredients: </h3>
-        {filteredSuggestedRecipes.length > 0 ? (
+        {limitedSuggestedRecipes.length > 0 ? (
           <div className="recipe-grid">
-            {filteredSuggestedRecipes.map(recipe => (
+            {limitedSuggestedRecipes.map(recipe => (
               <Recipe 
-                key={recipe.id}
-                id={recipe.id}
+                key={recipe._id}
+                _id={recipe._id}
                 name={recipe.name}
-                cookTime={recipe.time}
+                time={recipe.time}
                 imageUrl={recipe.imageUrl} 
               />
             ))}
@@ -99,14 +129,14 @@ function RecipeSuggestions() {
 
       <div className="Suggested-Recipes">
         <h3>Saved in My Favorite Recipes: </h3>
-        {filteredFavoriteRecipes.length > 0 ? (
+        {limitedFavoriteRecipes.length > 0 ? (
           <div className="recipe-grid">
-            {filteredFavoriteRecipes.map(recipe => (
+            {limitedFavoriteRecipes.map(recipe => (
               <Recipe 
-                key={recipe.id}
-                id={recipe.id}
+                key={recipe._id}
+                _id={recipe._id}
                 name={recipe.name}
-                cookTime={recipe.time}
+                time={recipe.time}
                 imageUrl={recipe.imageUrl} 
               />
             ))}

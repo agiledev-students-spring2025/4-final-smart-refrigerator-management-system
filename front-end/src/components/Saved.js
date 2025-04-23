@@ -1,4 +1,3 @@
-// src/components/Saved.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Searchbar from './Searchbar';
@@ -22,7 +21,7 @@ function RecipeSuggestions() {
         const data = await response.json();
 
         if (response.ok) {
-          setRecipes(data.data); // Assuming the recipes are under data.data
+          setRecipes(data.data); 
         } else {
           setError('Failed to load recipes');
         }
@@ -46,16 +45,22 @@ function RecipeSuggestions() {
     setFilter(value);
   }
 
-  // Filter recipes based on search term and selected filter
-  const filteredRecipes = recipes.filter(recipe => {
-    const matchesSearch = recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = selectedFilter ? recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(selectedFilter.toLowerCase())) : true;
-    return matchesSearch && matchesFilter;
-  });
+  // Filter recipes based on favorite status, search term, and filter
+  const filteredRecipes = recipes
+    .filter(recipe => recipe.favorite === true) 
+    .filter(recipe => {
+      const matchesSearch = recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesFilter = selectedFilter
+        ? recipe.ingredients.some(ingredient =>
+            ingredient.toLowerCase().includes(selectedFilter.toLowerCase())
+          )
+        : true;
+      return matchesSearch && matchesFilter;
+    });
 
   return (
     <div className="recipe-suggestions-container">
-      <h1>Recipe Suggestions</h1>
+      <h1>Saved Favorite Recipes</h1>
 
       <Searchbar onSearch={handleSearch} /> 
       <Dropdown onSelect={handleDropdownSelect} /> 
@@ -69,18 +74,20 @@ function RecipeSuggestions() {
           <p>{error}</p>
         ) : (
           filteredRecipes.length > 0 ? (
-            filteredRecipes.map(recipe => (
-              <Recipe 
-                key={recipe.id} // Make sure the recipe has a unique key
-                id={recipe.id}  // Pass the recipe's id
-                name={recipe.name}
-                description={recipe.description}
-                ingredients={recipe.ingredients.join(', ')} // Join ingredients array to a string
-                imageUrl={recipe.imageUrl}
-              />
-            ))
+            <div className="recipe-grid">
+              {filteredRecipes.map(recipe => (
+                <Recipe 
+                  key={recipe._id} 
+                  _id={recipe._id}
+                  name={recipe.name}
+                  description={recipe.description}
+                  ingredients={recipe.ingredients.join(', ')} // Convert array to string
+                  imageUrl={recipe.imageUrl}
+                />
+              ))}
+            </div>
           ) : (
-            <p>No recipes found matching your criteria.</p>
+            <p>No favorite recipes found.</p>
           )
         )}
       </div>
@@ -89,4 +96,3 @@ function RecipeSuggestions() {
 }
 
 export default RecipeSuggestions;
-

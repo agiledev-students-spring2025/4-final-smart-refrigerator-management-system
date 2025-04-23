@@ -1,0 +1,1184 @@
+[
+  {
+    "id": "1",
+    "name": "Mac n Cheese",
+    "ingredients": [
+      {
+        "name": "Salt",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Elbow Pasta",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Unsalted Butter",
+        "quantity": "2 tbsp"
+      },
+      {
+        "name": "Whole Milk",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "Half n Half",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "Cheddar",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "Gruyere",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "Smoked Paprika",
+        "quantity": "1 tsp"
+      }
+    ],
+    "time": "10m",
+    "instructions": [
+      "1. Cook Pasta",
+      "2. Shred cheese",
+      "3. Put butter, whole milk, half n half and seasonings on low heat until boil",
+      "4. Add 2/3 of shredded cheese and mix until smooth",
+      "5. take off heat, strain pasta and add to cheese mixture",
+      "6. Add to baking dish and distribute shreeded cheese on top evenly",
+      "7. Cook in oven on bake 365 for 25 minutes"
+    ],
+    "imageUrl": "https://picsum.photos/200/200",
+    "favorite": false
+  },
+  {
+    "id": "2",
+    "name": "Candied Yams",
+    "ingredients": [
+      {
+        "name": "Brown Sugar",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Yams",
+        "quantity": "3 whole"
+      },
+      {
+        "name": "Cinnamon",
+        "quantity": "2 tsp"
+      },
+      {
+        "name": "Butter",
+        "quantity": "3 tbsp"
+      }
+    ],
+    "time": "15m",
+    "instructions": [
+      "1. Oven Bake 365F",
+      "2. Mix Cinnamon and Sugar",
+      "3. Put yams in butter and then coat with dry mixture",
+      "4. Bake yams for 5 minutes"
+    ],
+    "imageUrl": "https://picsum.photos/200/300",
+    "favorite": false
+  },
+  {
+    "id": "3",
+    "name": "Creme Brulee (Easy)",
+    "ingredients": [
+      {
+        "name": "Sugar",
+        "quantity": "2 tbsp"
+      },
+      {
+        "name": "Vanilla Ice Cream",
+        "quantity": "1 cup"
+      },
+      {
+        "name": "2 Egg Yolks",
+        "quantity": "2"
+      },
+      {
+        "name": "Water",
+        "quantity": "100ml"
+      }
+    ],
+    "time": "45m",
+    "instructions": [
+      "1. Oven Bake 365F",
+      "2. Beat melted and cooled vanilla ice cream with 2 egg yolks",
+      "3. Create a water bath in a larger tin than the ramekin for creme brulee",
+      "4. Place ramekin with ice cream mix atop water bath and bake for 30m",
+      "5. Let cool in firdge for 3 hours",
+      "6. Add sugar on top and lightly scorch to taste"
+    ],
+    "imageUrl": "https://picsum.photos/200/500",
+    "favorite": false
+  },
+  {
+    "id": "4",
+    "name": "Spaghetti Bolognese",
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Ground Beef",
+        "quantity": "100g"
+      },
+      {
+        "name": "Tomato Sauce",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Onion",
+        "quantity": "1 whole"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "1 pinch"
+      }
+    ],
+    "time": "43m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/400",
+    "favorite": false
+  },
+  {
+    "id": "5",
+    "name": "Grilled Cheese Sandwich",
+    "ingredients": [
+      {
+        "name": "Bread",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Cheddar Cheese",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Butter",
+        "quantity": "2 cups"
+      }
+    ],
+    "time": "49m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/200",
+    "favorite": false
+  },
+  {
+    "id": "6",
+    "name": "Chicken Stir Fry",
+    "ingredients": [
+      {
+        "name": "Chicken Breast",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Soy Sauce",
+        "quantity": "100g"
+      },
+      {
+        "name": "Bell Pepper",
+        "quantity": "1 pinch"
+      },
+      {
+        "name": "Broccoli",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "1 whole"
+      }
+    ],
+    "time": "49m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/250",
+    "favorite": false
+  },
+  {
+    "id": "7",
+    "name": "Beef Tacos",
+    "ingredients": [
+      {
+        "name": "Taco Shells",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Ground Beef",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Lettuce",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Cheddar Cheese",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Salsa",
+        "quantity": "2 cups"
+      }
+    ],
+    "time": "38m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/300",
+    "favorite": false
+  },
+  {
+    "id": "8",
+    "name": "Vegetable Curry",
+    "ingredients": [
+      {
+        "name": "Potato",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Carrot",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Coconut Milk",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Curry Powder",
+        "quantity": "100g"
+      },
+      {
+        "name": "Onion",
+        "quantity": "1 slice"
+      }
+    ],
+    "time": "35m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/350",
+    "favorite": false
+  },
+  {
+    "id": "9",
+    "name": "Pancakes",
+    "ingredients": [
+      {
+        "name": "Flour",
+        "quantity": "1 pinch"
+      },
+      {
+        "name": "Egg",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Milk",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Butter",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Sugar",
+        "quantity": "200ml"
+      }
+    ],
+    "time": "26m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/400",
+    "favorite": false
+  },
+  {
+    "id": "10",
+    "name": "Avocado Toast",
+    "ingredients": [
+      {
+        "name": "Bread",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Avocado",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Lemon Juice",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Salt",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Pepper",
+        "quantity": "100g"
+      }
+    ],
+    "time": "47m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/200",
+    "favorite": false
+  },
+  {
+    "id": "11",
+    "name": "Miso Soup",
+    "ingredients": [
+      {
+        "name": "Miso Paste",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Tofu",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Seaweed",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Green Onion",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Water",
+        "quantity": "1 slice"
+      }
+    ],
+    "time": "28m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/250",
+    "favorite": false
+  },
+  {
+    "id": "12",
+    "name": "Chocolate Chip Cookies",
+    "ingredients": [
+      {
+        "name": "Flour",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Chocolate Chips",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Butter",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Egg",
+        "quantity": "1 whole"
+      },
+      {
+        "name": "Sugar",
+        "quantity": "1/2 cup"
+      }
+    ],
+    "time": "10m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/300",
+    "favorite": false
+  },
+  {
+    "id": "13",
+    "name": "Lemon Garlic Salmon",
+    "ingredients": [
+      {
+        "name": "Salmon",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Lemon",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Parsley",
+        "quantity": "1 tsp"
+      }
+    ],
+    "time": "18m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/350",
+    "favorite": false
+  },
+  {
+    "id": "14",
+    "name": "Mushroom Risotto",
+    "ingredients": [
+      {
+        "name": "Arborio Rice",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Mushrooms",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Onion",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Parmesan",
+        "quantity": "1 tsp"
+      }
+    ],
+    "time": "36m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/400",
+    "favorite": false
+  },
+  {
+    "id": "15",
+    "name": "Shrimp Scampi",
+    "ingredients": [
+      {
+        "name": "Shrimp",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Butter",
+        "quantity": "1/2 cup"
+      },
+      {
+        "name": "Lemon Juice",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Parsley",
+        "quantity": "200ml"
+      }
+    ],
+    "time": "26m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/200",
+    "favorite": false
+  },
+  {
+    "id": "16",
+    "name": "Quinoa Salad",
+    "ingredients": [
+      {
+        "name": "Quinoa",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Cucumber",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Tomato",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Feta Cheese",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Olive Oil",
+        "quantity": "200ml"
+      }
+    ],
+    "time": "33m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/250",
+    "favorite": false
+  },
+  {
+    "id": "17",
+    "name": "Stuffed Peppers",
+    "ingredients": [
+      {
+        "name": "Bell Pepper",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Rice",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Ground Beef",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Tomato Sauce",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Onion",
+        "quantity": "1 slice"
+      }
+    ],
+    "time": "36m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/300",
+    "favorite": false
+  },
+  {
+    "id": "18",
+    "name": "French Toast",
+    "ingredients": [
+      {
+        "name": "Bread",
+        "quantity": "1 slice"
+      },
+      {
+        "name": "Egg",
+        "quantity": "1 whole"
+      },
+      {
+        "name": "Milk",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Cinnamon",
+        "quantity": "2 cups"
+      },
+      {
+        "name": "Maple Syrup",
+        "quantity": "1 pinch"
+      }
+    ],
+    "time": "35m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/350",
+    "favorite": false
+  },
+  {
+    "id": "19",
+    "name": "Baked Ziti",
+    "ingredients": [
+      {
+        "name": "Ziti Pasta",
+        "quantity": "100g"
+      },
+      {
+        "name": "Marinara Sauce",
+        "quantity": "200ml"
+      },
+      {
+        "name": "Mozzarella Cheese",
+        "quantity": "1 lb"
+      },
+      {
+        "name": "Ricotta",
+        "quantity": "3 tbsp"
+      },
+      {
+        "name": "Parmesan",
+        "quantity": "200ml"
+      }
+    ],
+    "time": "30m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/400",
+    "favorite": false
+  },
+  {
+    "id": "20",
+    "name": "Chicken Alfredo",
+    "ingredients": [
+      {
+        "name": "Fettuccine",
+        "quantity": "1 whole"
+      },
+      {
+        "name": "Chicken",
+        "quantity": "100g"
+      },
+      {
+        "name": "Heavy Cream",
+        "quantity": "100g"
+      },
+      {
+        "name": "Parmesan",
+        "quantity": "1 tsp"
+      },
+      {
+        "name": "Garlic",
+        "quantity": "1 lb"
+      }
+    ],
+    "time": "20m",
+    "instructions": [
+      "1. Prep ingredients",
+      "2. Cook main item (e.g., meat, pasta, etc.)",
+      "3. Mix/cook with sauces or vegetables",
+      "4. Simmer or bake as needed",
+      "5. Serve and enjoy"
+    ],
+    "imageUrl": "https://picsum.photos/200/200",
+    "favorite": false
+  },
+  {
+    "id": "21",
+    "name": "Keto Bacon-Wrapped Chicken",
+    "ingredients": [
+      { "name": "Chicken Breast", "quantity": "1 whole" },
+      { "name": "Bacon", "quantity": "3 slices" },
+      { "name": "Cream Cheese", "quantity": "2 tbsp" },
+      { "name": "Spinach", "quantity": "1/2 cup" },
+      { "name": "Garlic Powder", "quantity": "1 tsp" }
+    ],
+    "time": "30m",
+    "instructions": [
+      "1. Butterfly chicken and fill with cream cheese and spinach.",
+      "2. Wrap in bacon slices.",
+      "3. Sear in a skillet until browned.",
+      "4. Bake at 375°F for 20 minutes.",
+      "5. Serve hot."
+    ],
+    "imageUrl": "https://picsum.photos/200/201",
+    "favorite": false,
+    "filter": "keto"
+  },
+  {
+    "id": "22",
+    "name": "Keto Cauliflower Mac & Cheese",
+    "ingredients": [
+      { "name": "Cauliflower", "quantity": "1 head" },
+      { "name": "Cheddar Cheese", "quantity": "1 cup" },
+      { "name": "Cream Cheese", "quantity": "2 tbsp" },
+      { "name": "Heavy Cream", "quantity": "1/4 cup" },
+      { "name": "Butter", "quantity": "1 tbsp" }
+    ],
+    "time": "25m",
+    "instructions": [
+      "1. Boil cauliflower until tender.",
+      "2. In a saucepan, melt butter and mix with cream cheese and heavy cream.",
+      "3. Stir in cheddar cheese until melted.",
+      "4. Combine with cauliflower.",
+      "5. Serve warm."
+    ],
+    "imageUrl": "https://picsum.photos/200/202",
+    "favorite": false,
+    "filter": "keto"
+  },
+  {
+    "id": "23",
+    "name": "Keto Avocado Egg Bowl",
+    "ingredients": [
+      { "name": "Avocado", "quantity": "1 whole" },
+      { "name": "Eggs", "quantity": "2 whole" },
+      { "name": "Olive Oil", "quantity": "1 tbsp" },
+      { "name": "Salt", "quantity": "1/2 tsp" },
+      { "name": "Chili Flakes", "quantity": "1 pinch" }
+    ],
+    "time": "15m",
+    "instructions": [
+      "1. Heat oil in a skillet.",
+      "2. Crack eggs and fry sunny-side up.",
+      "3. Slice avocado and place in a bowl.",
+      "4. Add eggs on top, season with salt and chili flakes.",
+      "5. Serve immediately."
+    ],
+    "imageUrl": "https://picsum.photos/200/203",
+    "favorite": false,
+    "filter": "keto"
+  },
+  {
+    "id": "24",
+    "name": "Keto Zucchini Lasagna",
+    "ingredients": [
+      { "name": "Zucchini", "quantity": "2 whole" },
+      { "name": "Ground Beef", "quantity": "200g" },
+      { "name": "Marinara Sauce (no sugar)", "quantity": "1/2 cup" },
+      { "name": "Ricotta Cheese", "quantity": "1/3 cup" },
+      { "name": "Mozzarella Cheese", "quantity": "1/2 cup" }
+    ],
+    "time": "40m",
+    "instructions": [
+      "1. Slice zucchini into thin strips.",
+      "2. Brown ground beef in a skillet.",
+      "3. Layer zucchini, ricotta, meat, and sauce in a baking dish.",
+      "4. Top with mozzarella cheese.",
+      "5. Bake at 375°F for 30 minutes."
+    ],
+    "imageUrl": "https://picsum.photos/200/204",
+    "favorite": false,
+    "filter": "keto"
+  },
+  {
+    "id": "25",
+    "name": "Keto Chicken Caesar Lettuce Wraps",
+    "ingredients": [
+      { "name": "Romaine Lettuce", "quantity": "4 leaves" },
+      { "name": "Grilled Chicken", "quantity": "150g" },
+      { "name": "Parmesan Cheese", "quantity": "2 tbsp" },
+      { "name": "Caesar Dressing (low-carb)", "quantity": "3 tbsp" },
+      { "name": "Black Pepper", "quantity": "1 pinch" }
+    ],
+    "time": "10m",
+    "instructions": [
+      "1. Chop grilled chicken into strips.",
+      "2. Toss chicken with Caesar dressing and pepper.",
+      "3. Spoon mixture into lettuce leaves.",
+      "4. Top with grated parmesan.",
+      "5. Fold and serve."
+    ],
+    "imageUrl": "https://picsum.photos/200/205",
+    "favorite": false,
+    "filter": "keto"
+  }, 
+  {
+    "id": "26",
+    "name": "Keto Steak & Garlic Butter Mushrooms",
+    "ingredients": [
+      { "name": "Ribeye Steak", "quantity": "1 whole" },
+      { "name": "Mushrooms", "quantity": "1 cup" },
+      { "name": "Butter", "quantity": "2 tbsp" },
+      { "name": "Garlic", "quantity": "2 cloves" },
+      { "name": "Thyme", "quantity": "1 tsp" }
+    ],
+    "time": "25m",
+    "instructions": [
+      "1. Pan-sear steak to desired doneness.",
+      "2. In the same pan, sauté garlic in butter.",
+      "3. Add mushrooms and thyme, cook until browned.",
+      "4. Serve mushrooms over steak.",
+      "5. Enjoy warm."
+    ],
+    "imageUrl": "https://picsum.photos/200/206",
+    "favorite": false,
+    "filter": "keto"
+  },
+  {
+    "id": "27",
+    "name": "Keto Guacamole Stuffed Eggs",
+    "ingredients": [
+      { "name": "Hard-Boiled Eggs", "quantity": "6 halves" },
+      { "name": "Avocado", "quantity": "1 whole" },
+      { "name": "Lime Juice", "quantity": "1 tsp" },
+      { "name": "Cilantro", "quantity": "1 tbsp" },
+      { "name": "Salt", "quantity": "1 pinch" }
+    ],
+    "time": "15m",
+    "instructions": [
+      "1. Scoop yolks from hard-boiled eggs.",
+      "2. Mix yolks with avocado, lime juice, salt, and cilantro.",
+      "3. Fill egg whites with guac mixture.",
+      "4. Garnish with extra cilantro.",
+      "5. Serve chilled."
+    ],
+    "imageUrl": "https://picsum.photos/200/207",
+    "favorite": false,
+    "filter": "keto"
+  },
+  {
+    "id": "28",
+    "name": "Keto Butter Coffee",
+    "ingredients": [
+      { "name": "Brewed Coffee", "quantity": "1 cup" },
+      { "name": "Unsalted Butter", "quantity": "1 tbsp" },
+      { "name": "MCT Oil", "quantity": "1 tbsp" },
+      { "name": "Vanilla Extract", "quantity": "1/4 tsp" },
+      { "name": "Cinnamon", "quantity": "1 pinch" }
+    ],
+    "time": "5m",
+    "instructions": [
+      "1. Brew fresh hot coffee.",
+      "2. Blend with butter, MCT oil, and vanilla extract.",
+      "3. Blend until creamy.",
+      "4. Sprinkle with cinnamon.",
+      "5. Sip and energize."
+    ],
+    "imageUrl": "https://picsum.photos/200/208",
+    "favorite": false,
+    "filter": "keto"
+    },
+
+    {
+      "id": "29",
+      "name": "Avocado Cucumber Salad",
+      "ingredients": [
+        { "name": "Avocado", "quantity": "1 whole" },
+        { "name": "Cucumber", "quantity": "1 whole" },
+        { "name": "Olive Oil", "quantity": "1 tbsp" },
+        { "name": "Lemon Juice", "quantity": "1 tbsp" },
+        { "name": "Salt & Pepper", "quantity": "1 pinch each" }
+      ],
+      "time": "10m",
+      "instructions": [
+        "1. Dice avocado and cucumber.",
+        "2. Drizzle with olive oil and lemon juice.",
+        "3. Sprinkle salt and pepper.",
+        "4. Toss gently.",
+        "5. Serve immediately."
+      ],
+      "imageUrl": "https://picsum.photos/200/210",
+      "favorite": false,
+      "filter": "vegan"
+    },
+    {
+      "id": "30",
+      "name": "Coconut Cauliflower Rice",
+      "ingredients": [
+        { "name": "Cauliflower", "quantity": "2 cups (riced)" },
+        { "name": "Coconut Oil", "quantity": "1 tbsp" },
+        { "name": "Coconut Milk", "quantity": "2 tbsp" },
+        { "name": "Salt", "quantity": "1 pinch" },
+        { "name": "Cilantro", "quantity": "1 tbsp (chopped)" }
+      ],
+      "time": "15m",
+      "instructions": [
+        "1. Sauté cauliflower rice in coconut oil.",
+        "2. Add coconut milk and stir well.",
+        "3. Season with salt.",
+        "4. Cook until soft.",
+        "5. Garnish with cilantro."
+      ],
+      "imageUrl": "https://picsum.photos/200/211",
+      "favorite": false,
+      "filter": "vegan"
+    },
+    {
+      "id": "31",
+      "name": "Stuffed Avocados",
+      "ingredients": [
+        { "name": "Avocados", "quantity": "2 halves" },
+        { "name": "Cherry Tomatoes", "quantity": "1/4 cup" },
+        { "name": "Red Onion", "quantity": "2 tbsp (chopped)" },
+        { "name": "Lime Juice", "quantity": "1 tsp" },
+        { "name": "Olive Oil", "quantity": "1 tsp" }
+      ],
+      "time": "10m",
+      "instructions": [
+        "1. Scoop a bit of avocado to make room.",
+        "2. Dice tomatoes and red onion.",
+        "3. Mix with lime juice and olive oil.",
+        "4. Stuff mixture into avocado halves.",
+        "5. Serve fresh."
+      ],
+      "imageUrl": "https://picsum.photos/200/212",
+      "favorite": false,
+      "filter": "vegan"
+    },
+    {
+      "id": "32",
+      "name": "Vegan Coconut Chia Pudding",
+      "ingredients": [
+        { "name": "Chia Seeds", "quantity": "3 tbsp" },
+        { "name": "Coconut Milk (full fat)", "quantity": "1/2 cup" },
+        { "name": "Vanilla Extract", "quantity": "1/4 tsp" },
+        { "name": "Stevia or Erythritol", "quantity": "to taste" },
+        { "name": "Berries", "quantity": "Optional topping" }
+      ],
+      "time": "5m (+30m chill)",
+      "instructions": [
+        "1. Mix chia seeds with coconut milk, vanilla, and sweetener.",
+        "2. Stir well.",
+        "3. Chill for at least 30 minutes.",
+        "4. Stir again before serving.",
+        "5. Top with berries if desired."
+      ],
+      "imageUrl": "https://picsum.photos/200/213",
+      "favorite": false,
+      "filter": "vegan"
+    },
+    {
+      "id": "33",
+      "name": "Zucchini Noodles with Avocado Pesto",
+      "ingredients": [
+        { "name": "Zucchini", "quantity": "2 whole (spiralized)" },
+        { "name": "Avocado", "quantity": "1 whole" },
+        { "name": "Basil Leaves", "quantity": "1/4 cup" },
+        { "name": "Lemon Juice", "quantity": "1 tbsp" },
+        { "name": "Garlic", "quantity": "1 clove" }
+      ],
+      "time": "15m",
+      "instructions": [
+        "1. Blend avocado, basil, lemon juice, and garlic to make pesto.",
+        "2. Spiralize zucchini.",
+        "3. Toss zoodles in avocado pesto.",
+        "4. Serve raw or lightly sautéed.",
+        "5. Top with hemp seeds if desired."
+      ],
+      "imageUrl": "https://picsum.photos/200/214",
+      "favorite": false,
+      "filter": "vegan"
+    },
+    {
+      "id": "34",
+      "name": "Creamy Vegan Broccoli Soup",
+      "ingredients": [
+        { "name": "Broccoli", "quantity": "2 cups (chopped)" },
+        { "name": "Coconut Milk", "quantity": "1 cup" },
+        { "name": "Garlic", "quantity": "1 clove" },
+        { "name": "Onion", "quantity": "1/4 cup" },
+        { "name": "Olive Oil", "quantity": "1 tbsp" }
+      ],
+      "time": "25m",
+      "instructions": [
+        "1. Sauté garlic and onion in olive oil.",
+        "2. Add chopped broccoli and coconut milk.",
+        "3. Simmer until soft.",
+        "4. Blend until creamy.",
+        "5. Season and serve hot."
+      ],
+      "imageUrl": "https://picsum.photos/200/215",
+      "favorite": false,
+      "filter": "vegan"
+    },
+    {
+      "id": "35",
+      "name": "Vegan Fat Bombs",
+      "ingredients": [
+        { "name": "Coconut Oil", "quantity": "1/4 cup" },
+        { "name": "Almond Butter", "quantity": "1/4 cup" },
+        { "name": "Cocoa Powder", "quantity": "1 tbsp" },
+        { "name": "Vanilla Extract", "quantity": "1/2 tsp" },
+        { "name": "Stevia or Erythritol", "quantity": "to taste" }
+      ],
+      "time": "10m (+1h chill)",
+      "instructions": [
+        "1. Melt coconut oil and almond butter together.",
+        "2. Stir in cocoa powder, vanilla, and sweetener.",
+        "3. Pour into silicone molds.",
+        "4. Freeze for 1 hour.",
+        "5. Pop out and store in fridge."
+      ],
+      "imageUrl": "https://picsum.photos/200/216",
+      "favorite": false,
+      "filter": "vegan"
+    },
+    {
+      "id": "36",
+      "name": "Caprese Salad Skewers",
+      "ingredients": [
+        { "name": "Cherry Tomatoes", "quantity": "1 cup" },
+        { "name": "Mozzarella Balls", "quantity": "1 cup" },
+        { "name": "Fresh Basil Leaves", "quantity": "1 bunch" },
+        { "name": "Balsamic Glaze", "quantity": "2 tbsp" },
+        { "name": "Skewers", "quantity": "6 pieces" }
+      ],
+      "time": "10m",
+      "instructions": [
+        "1. Alternate tomatoes, mozzarella, and basil on skewers.",
+        "2. Arrange on a plate.",
+        "3. Drizzle with balsamic glaze.",
+        "4. Chill before serving.",
+        "5. Enjoy fresh."
+      ],
+      "imageUrl": "https://picsum.photos/200/220",
+      "favorite": false,
+      "filter": "vegetarian"
+    },
+    {
+      "id": "37",
+      "name": "Vegetarian Lentil Soup",
+      "ingredients": [
+        { "name": "Lentils", "quantity": "1 cup" },
+        { "name": "Carrots", "quantity": "1 cup (diced)" },
+        { "name": "Celery", "quantity": "1 cup (chopped)" },
+        { "name": "Vegetable Broth", "quantity": "4 cups" },
+        { "name": "Tomato Paste", "quantity": "2 tbsp" }
+      ],
+      "time": "40m",
+      "instructions": [
+        "1. Sauté carrots and celery.",
+        "2. Add lentils, broth, and tomato paste.",
+        "3. Simmer for 30 minutes.",
+        "4. Season with salt and pepper.",
+        "5. Serve hot."
+      ],
+      "imageUrl": "https://picsum.photos/200/221",
+      "favorite": false,
+      "filter": "vegetarian"
+    },
+    {
+      "id": "38",
+      "name": "Garlic Butter Mushrooms",
+      "ingredients": [
+        { "name": "Button Mushrooms", "quantity": "2 cups" },
+        { "name": "Garlic", "quantity": "3 cloves (minced)" },
+        { "name": "Butter", "quantity": "2 tbsp" },
+        { "name": "Parsley", "quantity": "1 tbsp (chopped)" },
+        { "name": "Salt", "quantity": "to taste" }
+      ],
+      "time": "15m",
+      "instructions": [
+        "1. Melt butter in a pan.",
+        "2. Add garlic and sauté until fragrant.",
+        "3. Add mushrooms and cook until tender.",
+        "4. Sprinkle with salt and parsley.",
+        "5. Serve warm."
+      ],
+      "imageUrl": "https://picsum.photos/200/222",
+      "favorite": false,
+      "filter": "vegetarian"
+    },
+    {
+      "id": "39",
+      "name": "Crispy Falafel Bites",
+      "ingredients": [
+        { "name": "Chickpeas", "quantity": "1 can" },
+        { "name": "Onion", "quantity": "1/2 (chopped)" },
+        { "name": "Garlic", "quantity": "2 cloves" },
+        { "name": "Cilantro", "quantity": "1/4 cup" },
+        { "name": "Flour", "quantity": "2 tbsp" }
+      ],
+      "time": "30m",
+      "instructions": [
+        "1. Blend all ingredients until coarse.",
+        "2. Shape into small balls.",
+        "3. Pan-fry until golden brown.",
+        "4. Drain excess oil.",
+        "5. Serve with hummus or sauce."
+      ],
+      "imageUrl": "https://picsum.photos/200/223",
+      "favorite": false,
+      "filter": "vegetarian"
+    },
+    {
+      "id": "40",
+      "name": "Stuffed Bell Peppers",
+      "ingredients": [
+        { "name": "Bell Peppers", "quantity": "3 whole" },
+        { "name": "Cooked Rice", "quantity": "1 cup" },
+        { "name": "Black Beans", "quantity": "1/2 cup" },
+        { "name": "Corn", "quantity": "1/2 cup" },
+        { "name": "Cheddar Cheese", "quantity": "1/2 cup (shredded)" }
+      ],
+      "time": "35m",
+      "instructions": [
+        "1. Cut tops off peppers and remove seeds.",
+        "2. Mix rice, beans, corn, and cheese.",
+        "3. Stuff mixture into peppers.",
+        "4. Bake at 375°F for 25 minutes.",
+        "5. Serve hot."
+      ],
+      "imageUrl": "https://picsum.photos/200/224",
+      "favorite": false,
+      "filter": "vegetarian"
+    },
+    {
+      "id": "41",
+      "name": "Vegetarian Breakfast Scramble",
+      "ingredients": [
+        { "name": "Eggs", "quantity": "3 whole" },
+        { "name": "Spinach", "quantity": "1 cup" },
+        { "name": "Tomato", "quantity": "1 small (diced)" },
+        { "name": "Feta Cheese", "quantity": "1/4 cup" },
+        { "name": "Olive Oil", "quantity": "1 tbsp" }
+      ],
+      "time": "10m",
+      "instructions": [
+        "1. Heat oil in a pan.",
+        "2. Add spinach and tomato, sauté briefly.",
+        "3. Pour in beaten eggs.",
+        "4. Stir until cooked.",
+        "5. Sprinkle with feta and serve."
+      ],
+      "imageUrl": "https://picsum.photos/200/225",
+      "favorite": false,
+      "filter": "vegetarian"
+    }
+    
+]

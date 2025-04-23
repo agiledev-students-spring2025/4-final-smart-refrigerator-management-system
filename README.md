@@ -70,7 +70,8 @@ Make sure you have the following installed on your system before continuing:
 
 - **Node.js** (version 14+ or 16+ recommended)  
 - **npm** (comes bundled with Node)
-- (Optional) **Git** for version control  
+- **MongoDB Atlas Account** (for database)
+- **Git** for version control  
 
 **Check Versions**  
 ```bash
@@ -79,7 +80,7 @@ npm -v
 git --version
 ```
 ---
-### Installation
+### Environment Setup
 
 1. Clone the repository
 ```bash
@@ -117,13 +118,17 @@ The app will open at: http://localhost:3000
 ```bash
 cd back-end
 ```
+3. Edit .env file with your MongoDB Atlas connection string and JWT secret
+```bash
+cp .env.example .env
+```
 
-3. Install dependencies
+4. Install dependencies
 ```bash
 npm install
 ```
 
-4. Start the back-end server
+5. Start the back-end server
 ```bash
 npm start
 ```
@@ -140,6 +145,40 @@ npm test
 
 Tests are written using **Mocha**, **Chai**, and **Chai HTTP**, with c8 for code coverage.
 
+---
+### Database Structure
+The application uses MongoDB with the following main collections:
+- Users: Stores user accounts, preferences, and settings
+- Items: Tracks food items in the refrigerator with expiration dates
+- Recipes: Stores recipe data that can be recommended to users
+- Compartments: Represents different sections of a refrigerator
+
+---
+### API Endpoints
+#### Authentication
+- POST /api/signup: Register a new user
+- POST /api/login: Log in a user
+- GET /api/profile: Get the logged-in user's profile
+
+#### Items
+
+- GET /api/items: Get all items for the logged-in user
+- GET /api/items/:id: Get a specific item
+- POST /api/items: Add a new item
+- PUT /api/items/:id: Update an item
+- DELETE /api/items/:id: Delete an item
+
+#### Recipes
+
+- GET /api/recipes: Get all recipes
+- GET /api/recipes/:id: Get a specific recipe
+- GET /api/recipes/search: Search recipes
+
+#### Analytics
+
+- GET /api/analytics: Get inventory analytics
+- GET /api/waste: Get waste pattern data
+- GET /api/recommendations: Get shopping recommendations
 ---
 ### Troubleshooting
 - If you see an error about missing dependencies, try npm install again.
@@ -165,7 +204,7 @@ git push origin new-feature
 ```
 5. Submit a pull request to the main branch.
 
-We appreciate your contributions!
+We appreciate your contributions! Please see our [CONTRIBUTING.md](https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system/blob/master/CONTRIBUTING.md) for detailed guidelines.
 
 
 ## Additional Resources

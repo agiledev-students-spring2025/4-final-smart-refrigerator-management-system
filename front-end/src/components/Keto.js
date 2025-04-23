@@ -1,5 +1,4 @@
-// src/components/RecipeSuggestions.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Searchbar from './Searchbar';
 import Dropdown from './Dropdown';
@@ -10,36 +9,63 @@ function RecipeSuggestions() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setFilter] = useState('');
+  const [recipes, setRecipes] = useState([]);
+
+  // Fetch all recipes on mount
+  useEffect(() => {
+    fetch('http://localhost:5001/api/recipes')
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          setRecipes(data.data);
+        }
+      })
+      .catch(error => console.error('Error fetching recipes:', error));
+  }, []);
 
   // Handle search term
   function handleSearch(term) {
-    setSearchTerm(term); // Update search term state
+    setSearchTerm(term);
+    setSearchTerm(term);
   }
 
   // Handle dropdown selection
   function handleDropdownSelect(value) {
-    setFilter(value); 
+    setFilter(value);
+    setFilter(value);
   }
+
+  // Filter only Keto recipes (case-insensitive)
+  const ketoRecipes = recipes.filter(recipe => {
+    return recipe.filter && recipe.filter.toLowerCase() === 'keto';
+  });
 
   return (
     <div className="recipe-suggestions-container">
       <h1>Recipe Suggestions</h1>
 
       <Searchbar onSearch={handleSearch} /> 
-      
       <Dropdown onSelect={handleDropdownSelect} /> 
-      
-      <div className="Suggested-Recipes">
-        <h3>Keto </h3>
-            <Recipe 
-                name="Mac n Cheese"
-                description="This baked mac and cheese is a family favorite recipe, loved by both children and adults. It uses a combination of cheeses, layered in the dish as well as melted into a rich and creamy cheese sauce, for the ultimate in cheesy deliciousness! Perfect for a comforting dinner or as a holiday side dish!"
-                ingredients="Salt, elbow pasta, unsalted butter, whole milk, half n half, cheddar, gruyere, smoked paprika"
-                imageUrl="https://picsum.photos/seed/1/200/200" 
-            /> 
-        
-      </div>
 
+
+      <div className="Suggested-Recipes">
+        <h3>Keto Recipes</h3>
+        {ketoRecipes.length > 0 ? (
+          <div className="recipe-grid">
+            {ketoRecipes.map(recipe => (
+              <Recipe 
+                key={recipe._id}
+                _id={recipe._id}
+                name={recipe.name}
+                time={recipe.time}
+                imageUrl={recipe.imageUrl} 
+              />
+            ))}
+          </div>
+        ) : (
+          <p>No Keto recipes found.</p>
+        )}
+      </div>
     </div>
   );
 }
