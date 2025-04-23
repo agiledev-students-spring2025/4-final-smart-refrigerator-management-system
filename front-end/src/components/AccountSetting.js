@@ -5,9 +5,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { motion } from "framer-motion";
-
-const API_BASE_URL = "http://localhost:5001/api";
-
+import API_BASE_URL from "../api";
 
 function AccountInfo ({field, isEditing, info, changeText, onSave}){
     const [newValue, setNewValue] = useState(info);

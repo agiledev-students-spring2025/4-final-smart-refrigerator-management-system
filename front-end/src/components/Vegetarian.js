@@ -4,6 +4,7 @@ import Searchbar from './Searchbar';
 import Dropdown from './Dropdown';
 import Recipe from './Recipe';
 import './RecipeSuggestions.css'; 
+import API_BASE_URL from '../api';
 
 function RecipeSuggestions() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function RecipeSuggestions() {
 
   // Fetch all recipes on mount
   useEffect(() => {
-    fetch('http://localhost:5001/api/recipes')
+    fetch(`${API_BASE_URL}/recipes`)
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {

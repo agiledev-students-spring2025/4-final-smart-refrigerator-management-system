@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import "./Login.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
-
+import API_BASE_URL from "../api";
 
 
 function Login({ setUser }) {
@@ -17,7 +17,7 @@ function Login({ setUser }) {
         e.preventDefault();
       
         try {
-          const response = await fetch("http://localhost:5001/api/login", {
+          const response = await fetch(`${API_BASE_URL}/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
@@ -31,7 +31,7 @@ function Login({ setUser }) {
             // Fetch user profile using the token
             const token = localStorage.getItem("token");
       
-            const profileRes = await fetch("http://localhost:5001/api/profile", {
+            const profileRes = await fetch(`${API_BASE_URL}/profile`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
