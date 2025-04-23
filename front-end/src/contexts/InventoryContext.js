@@ -12,34 +12,39 @@ export const InventoryProvider = ({ children }) => {
 
   const API_URL = 'http://localhost:5001/api';
 
-    useEffect(() => {
-      const fetchInventory = async () => {
-        setLoading(true);
-        const token = localStorage.getItem('token');
-        let endpoint;
-        let options = {};
-    
-        if (token) {
-          endpoint = 'http://localhost:5001/api/items';
-          options.headers = { Authorization: `Bearer ${token}` };
-          setIsGuest(false);
+  useEffect(() => {
+    const fetchInventory = async () => {
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      let endpoint;
+      let options = {};
+
+      if (token) {
+        // for logged-in users, fetch their specific inventory items
+        endpoint = `${API_URL}/items`;
+        options.headers = { Authorization: `Bearer ${token}` };
+        setIsGuest(false);
+      } else {
+        // for guest users, fetch starter items
+        endpoint = `${API_URL}/guest/starter`;
+        setIsGuest(true);
+      }
+
+      try {
+        const res = await fetch(endpoint, options);
+        if (res.ok) {
+          const data = await res.json();
+
+          setInventory(data.data || []);
+          setError(null);
         } else {
-          endpoint = 'http://localhost:5001/api/guest/starter';
-          setIsGuest(true);
+          throw new Error("Failed to fetch inventory");
         }
-    
-        try {
-          const res = await fetch(endpoint, options);
-          if (res.ok) {
-            const data = await res.json();
-            setInventory(data.data || []);
-            setError(null);
-          } else {
-            throw new Error("Failed to fetch inventory");
-          }
-        } catch (error) {
-          console.warn('Backend fetch failed. Falling back to localStorage.');
-          setError('Failed to load inventory from server');
+      } catch (error) {
+        console.warn('Backend fetch failed. Falling back to localStorage.');
+        setError('Failed to load inventory from server');
+
+        if (isGuest) {
           const savedInventory = localStorage.getItem('foodInventory');
           if (savedInventory) {
             try {
@@ -49,13 +54,16 @@ export const InventoryProvider = ({ children }) => {
               setInventory([]);
             }
           }
-        }finally {
-          setLoading(false);
+        } else {
+          setInventory([]);
         }
-      };
-    
-      fetchInventory();
-    }, []);    
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInventory();
+  }, [API_URL]);
 
   const addItem = async (itemData) => {
     try {
