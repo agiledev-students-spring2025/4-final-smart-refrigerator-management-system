@@ -5,6 +5,7 @@ import Searchbar from './Searchbar';
 import Dropdown from './Dropdown';
 import Recipe from './Recipe';  // Ensure Recipe component is correctly imported
 import './RecipeSuggestions.css'; 
+import API_BASE_URL from '../api';
 
 function RecipeSuggestions() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function RecipeSuggestions() {
   // Fetch recipes from the backend
   useEffect(() => {
     // Fetch suggested recipes
-    fetch('http://localhost:5001/api/recipes')
+    fetch(`${API_BASE_URL}/recipes`)
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
@@ -26,7 +27,7 @@ function RecipeSuggestions() {
       .catch(error => console.error('Error fetching suggested recipes:', error));
 
     // Fetch all recipes, but we will filter favorites in the frontend
-    fetch('http://localhost:5001/api/recipes')
+    fetch(`${API_BASE_URL}/recipes`)
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
@@ -39,7 +40,7 @@ function RecipeSuggestions() {
   // Handle search term
   function handleSearch(term) {
     setSearchTerm(term); 
-    fetch(`http://localhost:5001/api/recipes/search?query=${term}`)
+    fetch(`${API_BASE_URL}/recipes/search?query=${term}`)
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Analytics.css";
+import API_BASE_URL from "../api";
 
 const ShoppingRecommendation = () => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const ShoppingRecommendation = () => {
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
-                const res = await fetch(`http://localhost:5001/api/recommendations?daysAhead=${daysAhead}`);
+                const res = await fetch(`${API_BASE_URL}/recommendations?daysAhead=${daysAhead}`);
                 const data = await res.json();
                 setMustBuyItems(data.mustBuy || []);
                 setReplenishSuggestions(data.replenish || []);

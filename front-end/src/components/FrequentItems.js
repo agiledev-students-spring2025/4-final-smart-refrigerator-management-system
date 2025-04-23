@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './FrequentItems.css';
+import API_BASE_URL from '../api';
 
 function FrequentItems() {
   const [frequentItems, setFrequentItems] = useState([]);
@@ -8,7 +9,7 @@ function FrequentItems() {
   const [addedItems, setAddedItems] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/items/frequent')
+    fetch(`${API_BASE_URL}/items/frequent`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -26,7 +27,7 @@ function FrequentItems() {
   }, []);
 
   const handleQuickAdd = (item) => {
-    fetch('http://localhost:5001/api/items/quick-add', {
+    fetch(`${API_BASE_URL}/items/quick-add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

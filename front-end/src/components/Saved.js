@@ -4,6 +4,7 @@ import Searchbar from './Searchbar';
 import Dropdown from './Dropdown';
 import Recipe from './Recipe';
 import './RecipeSuggestions.css'; 
+import API_BASE_URL from '../api';
 
 function RecipeSuggestions() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function RecipeSuggestions() {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/recipes');
+        const response = await fetch(`${API_BASE_URL}/recipes`);
         const data = await response.json();
 
         if (response.ok) {

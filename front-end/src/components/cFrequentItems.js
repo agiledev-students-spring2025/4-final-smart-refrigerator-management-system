@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import FrequentItems from './FrequentItems';
+import API_BASE_URL from '../api';
 
 function cFrequentItems() {
   const [frequentItems, setFrequentItems] = useState([]);
@@ -10,7 +11,7 @@ function cFrequentItems() {
 
   const fetchFrequentItems = useCallback(() => {
     setLoading(true);
-    fetch('http://localhost:5001/api/items/frequent')
+    fetch(`${API_BASE_URL}/items/frequent`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -32,7 +33,7 @@ function cFrequentItems() {
   }, [fetchFrequentItems, refreshTrigger]);
 
   const handleQuickAdd = useCallback((item) => {
-    fetch('http://localhost:5001/api/items/quick-add', {
+    fetch(`${API_BASE_URL}/items/quick-add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

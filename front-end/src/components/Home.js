@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
+import API_BASE_URL from "../api";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Home = () => {
             }
 
             try {
-                const res = await fetch("http://localhost:5001/api/profile", {
+                const res = await fetch(`${API_BASE_URL}/profile`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -45,7 +46,7 @@ const Home = () => {
     }, [navigate]);
 
     useEffect(() => {
-        fetch("http://localhost:5001/api/analytics")
+        fetch(`${API_BASE_URL}/analytics`)
             .then((res) => res.json())
             .then((data) => {
                 setTotalItems(data.totalItems);
@@ -63,7 +64,7 @@ const Home = () => {
     }, [totalItems]);
 
     useEffect(() => {
-        fetch('http://localhost:5001/api/recipes')
+        fetch(`${API_BASE_URL}/recipes`)
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 'success') {

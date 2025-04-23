@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Analytics.css";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
+import API_BASE_URL from "../api";
 
 const WastePattern = () => {
     const navigate = useNavigate();
@@ -23,12 +24,12 @@ const WastePattern = () => {
 
         const fetchWaste = async () => {
             try {
-                const res = await fetch(`http://localhost:5001/api/waste?startDate=${startDate}&endDate=${endDate}`);
+                const res = await fetch(`${API_BASE_URL}/waste?startDate=${startDate}&endDate=${endDate}`);
                 const data = await res.json();
                 setTotalExpired(data.totalExpired);
                 setCategoryItemMap(data.breakdown || {});
 
-                const res2 = await fetch("http://localhost:5001/api/analytics");
+                const res2 = await fetch(`${API_BASE_URL}/analytics`);
                 const a = await res2.json();
                 setTotalTracked(a.totalItems);
             } catch (err) {

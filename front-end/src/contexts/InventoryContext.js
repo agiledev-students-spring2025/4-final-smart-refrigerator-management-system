@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import API_BASE_URL from '../api';
 
 const InventoryContext = createContext();
 
@@ -10,8 +11,6 @@ export const InventoryProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_URL = 'http://localhost:5001/api';
-
     useEffect(() => {
       const fetchInventory = async () => {
         setLoading(true);
@@ -20,11 +19,11 @@ export const InventoryProvider = ({ children }) => {
         let options = {};
     
         if (token) {
-          endpoint = 'http://localhost:5001/api/items';
+          endpoint = `${API_BASE_URL}/items`;
           options.headers = { Authorization: `Bearer ${token}` };
           setIsGuest(false);
         } else {
-          endpoint = 'http://localhost:5001/api/guest/starter';
+          endpoint = `${API_BASE_URL}/guest/starter`;
           setIsGuest(true);
         }
     
@@ -73,7 +72,7 @@ export const InventoryProvider = ({ children }) => {
         return newItem;
       }
 
-      const response = await fetch(`http://localhost:5001/api/items`, {
+      const response = await fetch(`${API_BASE_URL}/items`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -109,7 +108,7 @@ export const InventoryProvider = ({ children }) => {
         ));
         return true;
       }
-      const response = await fetch(`http://localhost:5001/api/items/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/items/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -145,7 +144,7 @@ export const InventoryProvider = ({ children }) => {
         return true;
       }
       
-      const response = await fetch(`http://localhost:5001/api/items/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/items/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`

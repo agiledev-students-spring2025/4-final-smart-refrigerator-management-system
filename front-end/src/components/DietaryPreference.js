@@ -3,7 +3,7 @@ import "./FridgeSetUp.css"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-
+import API_BASE_URL from "../api";
 
 function DietaryPreference() {
 
@@ -15,7 +15,7 @@ function DietaryPreference() {
     useEffect(() => {
         const token = localStorage.getItem("token");
       
-        axios.get("http://localhost:5001/api/profile", {
+        axios.get(`${API_BASE_URL}/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           }
@@ -57,7 +57,7 @@ function DietaryPreference() {
         };
       
         axios.post(
-          "http://localhost:5001/api/Account-Setting/dietary",
+          `${API_BASE_URL}/Account-Setting/dietary`,
           { value: dietaryData },
           {
             headers: {

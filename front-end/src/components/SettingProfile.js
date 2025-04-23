@@ -2,6 +2,7 @@ import "./SettingProfile.css"
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API_BASE_URL from "../api";
 
 function SettingProfile() {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ function SettingProfile() {
         const token = localStorage.getItem("token");
         const fetchProfile = async() => {
             try{
-                const res = await fetch("http://localhost:5001/api/profile", {
+                const res = await fetch(`${API_BASE_URL}/profile`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
