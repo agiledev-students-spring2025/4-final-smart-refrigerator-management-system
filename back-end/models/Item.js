@@ -14,7 +14,8 @@ const ItemSchema = new mongoose.Schema({
   purchaseCount: {type: Number, default: 0},
   notes: {type: String, trim: true},
   imageUrl: {type: String},
-  owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false}
+  owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false},
+  isStarterItem: {type: Boolean, default: false}
 }, {timestamps: true});
 
 ItemSchema.virtual('isExpired').get(function() {
