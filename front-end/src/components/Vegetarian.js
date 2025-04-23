@@ -1,4 +1,3 @@
-// src/components/Vegetarian.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Searchbar from './Searchbar';
@@ -11,46 +10,34 @@ function RecipeSuggestions() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setFilter] = useState('');
   const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  // Fetch recipes from the backend
+  // Fetch all recipes on mount
   useEffect(() => {
-    const fetchRecipes = async () => {
-      try {
-        const response = await fetch('http://localhost:5001/api/recipes');
-        const data = await response.json();
-
-        if (response.ok) {
-          setRecipes(data.data); 
-        } else {
-          setError('Failed to load recipes');
+    fetch('http://localhost:5001/api/recipes')
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          setRecipes(data.data);
         }
-      } catch (err) {
-        setError('Error fetching recipes');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRecipes();
+      })
+      .catch(error => console.error('Error fetching recipes:', error));
   }, []);
 
   // Handle search term
   function handleSearch(term) {
+    setSearchTerm(term);
     setSearchTerm(term);
   }
 
   // Handle dropdown selection
   function handleDropdownSelect(value) {
     setFilter(value);
+    setFilter(value);
   }
 
-  // Filter recipes based on search term and selected filter
-  const filteredRecipes = recipes.filter(recipe => {
-    const matchesSearch = recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = selectedFilter ? recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(selectedFilter.toLowerCase())) : true;
-    return matchesSearch && matchesFilter;
+  // Filter only Vegetarian recipes (case-insensitive)
+  const vegetarianRecipes = recipes.filter(recipe => {
+    return recipe.filter && recipe.filter.toLowerCase() === 'vegetarian';
   });
 
   return (
@@ -60,28 +47,23 @@ function RecipeSuggestions() {
       <Searchbar onSearch={handleSearch} /> 
       <Dropdown onSelect={handleDropdownSelect} /> 
 
-      <div className="Suggested-Recipes">
-        <h3>Vegetarian:</h3>
 
-        {loading ? (
-          <p>Loading recipes...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          filteredRecipes.length > 0 ? (
-            filteredRecipes.map(recipe => (
+      <div className="Suggested-Recipes">
+        <h3>Vegetarian Recipes</h3>
+        {vegetarianRecipes.length > 0 ? (
+          <div className="recipe-grid">
+            {vegetarianRecipes.map(recipe => (
               <Recipe 
-                key={recipe.id}
-                id={recipe.id}  
+                key={recipe._id}
+                _id={recipe._id}
                 name={recipe.name}
-                description={recipe.description}
-                ingredients={recipe.ingredients.join(', ')} 
-                imageUrl={recipe.imageUrl}
+                time={recipe.time}
+                imageUrl={recipe.imageUrl} 
               />
-            ))
-          ) : (
-            <p>No recipes found matching your criteria.</p>
-          )
+            ))}
+          </div>
+        ) : (
+          <p>No Vegetarian recipes found.</p>
         )}
       </div>
     </div>

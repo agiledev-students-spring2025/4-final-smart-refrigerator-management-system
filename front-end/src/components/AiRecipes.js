@@ -20,6 +20,7 @@ function RecipeSuggestions() {
       try {
         const response = await fetch('http://localhost:5001/api/recipes');
         const data = await response.json();
+        console.log('📦 Fetched recipes:', data); // ← Add this line
 
         if (response.ok) {
           setRecipes(data.data); // Assuming the recipes are under data.data
@@ -71,8 +72,8 @@ function RecipeSuggestions() {
           filteredRecipes.length > 0 ? (
             filteredRecipes.map(recipe => (
               <Recipe 
-                key={recipe.id} // Make sure the recipe has a unique key
-                id={recipe.id}  
+                key={recipe._id} // Make sure the recipe has a unique key
+                _id={recipe._id}  
                 name={recipe.name}
                 description={recipe.description}
                 ingredients={recipe.ingredients.join(', ')} // Join ingredients array to a string
