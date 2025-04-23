@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './StarterItems.css';
+import API_BASE_URL from '../api';
 
 function StarterItems() {
   const [starterItems, setStarterItems] = useState([]);
@@ -8,7 +9,7 @@ function StarterItems() {
   const [selectedItems, setSelectedItems] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/items/starter')
+    fetch(`${API_BASE_URL}/items/starter`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -42,7 +43,7 @@ function StarterItems() {
 
     Promise.all(
       itemsToAdd.map(item => 
-        fetch('http://localhost:5001/api/items', {
+        fetch(`${API_BASE_URL}/items`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

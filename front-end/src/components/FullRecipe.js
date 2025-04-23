@@ -5,6 +5,7 @@ import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import Timer from './Timer';
 import './FullRecipe.css';
+import API_BASE_URL from '../api';
 
 function FullRecipe() {
   const { id } = useParams();  // Get the dynamic ID from the URL
@@ -17,7 +18,7 @@ function FullRecipe() {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/api/recipes/${id}`);
+        const response = await fetch(`${API_BASE_URL}/recipes/${id}`);
         const data = await response.json();
         
         if (response.ok) {
@@ -39,7 +40,7 @@ function FullRecipe() {
   // Handle favorite toggle
   const toggleFavorite = async () => {
     try {
-      const response = await fetch(`http://localhost:5001/api/recipes/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/recipes/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ favorite: !isFavorite }),

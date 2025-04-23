@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./FridgeSetUp.css";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../api";
 
 function FridgeSetup() {
     const [selectedBrand, setBrand] = useState('');
@@ -13,8 +14,6 @@ function FridgeSetup() {
     const [checkedVegetableDrawer, setVegetable] = useState(false);
     const [checkedIceMaker, setIceMaker] = useState(false);
     const [checkedTouchscreen, setTouchscreen] = useState(false);
-    
-    const API_BASE_URL = "http://localhost:5001/api";
     
     useEffect(() => {
         const token = localStorage.getItem("token");

@@ -5,6 +5,7 @@ import "./Signup.css";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
+import API_BASE_URL from "../api";
 
 
 function Signup({ setUser }) {
@@ -19,7 +20,7 @@ function Signup({ setUser }) {
     
         if (name && email && password) {
             try {
-                const res = await axios.post("http://localhost:5001/api/signup", {
+                const res = await axios.post(`${API_BASE_URL}/signup`, {
                     name,
                     email,
                     password
@@ -29,7 +30,7 @@ function Signup({ setUser }) {
                 localStorage.setItem("token", res.data.token);
     
                 // ✅ Optionally fetch user profile to validate token
-                const profileRes = await axios.get("http://localhost:5001/api/profile", {
+                const profileRes = await axios.get(`${API_BASE_URL}/profile`, {
                     headers: {
                         Authorization: `Bearer ${res.data.token}`
                     }
