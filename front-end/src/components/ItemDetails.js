@@ -183,7 +183,7 @@ const ItemDetails = () => {
             
             <div className="info-row">
               <span className="info-label">Expiry Date:</span>
-              <span className="info-value">{formatDate(item.expiryDate)}</span>
+              <span className="info-value">{formatDate(item.expirationDate)}</span>
             </div>
             
             {item.compartment && (
