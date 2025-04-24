@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Login.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -12,6 +12,16 @@ function Login({ setUser }) {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+    const location  = useLocation();
+
+    // ← if we arrived from Welcome with guest creds, pre-fill once
+    useEffect(() => {
+        if (location.state?.prefillEmail) {
+        setEmail(location.state.prefillEmail);
+        setPassword(location.state.prefillPassword);
+        }
+    }, [location.state]);
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
