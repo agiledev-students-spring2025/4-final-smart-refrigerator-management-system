@@ -32,7 +32,7 @@
 
 .analytics-btn {
     padding: 10px 15px;
-    background: #314c2c;
+    background: #4d7745;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -69,8 +69,8 @@
     display: block;
     width: 100%;
     margin: 10px 0;
-    padding: 10px;
-    background: #314c2c;
+    padding: 10px 15px;
+    background: #4d7745;
     color: white;
     border: none;
     border-radius: 5px;

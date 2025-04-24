@@ -4,6 +4,7 @@ import "./Analytics.css";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import API_BASE_URL from "../api";
+import {FaArrowLeft} from "react-icons/fa";
 
 const Analytics = () => {
     const [totalItems, setTotalItems] = useState(0);
@@ -149,6 +150,9 @@ const Analytics = () => {
 
             {/* Navigation Links */}
             <div className="analytics-links">
+                <div className="back-button" onClick={() => navigate("/home")}>
+                    <FaArrowLeft/> Back
+                </div>
                 <Link to="/waste-pattern" className="analytics-btn">View Waste Pattern</Link>
                 <Link to="/shopping-recommendation" className="analytics-btn">View Shopping Recommendations</Link>
             </div>

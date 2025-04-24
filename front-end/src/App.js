@@ -47,7 +47,7 @@ function AppContent({ setUser }) {
   // Define pages where the navbar should be hidden
   const hideNavbarRoutes = ["/", "/login", "/signup"];
   const navigate = useNavigate();
-  const excludedPaths = ["/", "/home"];
+  const excludedPaths = ["/", "/home", "/analytics"];
 
   return (
       <div className="app-container">
