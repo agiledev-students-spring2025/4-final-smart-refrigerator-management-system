@@ -26,7 +26,6 @@ const WastePattern = () => {
             try {
                 // const res = await fetch(`${API_BASE_URL}/waste?startDate=${startDate}&endDate=${endDate}`);
                 const token = localStorage.getItem("token");
-
                 const res = await fetch(`${API_BASE_URL}/waste?startDate=${startDate}&endDate=${endDate}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,

@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Item = require("../models/Item"); // Use teammate's Item model
+const Item = require("../models/Item");
+const verifyToken = require("../middleware/authMiddleware");
 
-router.get("/", async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
     try {
         const daysAhead = parseInt(req.query.daysAhead || 7);
         const today = new Date();
@@ -12,14 +13,16 @@ router.get("/", async (req, res) => {
         const secondWindow = new Date();
         secondWindow.setDate(nextWindow.getDate() + 7); // 7 days after daysAhead
 
-        const items = await Item.find({ expirationDate: { $gte: today } });
+        const items = await Item.find({
+            owner: req.user.userId,
+            expirationDate: { $gte: today }
+        });
 
         const mustBuy = [];
         const replenish = [];
 
         items.forEach(item => {
             const daysLeft = Math.ceil((new Date(item.expirationDate) - today) / (1000 * 60 * 60 * 24));
-
 
             if (daysLeft >= 0 && daysLeft <= daysAhead) {
                 mustBuy.push({

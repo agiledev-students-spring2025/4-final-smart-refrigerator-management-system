@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Analytics.css";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
+import API_BASE_URL from "../api";
 
 const Analytics = () => {
     const [totalItems, setTotalItems] = useState(0);
@@ -17,7 +18,7 @@ const Analytics = () => {
         const fetchAnalytics = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await fetch("http://localhost:5001/api/analytics", {
+                const res = await fetch(`${API_BASE_URL}/analytics`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

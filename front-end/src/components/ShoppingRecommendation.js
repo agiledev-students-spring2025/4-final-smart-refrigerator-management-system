@@ -12,7 +12,12 @@ const ShoppingRecommendation = () => {
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
-                const res = await fetch(`${API_BASE_URL}/recommendations?daysAhead=${daysAhead}`);
+                const token = localStorage.getItem("token");
+                const res = await fetch(`${API_BASE_URL}/recommendations?daysAhead=${daysAhead}`,{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
                 const data = await res.json();
                 setMustBuyItems(data.mustBuy || []);
                 setReplenishSuggestions(data.replenish || []);
