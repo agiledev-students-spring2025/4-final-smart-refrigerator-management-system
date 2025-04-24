@@ -77,7 +77,7 @@ const Analytics = () => {
             {/* Summary Box */}
             <div className="summary-box">
                 <p><strong>Total Items:</strong> {totalItems}</p>
-                <p><strong>Expiring Soon (≤3 days):</strong> {expiringSoonCount}</p>
+                <p><strong>Expiring Soon (≤7 days):</strong> {expiringSoonCount}</p>
                 <p><strong>Expired Items:</strong> {expiredCount}</p>
             </div>
 
@@ -104,7 +104,7 @@ const Analytics = () => {
                             }
                         }}
                     />                ) : (
-                    <p className="center-text">No items.</p>
+                    <p style={{ textAlign: "center"}}>No items</p>
                 )}
             </section>
 

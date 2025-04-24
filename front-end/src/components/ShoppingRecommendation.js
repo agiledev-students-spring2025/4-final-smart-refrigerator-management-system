@@ -47,8 +47,8 @@ const ShoppingRecommendation = () => {
             <h3 style={{textAlign: "left", margin: 0}}>Must Buy Items:</h3>
             <ul>
                 {mustBuyItems.length === 0 ? (
-                    <p className="center-text">No items expiring soon.</p>
-                ) : (
+                    <p style={{ textAlign: "left", margin: 0}}>No items expiring soon</p>
+                    ) : (
                     mustBuyItems.map((item, idx) => (
                         <li key={idx}>
                             {item.name} (Expires in {item.daysUntilExpiration} days)
@@ -60,7 +60,7 @@ const ShoppingRecommendation = () => {
             <h3 style={{textAlign: "left", margin: 0}}>Replenishment Suggestions:</h3>
             <ul>
                 {replenishSuggestions.length === 0 ? (
-                    <p className="center-text">No Suggestions</p>
+                    <p style={{textAlign: "left", margin: 0}}>No suggestions</p>
                 ) : (
                     replenishSuggestions.map((item, idx) => (
                         <li key={idx}>

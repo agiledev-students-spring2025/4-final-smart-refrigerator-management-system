@@ -8,7 +8,7 @@ router.get("/", verifyToken, async (req, res) => {
         const userId = req.user.userId; // pulled from JWT
         const today = new Date();
         const soon = new Date();
-        soon.setDate(today.getDate() + 3);
+        soon.setDate(today.getDate() + 7);
 
         const items = await Item.find({ owner: userId });
 
