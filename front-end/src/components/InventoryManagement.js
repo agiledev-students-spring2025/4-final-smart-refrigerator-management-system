@@ -44,8 +44,11 @@ const InventoryManagement = () => {
         </div>
       ) : (
         Object.entries(compartments).map(([compartmentId, items]) => (
-          <div key={compartmentId} className="compartment-section">
-            <h2>{compartmentNames[compartmentId] || compartmentId}</h2>
+            <div key={compartmentId} className="compartment-section">
+            {(() => {
+              const label = compartmentNames[compartmentId] || compartmentId;
+              return <h2>{label.charAt(0).toUpperCase() + label.slice(1)}</h2>;
+            })()}
             <div className="items-grid">
               {items.map(item => {
                 const daysUntilExpiry = getDaysUntilExpiration(item.expiryDate);

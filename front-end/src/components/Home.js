@@ -48,18 +48,18 @@ const Home = () => {
     const [expiringSoon, setExpiringSoon] = useState(0);
 
     useEffect(() => {
-    const today = new Date();
-    const soon  = new Date();
-    soon.setDate(today.getDate() + 3);
+        const today = new Date();
+        const soon  = new Date();
+        soon.setDate(today.getDate() + 7);
 
-    const countSoon = inventory.filter(
-        (item) =>
-        item.expirationDate &&
-        new Date(item.expirationDate) >= today &&
-        new Date(item.expirationDate) <= soon
-    ).length;
+        const countSoon = inventory.filter(
+            (item) =>
+            item.expirationDate &&
+            new Date(item.expirationDate) >= today &&
+            new Date(item.expirationDate) <= soon
+        ).length;
 
-    setExpiringSoon(countSoon);
+        setExpiringSoon(countSoon);
     }, [inventory]);
 
     const totalItems = inventory.length;
