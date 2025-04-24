@@ -67,12 +67,6 @@ const ScanItems = () => {
     <div className="scan-items-container">
       
       {/* 👇 This is below the navbar */}
-      <div className="back-wrapper">
-        <Link to="/inventory" className="back-button">
-          &larr; Back
-        </Link>
-      </div>
-
       <div className="scan-header">
         <h1>Add New Item</h1>
       </div>
