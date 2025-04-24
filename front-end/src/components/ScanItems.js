@@ -13,7 +13,8 @@ const ScanItems = () => {
     name: '',
     quantity: '',
     expiryDate: '',
-    compartment: '',
+    category: '',
+    storageLocation: '',
     notes: ''
   });
   
@@ -25,18 +26,23 @@ const ScanItems = () => {
     }));
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!formData.name || !formData.compartment) {
-      alert('Please fill in all required fields (Name and Compartment)');
+  
+    if (!formData.name || !formData.category || !formData.storageLocation) {
+      alert('Please fill in required fields: Name, Category, Storage Location.');
       return;
     }
-    
-    addItem(formData);
-    
+  
+    const itemToSubmit = {
+      ...formData,
+      expirationDate: formData.expiryDate, // just ensure naming matches schema
+    };
+  
+    await addItem(itemToSubmit);
     navigate('/inventory');
   };
+  
   
   const handleScan = () => {
     setIsScanning(true);
@@ -46,9 +52,11 @@ const ScanItems = () => {
         name: 'Organic Milk',
         quantity: '1 gallon',
         expiryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-        compartment: 'refrigerator',
+        category: 'dairy',
+        storageLocation: 'main',
         notes: 'Scanned from package'
       });
+      
       
       setIsScanning(false);
       setScanMode('manual');
@@ -113,7 +121,28 @@ const ScanItems = () => {
               placeholder="e.g. Milk, Eggs, Apples"
             />
           </div>
-          
+
+          <div className="form-group">
+            <label htmlFor="category">Category <span className="required">*</span></label>
+            <select
+              id="category"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select category</option>
+              <option value="dairy">Dairy</option>
+              <option value="meat">Meat</option>
+              <option value="vegetables">Vegetables</option>
+              <option value="fruits">Fruits</option>
+              <option value="beverages">Beverages</option>
+              <option value="leftovers">Leftovers</option>
+              <option value="condiments">Condiments</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
           <div className="form-group">
             <label htmlFor="quantity">Quantity</label>
             <input
@@ -138,21 +167,24 @@ const ScanItems = () => {
           </div>
           
           <div className="form-group">
-            <label htmlFor="compartment">Compartment <span className="required">*</span></label>
+            <label htmlFor="storageLocation">Storage Location <span className="required">*</span></label>
             <select
-              id="compartment"
-              name="compartment"
-              value={formData.compartment}
+              id="storageLocation"
+              name="storageLocation"
+              value={formData.storageLocation}
               onChange={handleChange}
               required
             >
               <option value="">Select where to store</option>
-              <option value="refrigerator">Main Refrigerator</option>
+              <option value="main">Main</option>
+              <option value="door">Door</option>
               <option value="freezer">Freezer</option>
-              <option value="vegetableDrawer">Vegetable Drawer</option>
-              <option value="dairySection">Dairy Section</option>
+              <option value="crisper">Crisper</option>
+              <option value="deli drawer">Deli Drawer</option>
+              <option value="other">Other</option>
             </select>
           </div>
+
           
           <div className="form-group">
             <label htmlFor="notes">Notes</label>
