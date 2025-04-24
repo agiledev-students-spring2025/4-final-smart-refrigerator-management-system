@@ -34,6 +34,10 @@
     cursor: pointer;
 }
 
+.hamburger:hover {
+    width: 50px;
+}
+
 /* Sidebar Menu */
 .sidebar {
     position: fixed;
@@ -86,6 +90,11 @@
     object-fit: cover;
 }
 
+.profile:hover{
+    width: 45px;
+    height: 45px;
+}
+
 .logo-link {
     display: flex;
     flex-direction: column;
@@ -94,6 +103,10 @@
     color: #314c2c;
     cursor: pointer;
   }
+
+.logo-link:hover {
+    height: 50px;
+}
 
 .home-text {
 font-size: 14px;
