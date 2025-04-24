@@ -160,6 +160,7 @@ export default function AccountSetting () {
             alert("Please login again using your new password");
             navigate('/');
             localStorage.removeItem("token");
+            window.dispatchEvent(new Event("tokenChanged"));
         }
       }
 
