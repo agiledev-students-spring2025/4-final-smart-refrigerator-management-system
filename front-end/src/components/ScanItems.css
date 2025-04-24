@@ -1,6 +1,15 @@
 .scan-items-container {
-    padding: 20px;
-  }
+  padding: 1rem;
+  margin-top: 10px;
+}
+
+.back-button {
+  margin-top: 90px;
+  display: inline-block;
+  font-size: 1rem;
+  color: #2f4f4f;
+  text-decoration: none;
+}
   
   .scan-header {
     display: flex;

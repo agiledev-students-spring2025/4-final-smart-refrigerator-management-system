@@ -13,10 +13,12 @@ const ItemDetails = () => {
   const [formData, setFormData] = useState({
     name: '',
     quantity: '',
-    expiryDate: '',
-    compartment: '',
+    expirationDate: '',
+    category: '',
+    storageLocation: '',
     notes: ''
   });
+  
   
   useEffect(() => {
     const currentItem = getItemById(id);
@@ -25,11 +27,12 @@ const ItemDetails = () => {
       setFormData({
         name: currentItem.name || '',
         quantity: currentItem.quantity || '',
-        expiryDate: currentItem.expiryDate || '',
-        compartment: currentItem.compartment || '',
+        expirationDate: currentItem.expirationDate?.split('T')[0] || '',
+        category: currentItem.category || '',
+        storageLocation: currentItem.storageLocation || '',
         notes: currentItem.notes || ''
       });
-    }
+    }    
   }, [id, getItemById]);
   
   const handleChange = (e) => {
@@ -105,7 +108,27 @@ const ItemDetails = () => {
                 required
               />
             </div>
-            
+
+            <div className="form-group">
+              <label htmlFor="category">Category</label>
+              <select
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+              >
+                <option value="">Select a category</option>
+                <option value="dairy">Dairy</option>
+                <option value="meat">Meat</option>
+                <option value="vegetables">Vegetables</option>
+                <option value="fruits">Fruits</option>
+                <option value="beverages">Beverages</option>
+                <option value="leftovers">Leftovers</option>
+                <option value="condiments">Condiments</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
             <div className="form-group">
               <label htmlFor="quantity">Quantity</label>
               <input
@@ -118,31 +141,34 @@ const ItemDetails = () => {
             </div>
             
             <div className="form-group">
-              <label htmlFor="expiryDate">Expiry Date</label>
+              <label htmlFor="expirationDate">Expiration Date</label>
               <input
                 type="date"
-                id="expiryDate"
-                name="expiryDate"
-                value={formData.expiryDate}
+                id="expirationDate"
+                name="expirationDate"
+                value={formData.expirationDate}
                 onChange={handleChange}
               />
             </div>
             
-            <div className="form-group">
-              <label htmlFor="compartment">Compartment</label>
-              <select
-                id="compartment"
-                name="compartment"
-                value={formData.compartment}
-                onChange={handleChange}
-              >
-                <option value="">Select a compartment</option>
-                <option value="refrigerator">Main Refrigerator</option>
-                <option value="freezer">Freezer</option>
-                <option value="vegetableDrawer">Vegetable Drawer</option>
-                <option value="dairySection">Dairy Section</option>
-              </select>
-            </div>
+          <div className="form-group">
+            <label htmlFor="storageLocation">Storage Location</label>
+            <select
+              id="storageLocation"
+              name="storageLocation"
+              value={formData.storageLocation}
+              onChange={handleChange}
+            >
+              <option value="">Select storage location</option>
+              <option value="main">Main</option>
+              <option value="door">Door</option>
+              <option value="freezer">Freezer</option>
+              <option value="crisper">Crisper</option>
+              <option value="deli drawer">Deli Drawer</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
             
             <div className="form-group">
               <label htmlFor="notes">Notes</label>
@@ -185,16 +211,17 @@ const ItemDetails = () => {
               <span className="info-value">{formatDate(item.expirationDate)}</span>
             </div>
             
-            {item.compartment && (
+            {item.category && (
               <div className="info-row">
-                <span className="info-label">Stored in:</span>
-                <span className="info-value">
-                  {item.compartment === 'refrigerator' && 'Main Refrigerator'}
-                  {item.compartment === 'freezer' && 'Freezer'}
-                  {item.compartment === 'vegetableDrawer' && 'Vegetable Drawer'}
-                  {item.compartment === 'dairySection' && 'Dairy Section'}
-                  {!['refrigerator', 'freezer', 'vegetableDrawer', 'dairySection'].includes(item.compartment) && item.compartment}
-                </span>
+                <span className="info-label">Category:</span>
+                <span className="info-value">{item.category}</span>
+              </div>
+            )}
+
+            {item.storageLocation && (
+              <div className="info-row">
+                <span className="info-label">Storage Location:</span>
+                <span className="info-value">{item.storageLocation}</span>
               </div>
             )}
             
