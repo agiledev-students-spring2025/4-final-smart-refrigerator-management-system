@@ -1,24 +1,27 @@
 const express = require("express");
 const router = express.Router();
-const Item = require("../models/Item"); // Use this once it's available
+const Item = require("../models/Item");
+const verifyToken = require("../middleware/verifyToken");
 
-router.get("/", async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
     try {
+        const userId = req.user.userId; // pulled from JWT
         const today = new Date();
         const soon = new Date();
         soon.setDate(today.getDate() + 3);
 
-        const totalItems = await Item.countDocuments();
+        const items = await Item.find({ owner: userId });
 
-        const expiringSoon = await Item.countDocuments({
-            expirationDate: { $gte: today, $lte: soon }
-        });
+        const totalItems = items.length;
 
-        const expired = await Item.countDocuments({
-            expirationDate: { $lt: today }
-        });
+        const expiringSoon = items.filter(item =>
+            item.expirationDate >= today && item.expirationDate <= soon
+        ).length;
 
-        const items = await Item.find({});
+        const expired = items.filter(item =>
+            item.expirationDate < today
+        ).length;
+
         const byCategory = {};
         items.forEach(item => {
             const category = item.category || "other";
@@ -26,7 +29,6 @@ router.get("/", async (req, res) => {
             byCategory[category].push(item.name);
         });
 
-        // const items = await Item.find({});
         const sorted = [...items].sort((a, b) => {
             const expiryA = new Date(a.expirationDate);
             const expiryB = new Date(b.expirationDate);
