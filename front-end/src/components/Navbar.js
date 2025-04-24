@@ -5,24 +5,19 @@ import "./Navbar.css";
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
-    const [isGuest, setIsGuest] = useState(true);
     const navigate = useNavigate();
+  
+    // always check current localStorage value
+    const email   = localStorage.getItem("userEmail");
+    const isGuest = !email || email === "guest@email.com";
 
-    useEffect(() => {
-        // Check for token on load
-        const token = localStorage.getItem("token");
-        setIsGuest(!token); // if token is null → guest
-    }, []);
+    const toggleMenu = () => setIsOpen(prev => !prev);
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
-
-    const handleProfileClick = (e) => {
-        if (isGuest) {
-            e.preventDefault(); // block navigation
-            setShowOverlay(true); // show guest message
-        }
+    const handleProfileClick = e => {
+      if (isGuest) {
+        e.preventDefault();
+        setShowOverlay(true);
+      }
     };
 
     const closeOverlay = () => {
