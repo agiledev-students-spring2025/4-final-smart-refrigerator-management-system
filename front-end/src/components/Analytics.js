@@ -112,14 +112,17 @@ const Analytics = () => {
                 <h3>Most Used Items:</h3>
                 <div className="item-grid">
                     {mostUsed.map((item) => (
-                        <div className="item-card" key={item._id}>
-                            <div className="item-thumbnail">
-                                <img src={item.imageUrl || "https://picsum.photos/100"} alt={item.name} />
+                        <Link to={`/inventory/${item._id}`} key={item._id} className="item-card-link">
+                            <div className="item-card" key={item._id}>
+                                <div className="item-thumbnail">
+                                    <img src={item.imageUrl || "https://picsum.photos/100"} alt={item.name}/>
+                                </div>
+                                <p><strong>{item.name}</strong></p>
+                                <p>Expires
+                                    in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
+                                <p>Qty: {item.quantity}</p>
                             </div>
-                            <p><strong>{item.name}</strong></p>
-                            <p>Expires in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
-                            <p>Qty: {item.quantity}</p>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>
@@ -129,14 +132,16 @@ const Analytics = () => {
                 <h3>Least Used Items:</h3>
                 <div className="item-grid">
                     {leastUsed.map((item) => (
-                        <div className="item-card" key={item._id}>
-                            <div className="item-thumbnail">
-                                <img src={item.imageUrl || "https://picsum.photos/100"} alt={item.name} />
+                        <Link to={`/inventory/${item._id}`} key={item._id} className="item-card-link">
+                            <div className="item-card" key={item._id}>
+                                <div className="item-thumbnail">
+                                    <img src={item.imageUrl || "https://picsum.photos/100"} alt={item.name}/>
+                                </div>
+                                <p><strong>{item.name}</strong></p>
+                                <p>Expires in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
+                                <p>Qty: {item.quantity}</p>
                             </div>
-                            <p><strong>{item.name}</strong></p>
-                            <p>Expires in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
-                            <p>Qty: {item.quantity}</p>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>

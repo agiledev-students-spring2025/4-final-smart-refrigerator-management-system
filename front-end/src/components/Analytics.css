@@ -141,3 +141,8 @@ ul li {
     align-items: flex-start;
     margin-left: 75px;
 }
+
+.item-card-link {
+    text-decoration: none;
+    color: inherit;
+}
