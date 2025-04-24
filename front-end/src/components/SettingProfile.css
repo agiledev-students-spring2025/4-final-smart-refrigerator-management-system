@@ -11,7 +11,6 @@
     align-items: stretch;
     gap: 15px;
     padding:20px;
-
 }
 
 .header{
@@ -54,7 +53,7 @@
 }
 
 .option:hover{
-    background-color: var(--primary-dark);
+    background: lightgray;
 }
 
 .logout {
