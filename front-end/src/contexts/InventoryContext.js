@@ -1,197 +1,147 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import API_BASE_URL from '../api';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import API_BASE_URL from "../api";
 
 const InventoryContext = createContext();
-
 export const useInventory = () => useContext(InventoryContext);
 
 export const InventoryProvider = ({ children }) => {
   const [inventory, setInventory] = useState([]);
-  const [isGuest, setIsGuest] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading,   setLoading]   = useState(true);
+  const [error,     setError]     = useState(null);
 
+  /* ─────────────────────────────
+     INITIAL LOAD
+  ───────────────────────────── */
   useEffect(() => {
     const fetchInventory = async () => {
-      setLoading(true);
-      const token = localStorage.getItem('token');
-      let endpoint;
-      let options = {};
+      const token = localStorage.getItem("token");
 
-      if (token) {
-        // for logged-in users, fetch their specific inventory items
-        endpoint = `${API_BASE_URL}/items`;
-        options.headers = { Authorization: `Bearer ${token}` };
-        setIsGuest(false);
-      } else {
-        // for guest users, fetch starter items
-        endpoint = `${API_BASE_URL}/guest/starter`;
-        setIsGuest(true);
+      if (!token) {
+        setInventory([]);
+        setError("No auth token found.");
+        setLoading(false);
+        return;
       }
 
       try {
-        const res = await fetch(endpoint, options);
-        if (res.ok) {
-          const data = await res.json();
+        const res = await fetch(`${API_BASE_URL}/items`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-          setInventory(data.data || []);
-          setError(null);
-        } else {
-          throw new Error("Failed to fetch inventory");
-        }
-      } catch (error) {
-        console.warn('Backend fetch failed. Falling back to localStorage.');
-        setError('Failed to load inventory from server');
+        if (!res.ok) throw new Error("Failed to fetch inventory");
 
-        if (isGuest) {
-          const savedInventory = localStorage.getItem('foodInventory');
-          if (savedInventory) {
-            try {
-              setInventory(JSON.parse(savedInventory));
-            } catch (error) {
-              console.error('Error parsing fallback inventory:', error);
-              setInventory([]);
-            }
-          }
-        } else {
-          setInventory([]);
-        }
+        const data = await res.json();
+        setInventory(data.data || []);
+        setError(null);
+      } catch (err) {
+        console.error(err);
+        setError("Could not load inventory.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchInventory();
-  }, [API_BASE_URL]);
+  }, []);               // ← no navigate dependency
 
+  /* ─────────────────────────────
+     CRUD HELPERS
+  ───────────────────────────── */
   const addItem = async (itemData) => {
-    try {
-      const token = localStorage.getItem('token');
-      
-      if (!token) {
-        const newItem = {
-          ...itemData,
-          id: Date.now().toString(),
-          createdAt: new Date().toISOString(),
-        };
-        const updatedInventory = [...inventory, newItem];
-        setInventory(updatedInventory);
-        localStorage.setItem('foodInventory', JSON.stringify(updatedInventory)); 
-        return newItem;
-      }
+    const token = localStorage.getItem("token");
+    if (!token) return null;
 
-      const response = await fetch(`${API_BASE_URL}/items`, {
-        method: 'POST',
+    try {
+      const res = await fetch(`${API_BASE_URL}/items`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(itemData)
+        body: JSON.stringify(itemData),
       });
-      
-      if (!response.ok) {
-        throw new Error('Failed to add item to database');
-      }
-      
-      const result = await response.json();
-      const newItem = result.data;
+
+      if (!res.ok) throw new Error("Failed to add item");
+
+      const { data: newItem } = await res.json();
       setInventory(prev => [...prev, newItem]);
       return newItem;
     } catch (err) {
-      console.error('Error adding item:', err);
-      setError('Failed to add item. Please try again.');
+      console.error(err);
+      setError("Could not add item.");
       return null;
     }
   };
-  
+
   const updateItem = async (id, updatedData) => {
+    const token = localStorage.getItem("token");
+    if (!token) return false;
+
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setInventory(prev => 
-          prev.map(item => (item.id === id) ? { ...item, ...updatedData } : item)
-        );
-        localStorage.setItem('foodInventory', JSON.stringify(
-          inventory.map(item => (item.id === id) ? { ...item, ...updatedData } : item)
-        ));
-        return true;
-      }
-      const response = await fetch(`${API_BASE_URL}/items/${id}`, {
-        method: 'PUT',
+      const res = await fetch(`${API_BASE_URL}/items/${id}`, {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(updatedData)
+        body: JSON.stringify(updatedData),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to update item in database');
-      }
+      if (!res.ok) throw new Error("Failed to update item");
 
-      const result = await response.json();
+      const { data: updatedItem } = await res.json();
       setInventory(prev =>
-        prev.map(item => (item._id === id) ? result.data : item)
+        prev.map(item => (item._id === id ? updatedItem : item))
       );
       return true;
     } catch (err) {
-      console.error('Error updating item:', err);
-      setError('Failed to update item. Please try again.');
+      console.error(err);
+      setError("Could not update item.");
       return false;
     }
   };
-  
+
   const deleteItem = async (id) => {
+    const token = localStorage.getItem("token");
+    if (!token) return false;
+
     try {
-      const token = localStorage.getItem('token');
-      
-      if (!token) {
-        const filteredInventory = inventory.filter(item => item.id !== id);
-        setInventory(filteredInventory);
-        localStorage.setItem('foodInventory', JSON.stringify(filteredInventory));
-        return true;
-      }
-      
-      const response = await fetch(`${API_BASE_URL}/items/${id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+      const res = await fetch(`${API_BASE_URL}/items/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
       });
-      
-      if (!response.ok) {
-        throw new Error('Failed to delete item from database');
-      }
-      
+
+      if (!res.ok) throw new Error("Failed to delete item");
+
       setInventory(prev => prev.filter(item => item._id !== id));
       return true;
     } catch (err) {
-      console.error('Error deleting item:', err);
-      setError('Failed to delete item. Please try again.');
+      console.error(err);
+      setError("Could not delete item.");
       return false;
     }
   };
-  
-  const getItemById = (id) => {
-    return inventory.find(item => item._id === id || item.id === id) || null;
-  };
-  
-  const getItemsByCompartment = () => {
-    const grouped = {};
-    
-    inventory.forEach(item => {
-      const compartment = item.storageLocation || 'other';
-      if (!grouped[compartment]) {
-        grouped[compartment] = [];
-      }
-      grouped[compartment].push(item);
-    });
-    
-    return grouped;
-  };
-  
-  const isLoading = () => loading;
-  const clearError = () => setError(null);
+
+  /* ─────────────────────────────
+     UTILITY HELPERS
+  ───────────────────────────── */
+  const getItemById = id =>
+    inventory.find(item => item._id === id) || null;
+
+  const getItemsByCompartment = () =>
+    inventory.reduce((groups, item) => {
+      const key = item.storageLocation || "other";
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(item);
+      return groups;
+    }, {});
+
+  /* ───────────────────────────── */
 
   return (
     <InventoryContext.Provider
@@ -199,19 +149,15 @@ export const InventoryProvider = ({ children }) => {
         inventory,
         loading,
         error,
-        isGuest,
         addItem,
         updateItem,
         deleteItem,
         getItemById,
         getItemsByCompartment,
-        isLoading,
-        clearError
+        clearError: () => setError(null),
       }}
     >
       {children}
     </InventoryContext.Provider>
   );
 };
-
-export { InventoryContext };

@@ -37,6 +37,7 @@ function Login({ setUser }) {
       
           if (response.ok) {
             localStorage.setItem("token", data.token);
+            localStorage.setItem("userEmail", data.user?.email || email);
       
             // Fetch user profile using the token
             const token = localStorage.getItem("token");
