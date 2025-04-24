@@ -40,8 +40,6 @@ function SettingProfile() {
       };
     
 
-    
-
     return(
         <div className= "account-profile">
             <div className="header">
@@ -60,7 +58,7 @@ function SettingProfile() {
                 <button className="option">Notifications</button>
                 <button onClick={() =>navigate('/DietaryPrefernece')} className="option">Dietary Preferences</button>
                 <button onClick={() =>navigate('/Help-Support')}className="option">Help & Support</button>
-                <button onClick={handleLogout} className="option">Logout</button>
+                <button onClick={handleLogout} className="logout">Logout</button>
             </div>
         </div>
     )
