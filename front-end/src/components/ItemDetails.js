@@ -80,9 +80,6 @@ const ItemDetails = () => {
   return (
     <div className="item-details-container">
       <div className="item-details-header">
-        <Link className="back-button" onClick={() => navigate(-1)}>
-          &larr; Back
-        </Link>
         <h1>{isEditing ? 'Edit Item' : 'Item Details'}</h1>
       </div>
 

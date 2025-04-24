@@ -149,7 +149,6 @@ const Analytics = () => {
 
             {/* Navigation Links */}
             <div className="analytics-links">
-                <Link to="/home" className="back-button">← Go Back</Link>
                 <Link to="/waste-pattern" className="analytics-btn">View Waste Pattern</Link>
                 <Link to="/shopping-recommendation" className="analytics-btn">View Shopping Recommendations</Link>
             </div>

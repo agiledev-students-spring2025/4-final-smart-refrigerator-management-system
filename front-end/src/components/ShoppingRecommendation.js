@@ -73,7 +73,6 @@ const ShoppingRecommendation = () => {
             <button className="shop-btn" onClick={() => window.open("https://www.amazon.com", "_blank")}>Directed to Amazon</button>
             <button className="shop-btn" onClick={() => window.open("https://www.ubereats.com", "_blank")}>Directed to Uber Eats</button>
 
-            <Link to="/analytics" className="back-button">← Back to Analytics</Link>
             <button className="back-btn" onClick={() => navigate("/analytics")}>← Back to Analytics</button>
         </div>
     );
