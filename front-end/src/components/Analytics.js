@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Analytics.css";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
@@ -13,6 +13,7 @@ const Analytics = () => {
     const [mostUsed, setMostUsed] = useState([]);
     const [leastUsed, setLeastUsed] = useState([]);
     const [categoryItemMap, setCategoryItemMap] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAnalytics = async () => {
@@ -82,7 +83,7 @@ const Analytics = () => {
 
             {/* Items by Category (Pie Chart) */}
             <section>
-                <h3>Items by Category</h3>
+                <h2 style={{ textAlign: "center" }}> Items by Category</h2>
                 {totalItems > 0 ? (
                     <Pie
                         data={compartmentChartData}
@@ -109,7 +110,7 @@ const Analytics = () => {
 
             {/* Most Used Items */}
             <section>
-                <h3>Most Used Items:</h3>
+                <h3 style={{textAlign:"center", margin: 0}}>Most Used Items:</h3>
                 <div className="item-grid">
                     {mostUsed.map((item) => (
                         <Link to={`/inventory/${item._id}`} key={item._id} className="item-card-link">
@@ -129,7 +130,7 @@ const Analytics = () => {
 
             {/* Least Used Items */}
             <section>
-                <h3>Least Used Items:</h3>
+                <h3 style={{textAlign:"center", margin: 0}}>Least Used Items:</h3>
                 <div className="item-grid">
                     {leastUsed.map((item) => (
                         <Link to={`/inventory/${item._id}`} key={item._id} className="item-card-link">
@@ -148,6 +149,7 @@ const Analytics = () => {
 
             {/* Navigation Links */}
             <div className="analytics-links">
+                <Link to="/home" className="back-button">← Go Back</Link>
                 <Link to="/waste-pattern" className="analytics-btn">View Waste Pattern</Link>
                 <Link to="/shopping-recommendation" className="analytics-btn">View Shopping Recommendations</Link>
             </div>

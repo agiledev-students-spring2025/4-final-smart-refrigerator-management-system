@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./Analytics.css";
 import API_BASE_URL from "../api";
 
@@ -33,7 +33,7 @@ const ShoppingRecommendation = () => {
 
     return (
         <div className="container">
-            <h2>Shopping Recommendation</h2>
+            <h1 style={{textAlign:"left"}}>Shopping Recommendation</h1>
             <div className="days-selector">
                 <label>For next
                     <select value={daysAhead} onChange={(e) => setDaysAhead(Number(e.target.value))}>
@@ -44,7 +44,7 @@ const ShoppingRecommendation = () => {
                 </label>
             </div>
 
-            <h3>Must-Buy Items:</h3>
+            <h3 style={{textAlign: "left", margin: 0}}>Must Buy Items:</h3>
             <ul>
                 {mustBuyItems.length === 0 ? (
                     <p className="center-text">No items expiring soon.</p>
@@ -57,7 +57,7 @@ const ShoppingRecommendation = () => {
                 )}
             </ul>
 
-            <h3>Replenishment Suggestions:</h3>
+            <h3 style={{textAlign: "left", margin: 0}}>Replenishment Suggestions:</h3>
             <ul>
                 {replenishSuggestions.length === 0 ? (
                     <p className="center-text">No Suggestions</p>
@@ -73,6 +73,7 @@ const ShoppingRecommendation = () => {
             <button className="shop-btn" onClick={() => window.open("https://www.amazon.com", "_blank")}>Directed to Amazon</button>
             <button className="shop-btn" onClick={() => window.open("https://www.ubereats.com", "_blank")}>Directed to Uber Eats</button>
 
+            <Link to="/analytics" className="back-button">← Back to Analytics</Link>
             <button className="back-btn" onClick={() => navigate("/analytics")}>← Back to Analytics</button>
         </div>
     );

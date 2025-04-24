@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./Analytics.css";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
@@ -62,7 +62,7 @@ const WastePattern = () => {
 
     return (
         <div className="container">
-            <h2>Waste Pattern</h2>
+            <h1 style={{textAlign:"left"}}>Waste Pattern</h1>
             <div className="date-selector">
                 <label>Start Date: <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} /></label>
                 <label>End Date: <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} /></label>
@@ -72,7 +72,7 @@ const WastePattern = () => {
                 <p><strong>Food Wasted:</strong> {totalTracked ? `${((totalExpired / totalTracked) * 100).toFixed(1)}%` : "0%"}</p>
                 <p><strong>Estimated Cost Lost:</strong> ${totalExpired * 5}</p>
             </div>
-            <h3>Waste Breakdown by Category:</h3>
+            <h2 style={{textAlign:"center"}}>Waste Breakdown by Category:</h2>
             {totalExpired > 0 ? (
                 <Pie
                     data={wasteChartData}
@@ -96,6 +96,7 @@ const WastePattern = () => {
             ) : (
                 <p className="center-text">No expired items in selected date range.</p>
             )}
+            <Link to="/analytics" className="back-button">← Back to Analytics</Link>
             <button className="back-btn" onClick={() => navigate("/analytics")}>← Back to Analytics</button>
         </div>
     );
