@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import { useInventory } from "../contexts/InventoryContext";
 import "./Home.css";
 import API_BASE_URL from "../api";
 
 const Home = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
-    const [totalItems, setTotalItems] = useState(0);
-    const [expiringSoon, setExpiringSoon] = useState(0);
-    const [analyticsLoaded, setAnalyticsLoaded] = useState(false);
-    const [showFridgeEmptyMessage, setShowFridgeEmptyMessage] = useState(false);
-    const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -45,131 +41,158 @@ const Home = () => {
         fetchUserProfile();
     }, [navigate]);
 
+    /* ───────────────────────
+        Inventory statistics
+    ─────────────────────── */
+    const { inventory, loading } = useInventory();
+    const [expiringSoon, setExpiringSoon] = useState(0);
+
     useEffect(() => {
-        fetch(`${API_BASE_URL}/analytics`)
-            .then((res) => res.json())
-            .then((data) => {
-                setTotalItems(data.totalItems);
-                setExpiringSoon(data.expiringSoon);
-                setAnalyticsLoaded(true);
-            })
-            .catch((err) => {
-                console.error("Error fetching analytics:", err);
-                setAnalyticsLoaded(true);
-            });
+    const today = new Date();
+    const soon  = new Date();
+    soon.setDate(today.getDate() + 3);
+
+    const countSoon = inventory.filter(
+        (item) =>
+        item.expirationDate &&
+        new Date(item.expirationDate) >= today &&
+        new Date(item.expirationDate) <= soon
+    ).length;
+
+    setExpiringSoon(countSoon);
+    }, [inventory]);
+
+    const totalItems = inventory.length;
+
+    /* ───────────────────────
+        Empty-fridge overlay
+    ─────────────────────── */
+    const [showEmptyMsg, setShowEmptyMsg] = useState(false);
+    useEffect(() => setShowEmptyMsg(totalItems === 0), [totalItems]);
+
+    /* ───────────────────────
+        Recipe recommendations
+    ─────────────────────── */
+    const [recipes, setRecipes] = useState([]);
+    useEffect(() => {
+    fetch(`${API_BASE_URL}/recipes`)
+        .then((r) => r.json())
+        .then((data) => {
+        if (data.status === "success") setRecipes(data.data);
+        })
+        .catch((e) => console.error("Error fetching recipes:", e));
     }, []);
 
-    useEffect(() => {
-        setShowFridgeEmptyMessage(totalItems === 0);
-    }, [totalItems]);
+  /* ───────────────────────
+     UI
+  ─────────────────────── */
+  return (
+    <motion.div
+      className="home-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* logo */}
+      <motion.div
+        className="logo-container"
+        initial={{ scale: 0.8 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <img id="logo" src="/logo.svg" alt="Smart Fridge Logo" />
+      </motion.div>
 
-    useEffect(() => {
-        fetch(`${API_BASE_URL}/recipes`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.status === 'success') {
-                    setRecipes(data.data);
-                }
-            })
-            .catch((error) => console.error('Error fetching recipes:', error));
-    }, []);
+      {/* greeting */}
+      <motion.h1
+        className="welcome-message"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        Welcome, {userName}!
+      </motion.h1>
 
-    return (
-        <motion.div
-            className="home-container"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-        >
-            <motion.div
-                className="logo-container"
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5 }}
-            >
-                <img id="logo" src="/logo.svg" alt="Smart Fridge Logo" />
-            </motion.div>
+      {/* fridge summary */}
+      <motion.div
+        className="fridge-summary"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        {loading ? null : showEmptyMsg && (
+          <div className="overlay">
+            <div className="overlay-card">
+              <p>Your fridge is empty! Add some food to get started.</p>
+              <button onClick={() => setShowEmptyMsg(false)}>Got it</button>
+            </div>
+          </div>
+        )}
 
-            <motion.h1
-                className="welcome-message"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-            >
-                Welcome, {userName || "Guest"}!
-            </motion.h1>
+        <h2>Your Fridge Activities:</h2>
+        <div className="summary-cards">
+          <motion.div
+            className="summary-card"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h2>Total Items</h2>
+            <p className="summary-number">{totalItems}</p>
+            <Link to="/inventory" className="summary-button">
+              View Inventory
+            </Link>
+          </motion.div>
 
-            <motion.div
-                className="fridge-summary"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-            >
-                {analyticsLoaded && totalItems === 0 && showFridgeEmptyMessage && (
-                    <div className="overlay">
-                        <div className="overlay-card">
-                            <p>Your fridge is empty！Add some food to get started!</p>
-                            <button onClick={() => setShowFridgeEmptyMessage(false)}>Got it</button>
-                        </div>
-                    </div>
-                )}
+          <motion.div
+            className="summary-card expiring-card"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h2>Expiring Soon</h2>
+            <p className="summary-number">{expiringSoon}</p>
+            <Link to="/analytics" className="summary-button">
+              View Analytics
+            </Link>
+          </motion.div>
+        </div>
+      </motion.div>
 
-                <h2>Your Fridge Activities:</h2>
-
-                <div className="summary-cards">
-                    <motion.div
-                        className="summary-card"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        <h2>Total Items</h2>
-                        <p className="summary-number">{totalItems}</p>
-                        <Link to="/inventory" className="summary-button">View Inventory</Link>
-                    </motion.div>
-
-                    <motion.div
-                        className="summary-card expiring-card"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        <h2>Expiring Soon</h2>
-                        <p className="summary-number">{expiringSoon}</p>
-                        <Link to="/analytics" className="summary-button">View Analytics</Link>
-                    </motion.div>
-                </div>
-            </motion.div>
-
-            <motion.div
-                className="recipe-recommendations"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-            >
-                <h2>Recipe Recommendations: </h2>
-                <div className="recipe-grid">
-                    {recipes.length > 0 ? (
-                        recipes.map((recipe) => (
-                            <motion.div
-                                key={recipe._id}
-                                className="recipe-item"
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <img src={recipe.imageUrl || "https://picsum.photos/200"} alt={recipe.name} className="recipe-thumbnail" />
-                                <p className="recipe-name">{recipe.name}</p>
-                                <p className="recipe-time">Cook time: {recipe.time}</p>
-                                <Link to={`/recipe/${recipe._id}`} className="recipe-time">
-                                    View Full Recipe
-                                </Link>
-                            </motion.div>
-                        ))
-                    ) : (
-                        <p>No recipe recommendations found.</p>
-                    )}
-                </div>
-            </motion.div>
-        </motion.div>
-    );
+      {/* recipe recommendations */}
+      <motion.div
+        className="recipe-recommendations"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
+      >
+        <h2>Recipe Recommendations:</h2>
+        <div className="recipe-grid">
+          {recipes.length ? (
+            recipes.map((r) => (
+              <motion.div
+                key={r._id}
+                className="recipe-item"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img
+                  src={r.imageUrl || "https://picsum.photos/200"}
+                  alt={r.name}
+                  className="recipe-thumbnail"
+                />
+                <p className="recipe-name">{r.name}</p>
+                <p className="recipe-time">Cook time: {r.time}</p>
+                <Link to={`/recipe/${r._id}`} className="recipe-time">
+                  View Full Recipe
+                </Link>
+              </motion.div>
+            ))
+          ) : (
+            <p>No recipe recommendations found.</p>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
 };
 
 export default Home;
