@@ -32,6 +32,9 @@
     border-radius: 15px;
 }
 
+.account-change button:hover{
+    background: var(--primary-dark);
+}
 
 .profile-image img{
     width: 200px;
