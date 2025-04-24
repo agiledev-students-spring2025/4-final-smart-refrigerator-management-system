@@ -1,5 +1,5 @@
 import React , { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, useLocation, Link, useNavigate} from 'react-router-dom';
 import { InventoryProvider } from './contexts/InventoryContext';
 import InventoryManagement from './components/InventoryManagement';
 import ItemDetails from './components/ItemDetails';
@@ -25,6 +25,7 @@ import AiRecipes from './components/AiRecipes';
 import Saved from './components/Saved';
 import FullRecipe from './components/FullRecipe';
 import './App.css';
+import {FaArrowLeft} from "react-icons/fa";
 
 
 function App() {
@@ -45,39 +46,47 @@ function AppContent({ setUser }) {
 
   // Define pages where the navbar should be hidden
   const hideNavbarRoutes = ["/", "/login", "/signup"];
+  const navigate = useNavigate();
+  const excludedPaths = ["/", "/home", "/analytics", "/inventory",
+    "/recipe-suggestions", "/keto", "/vegan", "/vegetarian"];
 
   return (
-    <div className="app-container">
-      {/* Show Navbar only if the current path is NOT in hideNavbarRoutes */}
-      {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
+      <div className="app-container">
+        {!excludedPaths.includes(location.pathname) && (
+            <div className="back-button" onClick={() => navigate(-1)}>
+              <FaArrowLeft /> Back
+            </div>
+        )}
+        {/* Show Navbar only if the current path is NOT in hideNavbarRoutes */}
+        {!hideNavbarRoutes.includes(location.pathname) && <Navbar/>}
 
 
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/inventory" element={<InventoryManagement />} />
-        <Route path="/inventory/:id" element={<ItemDetails />} />
-        <Route path="/scan" element={<ScanItems />} />
-        <Route path="/settings" element={<SettingProfile />} />
-        <Route path="/Account-Setting" element={<AccountSetting />} />
-        <Route path="/Fridge-Model" element={<FridgeSetup />} />
-        <Route path="/DietaryPrefernece" element={<DietaryPreference />}/>
-        <Route path="Help-Support" element={<HelpSupport />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/analytics" element={<Analytics />} />
-        <Route path="/waste-pattern" element={<WastePattern />} />
-        <Route path="/shopping-recommendation" element={<ShoppingRecommendation />} />
-        <Route path="/recipe-suggestions" element={<RecipeSuggestions />}></Route>
-        <Route path="/keto" element={<Keto />}></Route>
-        <Route path="/vegan" element={<Vegan />}></Route>
-        <Route path="/vegetarian" element={<Vegetarian />}></Route>
-        <Route path="/AiRecipes" element={<AiRecipes />}></Route>
-        <Route path="/Saved" element={<Saved />}></Route>
-        <Route path="/recipe/:id" element={<FullRecipe />} />
+        <Routes>
+          <Route path="/" element={<Welcome/>}/>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/inventory" element={<InventoryManagement/>}/>
+          <Route path="/inventory/:id" element={<ItemDetails/>}/>
+          <Route path="/scan" element={<ScanItems/>}/>
+          <Route path="/settings" element={<SettingProfile/>}/>
+          <Route path="/Account-Setting" element={<AccountSetting/>}/>
+          <Route path="/Fridge-Model" element={<FridgeSetup/>}/>
+          <Route path="/DietaryPrefernece" element={<DietaryPreference/>}/>
+          <Route path="Help-Support" element={<HelpSupport/>}/>
+          <Route path="/login" element={<Login setUser={setUser}/>}/>
+          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/analytics" element={<Analytics/>}/>
+          <Route path="/waste-pattern" element={<WastePattern/>}/>
+          <Route path="/shopping-recommendation" element={<ShoppingRecommendation/>}/>
+          <Route path="/recipe-suggestions" element={<RecipeSuggestions/>}></Route>
+          <Route path="/keto" element={<Keto/>}></Route>
+          <Route path="/vegan" element={<Vegan/>}></Route>
+          <Route path="/vegetarian" element={<Vegetarian/>}></Route>
+          <Route path="/AiRecipes" element={<AiRecipes/>}></Route>
+          <Route path="/Saved" element={<Saved/>}></Route>
+          <Route path="/recipe/:id" element={<FullRecipe/>}/>
 
-      </Routes>
-    </div>
+        </Routes>
+      </div>
   );
 }
 

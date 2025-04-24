@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap:100px;
+    gap:10px;
 }
 
 .search-bar{

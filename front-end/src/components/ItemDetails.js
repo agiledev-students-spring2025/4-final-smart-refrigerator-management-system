@@ -73,7 +73,9 @@ const ItemDetails = () => {
       <div className="item-not-found">
         <h2>Item not found</h2>
         <p>The item you're looking for may have been deleted.</p>
-        <Link to="/inventory" className="back-link">Back to Inventory</Link>
+        <Link className="back-button" onClick={() => navigate(-1)}>
+          &larr; Back
+        </Link>
       </div>
     );
   }
@@ -81,12 +83,9 @@ const ItemDetails = () => {
   return (
     <div className="item-details-container">
       <div className="item-details-header">
-        <Link to="/inventory" className="back-button">
-          &larr; Back
-        </Link>
         <h1>{isEditing ? 'Edit Item' : 'Item Details'}</h1>
       </div>
-      
+
       <div className="item-details-content">
         <div className="item-image-container">
           <img 

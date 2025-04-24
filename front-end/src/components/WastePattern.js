@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./Analytics.css";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
@@ -24,14 +24,20 @@ const WastePattern = () => {
 
         const fetchWaste = async () => {
             try {
-                const res = await fetch(`${API_BASE_URL}/waste?startDate=${startDate}&endDate=${endDate}`);
+                // const res = await fetch(`${API_BASE_URL}/waste?startDate=${startDate}&endDate=${endDate}`);
+                const token = localStorage.getItem("token");
+                const res = await fetch(`${API_BASE_URL}/waste?startDate=${startDate}&endDate=${endDate}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 const data = await res.json();
                 setTotalExpired(data.totalExpired);
                 setCategoryItemMap(data.breakdown || {});
 
                 const res2 = await fetch(`${API_BASE_URL}/analytics`);
                 const a = await res2.json();
-                setTotalTracked(a.totalItems);
+                setTotalTracked(data.totalTracked);
             } catch (err) {
                 console.warn("Backend not available – showing empty waste data.");
                 setTotalExpired(0);
@@ -56,7 +62,7 @@ const WastePattern = () => {
 
     return (
         <div className="container">
-            <h2>Waste Pattern</h2>
+            <h1 style={{textAlign:"left"}}>Waste Pattern</h1>
             <div className="date-selector">
                 <label>Start Date: <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} /></label>
                 <label>End Date: <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} /></label>
@@ -66,7 +72,7 @@ const WastePattern = () => {
                 <p><strong>Food Wasted:</strong> {totalTracked ? `${((totalExpired / totalTracked) * 100).toFixed(1)}%` : "0%"}</p>
                 <p><strong>Estimated Cost Lost:</strong> ${totalExpired * 5}</p>
             </div>
-            <h3>Waste Breakdown by Category:</h3>
+            <h2 style={{textAlign:"center"}}>Waste Breakdown by Category:</h2>
             {totalExpired > 0 ? (
                 <Pie
                     data={wasteChartData}

@@ -5,6 +5,7 @@ import Dropdown from './Dropdown';
 import Recipe from './Recipe';
 import './RecipeSuggestions.css'; 
 import API_BASE_URL from '../api';
+import {FaArrowLeft} from "react-icons/fa";
 
 function RecipeSuggestions() {
   const navigate = useNavigate();
@@ -42,32 +43,35 @@ function RecipeSuggestions() {
   });
 
   return (
-    <div className="recipe-suggestions-container">
-      <h1>Recipe Suggestions</h1>
-
-      <Searchbar onSearch={handleSearch} /> 
-      <Dropdown onSelect={handleDropdownSelect} /> 
-
-
-      <div className="Suggested-Recipes">
-        <h3>Vegan Recipes</h3>
-        {veganRecipes.length > 0 ? (
-          <div className="recipe-grid">
-            {veganRecipes.map(recipe => (
-              <Recipe 
-                key={recipe._id}
-                _id={recipe._id}
-                name={recipe.name}
-                time={recipe.time}
-                imageUrl={recipe.imageUrl} 
-              />
-            ))}
+      <div className="recipe-suggestions-container">
+          <div className="back-button" onClick={() => navigate("/home")}>
+              <FaArrowLeft/> Back
           </div>
-        ) : (
-          <p>No Vegan recipes found.</p>
-        )}
+          <h1>Recipe Suggestions</h1>
+
+          <Searchbar onSearch={handleSearch}/>
+          <Dropdown onSelect={handleDropdownSelect}/>
+
+
+          <div className="Suggested-Recipes">
+              <h3>Vegan Recipes</h3>
+              {veganRecipes.length > 0 ? (
+                  <div className="recipe-grid">
+                      {veganRecipes.map(recipe => (
+                          <Recipe
+                              key={recipe._id}
+                              _id={recipe._id}
+                              name={recipe.name}
+                              time={recipe.time}
+                              imageUrl={recipe.imageUrl}
+                          />
+                      ))}
+                  </div>
+              ) : (
+                  <p>No Vegan recipes found.</p>
+              )}
+          </div>
       </div>
-    </div>
   );
 }
 

@@ -6,6 +6,7 @@ import Dropdown from './Dropdown';
 import Recipe from './Recipe';  // Ensure Recipe component is correctly imported
 import './RecipeSuggestions.css'; 
 import API_BASE_URL from '../api';
+import {FaArrowLeft} from "react-icons/fa";
 
 function RecipeSuggestions() {
   const navigate = useNavigate();
@@ -99,58 +100,61 @@ function RecipeSuggestions() {
   const limitedFavoriteRecipes = filteredFavoriteRecipesOnly.slice(0, 4);
 
   return (
-    <div className="recipe-suggestions-container">
-      <h1>Recipe Suggestions</h1>
+      <div className="recipe-suggestions-container">
+        <div className="back-button" onClick={() => navigate("/home")}>
+          <FaArrowLeft/> Back
+        </div>
+        <h1>Recipe Suggestions</h1>
 
-      <Searchbar onSearch={handleSearch} /> 
-      <Dropdown onSelect={handleDropdownSelect} /> 
+        <Searchbar onSearch={handleSearch}/>
+        <Dropdown onSelect={handleDropdownSelect}/>
 
-      <div className="Suggested-Recipes">
-        <h3>AI Suggested Recipes Based on Ingredients: </h3>
-        {limitedSuggestedRecipes.length > 0 ? (
-          <div className="recipe-grid">
-            {limitedSuggestedRecipes.map(recipe => (
-              <Recipe 
-                key={recipe._id}
-                _id={recipe._id}
-                name={recipe.name}
-                time={recipe.time}
-                imageUrl={recipe.imageUrl} 
-              />
-            ))}
+        <div className="Suggested-Recipes">
+          <h3>AI Suggested Recipes Based on Ingredients: </h3>
+          {limitedSuggestedRecipes.length > 0 ? (
+              <div className="recipe-grid">
+                {limitedSuggestedRecipes.map(recipe => (
+                    <Recipe
+                        key={recipe._id}
+                        _id={recipe._id}
+                        name={recipe.name}
+                        time={recipe.time}
+                        imageUrl={recipe.imageUrl}
+                    />
+                ))}
+              </div>
+          ) : (
+              <p>No suggested recipes found.</p>
+          )}
+
+          <div className="more-link-container">
+            <Link to="/AiRecipes" className="more-link">More...</Link>
           </div>
-        ) : (
-          <p>No suggested recipes found.</p>
-        )}
+        </div>
 
-        <div className="more-link-container">
-          <Link to="/AiRecipes" className="more-link">More...</Link>
+        <div className="Suggested-Recipes">
+          <h3>Saved in My Favorite Recipes: </h3>
+          {limitedFavoriteRecipes.length > 0 ? (
+              <div className="recipe-grid">
+                {limitedFavoriteRecipes.map(recipe => (
+                    <Recipe
+                        key={recipe._id}
+                        _id={recipe._id}
+                        name={recipe.name}
+                        time={recipe.time}
+                        imageUrl={recipe.imageUrl}
+                    />
+                ))}
+              </div>
+          ) : (
+              <p>No favorite recipes found.</p>
+          )}
+
+          <div className="more-link-container">
+            <Link to="/Saved" className="more-link">More...</Link>
+          </div>
         </div>
       </div>
-
-      <div className="Suggested-Recipes">
-        <h3>Saved in My Favorite Recipes: </h3>
-        {limitedFavoriteRecipes.length > 0 ? (
-          <div className="recipe-grid">
-            {limitedFavoriteRecipes.map(recipe => (
-              <Recipe 
-                key={recipe._id}
-                _id={recipe._id}
-                name={recipe.name}
-                time={recipe.time}
-                imageUrl={recipe.imageUrl} 
-              />
-            ))}
-          </div>
-        ) : (
-          <p>No favorite recipes found.</p>
-        )}
-
-        <div className="more-link-container">
-          <Link to="/Saved" className="more-link">More...</Link>
-        </div>
-      </div>
-    </div>
   );
 }
 

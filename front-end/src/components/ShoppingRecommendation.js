@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./Analytics.css";
 import API_BASE_URL from "../api";
 
@@ -12,7 +12,12 @@ const ShoppingRecommendation = () => {
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
-                const res = await fetch(`${API_BASE_URL}/recommendations?daysAhead=${daysAhead}`);
+                const token = localStorage.getItem("token");
+                const res = await fetch(`${API_BASE_URL}/recommendations?daysAhead=${daysAhead}`,{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
                 const data = await res.json();
                 setMustBuyItems(data.mustBuy || []);
                 setReplenishSuggestions(data.replenish || []);
@@ -28,7 +33,7 @@ const ShoppingRecommendation = () => {
 
     return (
         <div className="container">
-            <h2>Shopping Recommendation</h2>
+            <h1 style={{textAlign:"left"}}>Shopping Recommendation</h1>
             <div className="days-selector">
                 <label>For next
                     <select value={daysAhead} onChange={(e) => setDaysAhead(Number(e.target.value))}>
@@ -39,11 +44,11 @@ const ShoppingRecommendation = () => {
                 </label>
             </div>
 
-            <h3>Must-Buy Items:</h3>
+            <h3 style={{textAlign: "left", margin: 0}}>Must Buy Items:</h3>
             <ul>
                 {mustBuyItems.length === 0 ? (
-                    <p className="center-text">No items expiring soon.</p>
-                ) : (
+                    <p style={{ textAlign: "left", margin: 0}}>No items expiring soon</p>
+                    ) : (
                     mustBuyItems.map((item, idx) => (
                         <li key={idx}>
                             {item.name} (Expires in {item.daysUntilExpiration} days)
@@ -52,10 +57,10 @@ const ShoppingRecommendation = () => {
                 )}
             </ul>
 
-            <h3>Replenishment Suggestions:</h3>
+            <h3 style={{textAlign: "left", margin: 0}}>Replenishment Suggestions:</h3>
             <ul>
                 {replenishSuggestions.length === 0 ? (
-                    <p className="center-text">No Suggestions</p>
+                    <p style={{textAlign: "left", margin: 0}}>No suggestions</p>
                 ) : (
                     replenishSuggestions.map((item, idx) => (
                         <li key={idx}>

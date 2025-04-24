@@ -79,9 +79,9 @@ function Signup({ setUser }) {
             exit={{ opacity: 0, scale: 0.9 }} 
             transition={{ duration: 0.3, ease: "easeOut" }}
         >
-            <div className="back-button" onClick={() => navigate("/")}>
-                <FaArrowLeft /> Back
-            </div>
+            {/*<div className="back-button" onClick={() => navigate("/")}>*/}
+            {/*    <FaArrowLeft /> Back*/}
+            {/*</div>*/}
 
             <motion.h1 
                 initial={{ opacity: 0, y: -10 }}
