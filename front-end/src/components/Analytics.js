@@ -21,7 +21,8 @@ const Analytics = () => {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
-                });                const data = await res.json();
+                });
+                const data = await res.json();
                 setTotalItems(data.totalItems);
                 setExpiringSoonCount(data.expiringSoon);
                 setExpiredCount(data.expired);

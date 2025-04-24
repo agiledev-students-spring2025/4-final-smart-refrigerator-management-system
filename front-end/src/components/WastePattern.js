@@ -24,14 +24,21 @@ const WastePattern = () => {
 
         const fetchWaste = async () => {
             try {
-                const res = await fetch(`${API_BASE_URL}/waste?startDate=${startDate}&endDate=${endDate}`);
+                // const res = await fetch(`${API_BASE_URL}/waste?startDate=${startDate}&endDate=${endDate}`);
+                const token = localStorage.getItem("token");
+
+                const res = await fetch(`${API_BASE_URL}/waste?startDate=${startDate}&endDate=${endDate}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 const data = await res.json();
                 setTotalExpired(data.totalExpired);
                 setCategoryItemMap(data.breakdown || {});
 
                 const res2 = await fetch(`${API_BASE_URL}/analytics`);
                 const a = await res2.json();
-                setTotalTracked(a.totalItems);
+                setTotalTracked(data.totalTracked);
             } catch (err) {
                 console.warn("Backend not available – showing empty waste data.");
                 setTotalExpired(0);
