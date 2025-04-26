@@ -90,7 +90,7 @@ cd 4-final-smart-refrigerator-management-system
 
 ---
 
-### 🖥 Front-End Setup (React)
+### Front-End Setup (React)
 
 2. Navigate into the front-end folder
 ```bash
@@ -110,7 +110,7 @@ npm start
 The app will open at: http://localhost:3000
 
 ---
-### 🖥 Back-End Setup (Express.js)
+### Back-End Setup (Express.js)
 
 1. Open a new terminal tab or window
 
@@ -186,6 +186,14 @@ The application uses MongoDB with the following main collections:
 - Check your Node or npm versions—older versions can cause unexpected issues.
 
 ---
+## Deployment
+
+The application is deployed using Continuous Deployment with GitHub Actions.
+
+API URL: https://smart-fridge-management-system-n7sfo.ondigitalocean.app/
+
+Any changes pushed to the main branch are automatically deployed to our Digital Ocean droplet.
+
 ### Contributing
 If you would like to contribute:
 
