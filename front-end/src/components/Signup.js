@@ -40,7 +40,7 @@ function Signup({ setUser }) {
         try {
             // Clear any existing token first
             localStorage.removeItem("token");
-            
+
             const res = await axios.post(`${API_BASE_URL}/signup`, {
                 name,
                 email,
@@ -48,6 +48,8 @@ function Signup({ setUser }) {
             });
             
             localStorage.setItem("token", res.data.token);
+            // 🔥 manually dispatch tokenChanged event
+            window.dispatchEvent(new Event("tokenChanged"));
             
             const profileRes = await axios.get(`${API_BASE_URL}/profile`, {
                 headers: {

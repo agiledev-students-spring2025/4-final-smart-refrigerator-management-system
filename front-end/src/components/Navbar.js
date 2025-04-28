@@ -14,8 +14,11 @@ function Navbar() {
         if (token) {
             try {
                 const decoded = jwtDecode(token);
-                const email = decoded?.email;
-                setIsGuest(email === "guest@email.com");
+                const userId = decoded?.userId;
+
+                // ✅ Check if userId is the special "guest" id
+                setIsGuest(userId === "68098b2487a36912cb72e970");
+    
             } catch (err) {
                 console.error("Error decoding token:", err);
                 setIsGuest(true); // if error decoding, assume guest
