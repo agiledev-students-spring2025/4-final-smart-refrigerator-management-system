@@ -47,19 +47,19 @@ function AppContent({ setUser }) {
   // Define pages where the navbar should be hidden
   const hideNavbarRoutes = ["/", "/login", "/signup"];
   const navigate = useNavigate();
-  const excludedPaths = ["/", "/home", "/analytics", "/inventory",
+  const excludedPaths = ["/", "/login", "/signup", "/home", "/settings", "/analytics", "/inventory",
     "/recipe-suggestions", "/keto", "/vegan", "/vegetarian"];
 
   return (
       <div className="app-container">
+        {/* Show Navbar only if the current path is NOT in hideNavbarRoutes */}
+        {!hideNavbarRoutes.includes(location.pathname) && <Navbar/>}
+
         {!excludedPaths.includes(location.pathname) && (
             <div className="back-button" onClick={() => navigate(-1)}>
               <FaArrowLeft /> Back
             </div>
         )}
-        {/* Show Navbar only if the current path is NOT in hideNavbarRoutes */}
-        {!hideNavbarRoutes.includes(location.pathname) && <Navbar/>}
-
 
         <Routes>
           <Route path="/" element={<Welcome/>}/>

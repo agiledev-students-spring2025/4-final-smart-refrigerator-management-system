@@ -76,9 +76,9 @@ function Login({ setUser }) {
             transition={{ duration: 0.3, ease: "easeOut" }}
         >
             {/* Title Animation */}
-            {/*<div className="back-button" onClick={() => navigate("/")}>*/}
-            {/*    <FaArrowLeft /> Back*/}
-            {/*</div>*/}
+            <div className="back-button" onClick={() => navigate("/")}>
+                <FaArrowLeft /> Back
+            </div>
 
             <motion.h1 
                 initial={{ opacity: 0, y: -10 }}

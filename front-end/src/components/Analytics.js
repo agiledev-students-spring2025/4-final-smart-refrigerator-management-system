@@ -150,9 +150,6 @@ const Analytics = () => {
 
             {/* Navigation Links */}
             <div className="analytics-links">
-                <div className="back-button" onClick={() => navigate("/home")}>
-                    <FaArrowLeft/> Back
-                </div>
                 <Link to="/waste-pattern" className="analytics-btn">View Waste Pattern</Link>
                 <Link to="/shopping-recommendation" className="analytics-btn">View Shopping Recommendations</Link>
             </div>

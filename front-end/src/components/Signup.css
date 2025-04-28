@@ -1,4 +1,5 @@
 .signup-container {
+    position: relative;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -101,25 +102,30 @@
     color: #6d6c6c;
 }
 
-.back-button {
+.signup-container .back-button {
     position: absolute;
-    top: 20px;
+    top: -60px;
     left: 20px;
     font-size: 18px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
     color: #4d7745;
     transition: transform 0.2s ease;
+    display: flex; /* make it flexbox */
+    align-items: center; /* vertically center the icon and text */
 }
 
-.back-button:hover {
+.signup-container .back-button:hover {
     transform: scale(1.05);
     color: #555;
 }
 
-.back-button svg {
+.signup-container .back-button svg {
     margin-right: 6px;
 }
 
-
+.error-message {
+    color: #ff4d4d;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    text-align: center;
+}

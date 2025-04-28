@@ -36,10 +36,6 @@ const InventoryManagement = () => {
 
   return (
       <>
-        <div className="back-button" onClick={() => navigate("/home")}>
-          <FaArrowLeft/> Back
-        </div>
-
         <div className="inventory-container">
           <h1>My Refrigerator</h1>
 
