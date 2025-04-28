@@ -35,8 +35,8 @@ router.get("/", verifyToken, async (req, res) => {
             return expiryA - expiryB || parseInt(a.quantity) - parseInt(b.quantity);
         });
 
-        const mostUsed = sorted.slice(0, 4);
-        const leastUsed = sorted.slice(-4);
+        const mostUsed = sorted.slice(0, 4); //closest to expiring
+        const leastUsed = sorted.slice(-4); //farthest from expiration
 
         res.json({ totalItems, expiringSoon, expired, byCategory, mostUsed, leastUsed });
 

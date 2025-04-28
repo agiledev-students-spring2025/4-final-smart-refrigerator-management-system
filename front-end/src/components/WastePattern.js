@@ -70,7 +70,6 @@ const WastePattern = () => {
             <div className="summary-box">
                 <p><strong>Total Items Tracked:</strong> {totalTracked}</p>
                 <p><strong>Food Wasted:</strong> {totalTracked ? `${((totalExpired / totalTracked) * 100).toFixed(1)}%` : "0%"}</p>
-                <p><strong>Estimated Cost Lost:</strong> ${totalExpired * 5}</p>
             </div>
             <h2 style={{textAlign:"center"}}>Waste Breakdown by Category:</h2>
             {totalExpired > 0 ? (

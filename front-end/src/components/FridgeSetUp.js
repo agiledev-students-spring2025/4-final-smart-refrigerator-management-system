@@ -39,7 +39,6 @@ function FridgeSetup() {
             .catch(err => console.error("Error loading fridge settings:", err));
     }, []);
     
-    // Handle form submission
     const handleSave = () => {
         const token = localStorage.getItem("token");
 
@@ -55,8 +54,9 @@ function FridgeSetup() {
             }
         };
         
-        axios.post(`${API_BASE_URL}/Fridge-Model`, fridgeData, {
-            headers: {
+        axios.post(`${API_BASE_URL}/Fridge-Model`,
+            { value: fridgeData },
+            {headers: {
                 Authorization: `Bearer ${token}`,
               },
         })
@@ -111,7 +111,7 @@ function FridgeSetup() {
                     value={selectedModel}
                     onChange={(event) => setModel(event.target.value)}
                     description="select your model"
-                    options={["S29","HR22","Pro Max"]}
+                    options={["20-30 cu ft 3 door","20-30 cu ft 4 door",">30 cu ft 3 door",">30 cu ft 4 door"]}
                 />
             </div>
         </div>

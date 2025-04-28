@@ -104,15 +104,22 @@ const Analytics = () => {
                                 }
                             }
                         }}
-                    />                ) : (
-                    <p style={{ textAlign: "center"}}>No items</p>
+                    />
+                ) : (
+                    <p style={{ textAlign: "center" }}>
+                Fridge is Empty, get started now!{" "}
+                <Link to="/scan" style={{ textDecoration: "underline", color: "#314c2c" }}>
+                    Add Items
+                </Link>
+            </p>
                 )}
             </section>
 
-            {/* Most Used Items */}
+            {/* First to Expire Items */}
             <section>
-                <h3 style={{textAlign:"center", margin: 0}}>Most Used Items:</h3>
-                <div className="item-grid">
+                <h3 style={{textAlign:"center", margin: 0}}>Items Expiring Soon:</h3>
+                {mostUsed.length > 0 ? (
+                    <div className="item-grid">
                     {mostUsed.map((item) => (
                         <Link to={`/inventory/${item._id}`} key={item._id} className="item-card-link">
                             <div className="item-card" key={item._id}>
@@ -127,25 +134,34 @@ const Analytics = () => {
                         </Link>
                     ))}
                 </div>
+                ) : (
+                    <p style={{ textAlign: "center"}}>No items</p>
+                )}
             </section>
 
-            {/* Least Used Items */}
+            {/* Last to Expire Items */}
             <section>
-                <h3 style={{textAlign:"center", margin: 0}}>Least Used Items:</h3>
-                <div className="item-grid">
-                    {leastUsed.map((item) => (
-                        <Link to={`/inventory/${item._id}`} key={item._id} className="item-card-link">
-                            <div className="item-card" key={item._id}>
-                                <div className="item-thumbnail">
-                                    <img src={item.imageUrl || "https://picsum.photos/100"} alt={item.name}/>
+                <h3 style={{textAlign: "center", margin: 0}}>Items Expiring Last:</h3>
+                {leastUsed.length > 0 ? (
+                    <div className="item-grid">
+                        {leastUsed.map((item) => (
+                            <Link to={`/inventory/${item._id}`} key={item._id} className="item-card-link">
+                                <div className="item-card" key={item._id}>
+                                    <div className="item-thumbnail">
+                                        <img src={item.imageUrl || "https://picsum.photos/100"} alt={item.name}/>
+                                    </div>
+                                    <p><strong>{item.name}</strong></p>
+                                    <p>Expires
+                                        in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
+                                    <p>Qty: {item.quantity}</p>
                                 </div>
-                                <p><strong>{item.name}</strong></p>
-                                <p>Expires in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
-                                <p>Qty: {item.quantity}</p>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
+                            </Link>
+                        ))}
+                    </div>
+                ) : (
+                    <p style={{ textAlign: "center"}}>No items</p>
+                )}
+
             </section>
 
             {/* Navigation Links */}

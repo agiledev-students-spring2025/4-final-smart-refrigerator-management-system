@@ -27,6 +27,12 @@ const validateField = (field) => {
           body('value.nutritionGoals').notEmpty().withMessage('Nutrition goal is required'),
           body('value.allergies').isArray().withMessage('Allergies must be an array'),
         ];
+    case 'notifications':
+      return [
+        body('value.email').isBoolean().withMessage('Email notification must be true or false'),
+        body('value.app').isBoolean().withMessage('App notification must be true or false'),
+        body('value.sms').isBoolean().withMessage('SMS notification must be true or false')
+      ];
     default:
       return [];
   }
@@ -53,15 +59,13 @@ router.post("/Account-Setting/:field",
         value = await bcrypt.hash(value, 10);
       }
 
-      const update = field === "dietary"
-        ? { dietary: value }
-        : { [field]: value };
+      const update = { [field]: value };
 
       const updatedUser = await User.findByIdAndUpdate(
         req.user.userId, 
         update,                       
         { new: true, runValidators: true }         
-      ).select("name email phone");
+      ).select("name email phone dietary notifications");
 
       if (!updatedUser) {
         return res.status(404).json({ error: "User not found" });

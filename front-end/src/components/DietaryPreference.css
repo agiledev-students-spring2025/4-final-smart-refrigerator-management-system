@@ -1,0 +1,40 @@
+.field-description {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0.25rem;
+}
+
+.option-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* space between buttons */
+    margin-top: 1rem;
+}
+
+.option-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.option-button:hover {
+    background-color: #f0f0f0;
+}
+
+.option-button.selected {
+    background: linear-gradient(to right, #f9efe1, #e2f4d4);
+    color: #314c2c;;
+    border: 1px solid #314c2c;
+}
+
+.selected-values {
+    margin-top: 1rem;
+    font-size: 0.95em;
+    color: #333;
+}
