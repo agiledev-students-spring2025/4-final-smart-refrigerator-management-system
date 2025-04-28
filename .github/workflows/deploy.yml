@@ -23,19 +23,18 @@ jobs:
           
       - name: Install front-end dependencies
         working-directory: ./front-end
-        run: npm install
-
-      - name: Create .env for front-end
-        working-directory: ./front-end
-        run: echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" > .env
-
+        run: npm ci
+      
       - name: Build front-end
         working-directory: ./front-end
-        run: npm run build
+        run: |
+          npm run build
+          # Create .env file from secrets for front-end if needed
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" > .env
       
       - name: Install back-end dependencies
         working-directory: ./back-end
-        run: npm install
+        run: npm ci
       
       - name: Run tests
         working-directory: ./back-end
@@ -83,7 +82,7 @@ jobs:
           
           # Set up and restart backend service on Digital Ocean
           ssh root@${{ secrets.DO_HOST }} << 'ENDSSH'
-          cd /var/www/smart-fridge/back-end
+          cd $APP_DIR/back-end
           npm ci --production
           
           # Create PM2 ecosystem file if it doesn't exist
