@@ -5,12 +5,12 @@ on:
     branches:
       - master
       - main
-      - "**"    # All branches
+      - "**"
   pull_request:
     branches:
       - master
       - main
-      - "**"    # All PRs
+      - "**"
 
 jobs:
   build-and-test:
@@ -25,18 +25,30 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      # Install backend dependencies
+      - name: Install Backend Dependencies
+        working-directory: back-end
         run: npm install
 
-      - name: Build project (ignore React warnings)
-        run: CI=false npm run build
-
-      - name: Run tests
+      # Run backend tests
+      - name: Run Backend Tests
+        working-directory: back-end
         run: npm test || echo "Tests failed, but continuing"
 
-      - name: Upload build artifacts (optional)
+      # Install frontend dependencies
+      - name: Install Frontend Dependencies
+        working-directory: front-end
+        run: npm install
+
+      # Build frontend (React app)
+      - name: Build Frontend
+        working-directory: front-end
+        run: CI=false npm run build
+
+      # Upload frontend build artifacts (optional)
+      - name: Upload Frontend Build Artifacts
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: build
-          path: build
+          name: frontend-build
+          path: front-end/build
