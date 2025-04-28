@@ -1,5 +1,5 @@
 # Smart Refrigerator Management System (SRMS)
-![CI Build](https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system/actions/workflows/ci.yml/badge.svg)
+
 ## Product Vision Statement
 
 **Sprint 0:**
