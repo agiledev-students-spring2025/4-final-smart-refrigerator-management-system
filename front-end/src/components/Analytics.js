@@ -115,9 +115,9 @@ const Analytics = () => {
                 )}
             </section>
 
-            {/* Most Used Items */}
+            {/* First to Expire Items */}
             <section>
-                <h3 style={{textAlign:"center", margin: 0}}>Most Used Items:</h3>
+                <h3 style={{textAlign:"center", margin: 0}}>Items Expiring Soon:</h3>
                 {mostUsed.length > 0 ? (
                     <div className="item-grid">
                     {mostUsed.map((item) => (
@@ -139,9 +139,9 @@ const Analytics = () => {
                 )}
             </section>
 
-            {/* Least Used Items */}
+            {/* Last to Expire Items */}
             <section>
-                <h3 style={{textAlign: "center", margin: 0}}>Least Used Items:</h3>
+                <h3 style={{textAlign: "center", margin: 0}}>Items Expiring Last:</h3>
                 {leastUsed.length > 0 ? (
                     <div className="item-grid">
                         {leastUsed.map((item) => (
