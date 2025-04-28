@@ -1,23 +1,37 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";  // ✅ correct
 import "./Navbar.css";
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
+    const [isGuest, setIsGuest] = useState(false); 
     const navigate = useNavigate();
   
-    // always check current localStorage value
-    const email   = localStorage.getItem("userEmail");
-    const isGuest = !email || email === "guest@email.com";
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            try {
+                const decoded = jwtDecode(token);
+                const email = decoded?.email;
+                setIsGuest(email === "guest@email.com");
+            } catch (err) {
+                console.error("Error decoding token:", err);
+                setIsGuest(true); // if error decoding, assume guest
+            }
+        } else {
+            setIsGuest(true); // no token, treat as guest
+        }
+    }, []); // ✅ only check once when Navbar mounts
 
     const toggleMenu = () => setIsOpen(prev => !prev);
 
-    const handleProfileClick = e => {
-      if (isGuest) {
-        e.preventDefault();
-        setShowOverlay(true);
-      }
+    const handleProfileClick = (e) => {
+        if (isGuest) {
+            e.preventDefault();
+            setShowOverlay(true);
+        }
     };
 
     const closeOverlay = () => {
