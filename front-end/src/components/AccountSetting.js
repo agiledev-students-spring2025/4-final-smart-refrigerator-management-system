@@ -7,6 +7,16 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { motion } from "framer-motion";
 import API_BASE_URL from "../api";
 
+const validateEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+};
+
+const validatePhone = (phone) => {
+  const regex = /^\d{3}-\d{3}-\d{4}$/;
+  return regex.test(phone);
+};
+
 function AccountInfo ({field, isEditing, info, changeText, onSave}){
     const [newValue, setNewValue] = useState(info);
     const [password, setPassword] = useState("");
@@ -81,6 +91,10 @@ export default function AccountSetting () {
         if (newName === null) {
           setAccount({ ...account, isEditingName: true });
         } else {
+          if(newName.trim() === ''){
+            alert("can't have blank name change");
+            return;
+          }
           axios.post(
             `${API_BASE_URL}/Account-Setting/name`,
             { value: newName },
@@ -102,6 +116,14 @@ export default function AccountSetting () {
         if (newEmail === null) {
           setAccount({ ...account, isEditingEmail: true });
         } else {
+          if(newEmail.trim() === ''){
+            alert("can't have blank email change");
+            return;
+          }
+          if(!validateEmail(newEmail)){
+            alert("Please enter valid email address");
+            return;
+          }
           axios.post(
             `${API_BASE_URL}/Account-Setting/email`,
             { value: newEmail },
@@ -123,6 +145,14 @@ export default function AccountSetting () {
         if (newPhone === null) {
           setAccount({ ...account, isEditingPhone: true });
         } else {
+          if(newPhone.trim() === ''){
+            alert("can't have blank phone change");
+            return;
+          }
+          if(!validatePhone(newPhone)){
+            alert("Please enter in 000-000-0000 format");
+            return;
+          }
           axios.post(
             `${API_BASE_URL}/Account-Setting/phone`,
             { value: newPhone },
@@ -143,6 +173,10 @@ export default function AccountSetting () {
         if (newPassword === null){
             setAccount({ ...account, isEditingPassword: true });
         } else{
+          if(newPassword.trim() === ''){
+            alert("can't have blank password change");
+            return;
+          }
             axios.post(
                 `${API_BASE_URL}/Account-Setting/password`,
                 { value: newPassword },
@@ -192,10 +226,6 @@ export default function AccountSetting () {
         <div className="account-setting">
             <div className="header">
                 <h1>Profile Information</h1>
-            </div>
-            <div className="account-change">
-                <img src="https://picsum.photos/200"></img>
-                <button>Change profile photo</button>
             </div>
             <AccountInfo
                 isEditing = {account.isEditingName} 

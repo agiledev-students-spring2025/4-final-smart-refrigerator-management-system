@@ -9,6 +9,7 @@ import SettingProfile from './components/SettingProfile';
 import AccountSetting from './components/AccountSetting';
 import FridgeSetup from './components/FridgeSetUp';
 import DietaryPreference from './components/DietaryPreference';
+import Notifications from './components/Notification';
 import HelpSupport from './components/HelpSupport';
 import RecipeSuggestions from './components/RecipeSuggestions';
 import Login from './components/Login';
@@ -71,6 +72,7 @@ function AppContent({ setUser }) {
           <Route path="/Account-Setting" element={<AccountSetting/>}/>
           <Route path="/Fridge-Model" element={<FridgeSetup/>}/>
           <Route path="/DietaryPrefernece" element={<DietaryPreference/>}/>
+          <Route path="/Notifications" element= {<Notifications/>}/>
           <Route path="Help-Support" element={<HelpSupport/>}/>
           <Route path="/login" element={<Login setUser={setUser}/>}/>
           <Route path="/signup" element={<Signup/>}/>

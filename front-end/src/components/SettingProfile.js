@@ -1,7 +1,6 @@
 import "./SettingProfile.css"
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import API_BASE_URL from "../api";
 
 function SettingProfile() {
@@ -55,7 +54,7 @@ function SettingProfile() {
             <div className= "settings-option">
                 <button onClick={() =>navigate('/Account-Setting')}className="option">Account Settings</button>
                 <button onClick={() =>navigate('/Fridge-Model')} className="option">Refrigerator Model Setup</button>
-                <button className="option">Notifications</button>
+                <button onClick={() =>navigate('/Notifications')}className="option">Notifications</button>
                 <button onClick={() =>navigate('/DietaryPrefernece')} className="option">Dietary Preferences</button>
                 <button onClick={() =>navigate('/Help-Support')}className="option">Help & Support</button>
                 <button onClick={handleLogout} className="logout">Logout</button>
