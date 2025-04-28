@@ -20,7 +20,12 @@ const userSchema = new mongoose.Schema({
     dietType: {type:String, default: ""},
     nutritionGoals:{type:String, default: ""},
     allergies:{type:Array}
-  }
+  },
+  notifications: {
+    email: { type: Boolean, default: false },
+    app: { type: Boolean, default: false },
+    sms: { type: Boolean, default: false }
+  }  
 
 });
 

@@ -9,9 +9,8 @@ const User = require('../models/User');
    * @access  Public
    */
   router.post("/Fridge-Model", verifyToken, async (req, res) => {
-    const { fridgeBrand, modelName, Features} = req.body;
     try {
-      
+      const { fridgeBrand, modelName, Features} = req.body.value;
       if (!fridgeBrand || !modelName) {
         return res.status(400).json({ error: "Brand and model are required" });
       }

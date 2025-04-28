@@ -1,21 +1,52 @@
-.help-container{
-
+.form-collector, .header, .faq-list {
+    padding: 10px 20px 10px 20px;
+    margin: 10px 20px 10px 20px;
     display: flex;
-    align-items: center;
     flex-direction: column;
-    gap:10px;
 }
 
-.search-bar{
-    gap:20px;
-    display:flex;
+.header, .button-group {
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
-.search-button{
-    padding:10px;
-    max-height: 40px;
+.faq-list {
+    gap: 10px;
 }
 
-input{
-    padding: 10px;
+.faq-item {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px 20px;
+    background-color: #fff;
+}
+
+.faq-question {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question:hover {
+    color: #007bff;
+}
+
+.faq-icon {
+    font-size: 1.5rem;
+}
+
+.faq-answer {
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: #555;
+    padding-left: 10px;
 }

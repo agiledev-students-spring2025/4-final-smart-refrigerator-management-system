@@ -1,24 +1,59 @@
-import "./HelpSupport.css"
+import { useState } from "react";
+import "./HelpSupport.css";
 
-function HelpSupport () {
+function HelpSupport() {
+    const [expandedQuestion, setExpandedQuestion] = useState(null);
 
-    return(
-    <div className="help-container">
-        <div>
-            <h1>Help & Support</h1>
+    const faqs = [
+        {
+            question: "How do I update my profile?",
+            answer: "Go to your Account Settings and click on 'Edit Profile'."
+        },
+        {
+            question: "How do I reset my password?",
+            answer: "Click on 'Forgot Password' on the login screen and follow the instructions."
+        },
+        {
+            question: "How can I delete my account?",
+            answer: "Please contact support at help@smartfridge.com to request account deletion."
+        },
+        {
+            question: "How do I manage my dietary preferences?",
+            answer: "Go to Settings > Dietary Preferences and customize your selections."
+        }
+    ];
+
+    const toggleQuestion = (index) => {
+        setExpandedQuestion(prev => prev === index ? null : index);
+    };
+
+    return (
+        <div className="form-collector">
+            <div className="header">
+                <h1>Help & Support</h1>
+                <p>Find answers to common questions and get help</p>
+            </div>
+
+            <div className="faq-list">
+                {faqs.map((faq, index) => (
+                    <div key={index} className="faq-item">
+                        <button
+                            className="faq-question"
+                            onClick={() => toggleQuestion(index)}
+                        >
+                            {faq.question}
+                            <span className="faq-icon">{expandedQuestion === index ? "-" : "+"}</span>
+                        </button>
+                        {expandedQuestion === index && (
+                            <div className="faq-answer">
+                                {faq.answer}
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
         </div>
-        <div className ="search-fields">
-            <h2>How can we help?</h2>
-            <p>Search keyword</p>
-            <label className="search-bar">
-                <input name="search"></input>
-                <button className="search-button">search</button>
-            </label>
-            
-            <p>or email us at help@smartfridge.com</p>
-        </div>
-    </div>
-    )
+    );
 }
 
 export default HelpSupport;

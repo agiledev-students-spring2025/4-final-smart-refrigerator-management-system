@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./FridgeSetUp.css"
+import "./DietaryPreference.css"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -74,35 +75,37 @@ function DietaryPreference() {
           });
       };
 
-    const SelectMultipleField = ({label, description, id, name, value, options, onChange }) => {
-        const handleChange = (event) => {
-            const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
-            onChange(selectedOptions);
+    const SelectMultipleField = ({ label, description, id, name, value, options, onChange }) => {
+        const handleClick = (option) => {
+            if (value.includes(option)) {
+                onChange(value.filter((val) => val !== option));
+            } else {
+                onChange([...value, option]);
+            }
         };
-
+    
         return (
             <div className="form-group">
-            <label htmlFor={id}>{label}</label>
-            <select 
-                id={id} 
-                name={name} 
-                multiple={true} 
-                value={value} 
-                onChange={handleChange}
-                size={4} 
-                className="multi-select"
-            >
-                {description && <option disabled>{description}</option>}
-                {options.map((option) => (
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
-            </select>
-            <div className="selected-values">
-                Selected: {value.length > 0 ? value.join(", ") : "None Selected"}
+                <label htmlFor={id}>{label}</label>
+                {description && <p className="field-description">{description}</p>}
+    
+                <div className="option-list">
+                    {options.map((option) => (
+                        <button
+                            key={option}
+                            type="button"
+                            onClick={() => handleClick(option)}
+                            className={`option-button ${value.includes(option) ? "selected" : ""}`}
+                        >
+                            {option}
+                        </button>
+                    ))}
+                </div>
+    
+                <div className="selected-values">
+                    Selected: {value.length > 0 ? value.join(", ") : "None Selected"}
+                </div>
             </div>
-        </div>
         );
     };
     
@@ -134,7 +137,7 @@ function DietaryPreference() {
                     onChange={(event) => setAllergies(event.target.value)}
                 />
             </div>
-            <div className="form-group">
+            <div className="form-group multi-select">
                 <SelectMultipleField
                     label="Allergies & Restrictions"
                     description="Choose your options"
