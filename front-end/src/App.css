@@ -35,3 +35,24 @@
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   }
+
+  .back-button {
+    display: flex;
+    align-items: center; /* center the icon and text vertically */
+    margin-top: 0px; /* space below the navbar */
+    margin-left: 20px; /* slight indent from the left */
+    font-size: 18px;
+    color: #4d7745;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .back-button:hover {
+    transform: scale(1.05);
+    color: #555;
+  }
+  
+  .back-button svg {
+    margin-right: 6px; /* space between arrow and text */
+  }
+  

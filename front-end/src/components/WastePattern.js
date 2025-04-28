@@ -96,7 +96,6 @@ const WastePattern = () => {
             ) : (
                 <p className="center-text">No expired items in selected date range.</p>
             )}
-            <button className="back-btn" onClick={() => navigate("/analytics")}>← Back to Analytics</button>
         </div>
     );
 };
