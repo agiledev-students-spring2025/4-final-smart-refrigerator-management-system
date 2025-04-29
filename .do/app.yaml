@@ -40,8 +40,3 @@ services:
     routes:
       - path: /
 
-databases:
-  - name: mongodb-cluster
-    engine: mongodb-dev
-    cluster_name: smart-fridge-mongodb
-    version: "5.0"
