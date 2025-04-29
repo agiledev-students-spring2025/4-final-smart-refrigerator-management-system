@@ -37,8 +37,7 @@
 
 Our product vision: Making fridge management smarter—so you waste less, save more, and eat better.
 
-We strive for collaborative fridge management with the user and the system. 
-### Themes
+### 🎯 Themes
 - Optimizing space and food category: managing important details (ex. expiration date) without altering allocation of foods in fridge
 - Recipie suggestions: suggesting possible recipies before throwing items away 
 - Inventory analysis: reducing common failures and encouraging healthy roation in diet
@@ -61,9 +60,11 @@ We welcome contributions from developers, designers, and food sustainability adv
 - Check open issues on our GitHub repository and comment on those you're interested in.
 - Submit pull requests with well-documented code and commit messages.
 
-## Project Set Up
+## 🚀 Project Set Up
+You can either set up manually or run everything with Docker containers.
 
-This is a full-stack project with separate front-end and back-end directories. Follow the instructions below to get everything running locally.
+
+## 🛠️ Local Manual Setup
 
 ### Prerequisites
 
@@ -144,24 +145,80 @@ cd back-end
 npm test
 ```
 
-Tests are written using **Mocha**, **Chai**, and **Chai HTTP**, with c8 for code coverage.
+- Testing with Mocha, Chai, Chai-HTTP
 
----
-### Database Structure
+- Code coverage with c8
+
+## 🚀 Deployment Instructions (DigitalOcean + Docker + CI/CD)
+
+This application is deployed on a **DigitalOcean Droplet** and follows all production deployment best practices:
+
+### - Live Production Deployment
+
+API URL: https://smart-fridge-management-system-n7sfo.ondigitalocean.app/
+
+Any changes pushed to the main branch are automatically deployed to our Digital Ocean droplet.
+
+
+You can also clone and run the app **locally using Docker** as described below.
+
+### - Dockerized Local Deployment
+
+We containerized both the frontend and backend using Docker and orchestrated them with Docker Compose. This enables easy setup and development across all environments.
+
+#### Prerequisites: 
+- Docker
+- Docker Compose
+
+Make sure Docker is installed:
+```bash
+docker --version
+docker compose version
+```
+#### Setup Steps:
+
+1. Clone the repository
+```bash
+git clone https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system.git
+cd 4-final-smart-refrigerator-management-system
+```
+
+2. Run the application with Docker Compose
+```bash
+docker-compose up --build
+```
+
+**Local Service Access:**
+| Service | URL |
+|--------|-----|
+| Frontend (React) | http://localhost:3000 |
+| Backend (Express API) | http://localhost:5001 |
+
+✅ Supports live code updates (React hot reload and backend Nodemon restarts).
+
+### - CI/CD Setup
+We implemented both Continuous Integration and Continuous Deployment workflows using GitHub Actions.
+
+✅ CI Workflow: Runs tests on every branch push and pull request
+![CI Build](https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system/actions/workflows/continuous-integration.yml/badge.svg)
+
+✅ CD Workflow: Automatically deploys to DigitalOcean on push to main
+![Deployment Status](https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system/actions/workflows/continuous-deployment.yml/badge.svg)
+
+
+## 🗄️ Database Structure
 The application uses MongoDB with the following main collections:
 - Users: Stores user accounts, preferences, and settings
 - Items: Tracks food items in the refrigerator with expiration dates
 - Recipes: Stores recipe data that can be recommended to users
-- Compartments: Represents different sections of a refrigerator
 
----
-### API Endpoints
-#### Authentication
+## 🌐 API Endpoints
+### Authentication
 - POST /api/signup: Register a new user
 - POST /api/login: Log in a user
 - GET /api/profile: Get the logged-in user's profile
 
-#### Items
+### Items
 
 - GET /api/items: Get all items for the logged-in user
 - GET /api/items/:id: Get a specific item
@@ -169,33 +226,26 @@ The application uses MongoDB with the following main collections:
 - PUT /api/items/:id: Update an item
 - DELETE /api/items/:id: Delete an item
 
-#### Recipes
+### Recipes
 
 - GET /api/recipes: Get all recipes
 - GET /api/recipes/:id: Get a specific recipe
 - GET /api/recipes/search: Search recipes
 
-#### Analytics
+### Analytics
 
 - GET /api/analytics: Get inventory analytics
 - GET /api/waste: Get waste pattern data
 - GET /api/recommendations: Get shopping recommendations
----
-### Troubleshooting
+
+
+## Troubleshooting
 - If you see an error about missing dependencies, try npm install again.
 
 - Check your Node or npm versions—older versions can cause unexpected issues.
 
----
-## Deployment
 
-The application is deployed using Continuous Deployment with GitHub Actions.
-
-API URL: https://smart-fridge-management-system-n7sfo.ondigitalocean.app/
-
-Any changes pushed to the main branch are automatically deployed to our Digital Ocean droplet.
-
-### Contributing
+## Contributing
 If you would like to contribute:
 
 1. Fork the repository
