@@ -43,6 +43,6 @@ services:
 
 databases:
   - name: mongodb-cluster
-    engine: mongodb-dev
+    engine: mongodb
     cluster_name: smart-fridge-mongodb
     version: "5.0"
