@@ -330,7 +330,6 @@ router.get('/location/:location', auth, async (req, res) => {
  */
 router.post('/scan', auth, async (req, res) => {
   try {
-    // TODO: Add AI image processing logic here in the future
     const newItem = new Item({
       name: req.body.name || 'Scanned Item',
       category: req.body.category || 'Unknown',

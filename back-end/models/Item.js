@@ -4,7 +4,7 @@ const ItemSchema = new mongoose.Schema({
   name: {type: String, required: true, trim: true},
   category: {type: String, required: true, enum: ['dairy', 'meat', 'vegetables', 'fruits', 'beverages', 'leftovers', 'condiments', 'other'], default: 'other'},
   quantity: {type: String, required: true},
-  expirationDate: {type: Date, required: false}, // Changed to not required to allow null for non-expiring items
+  expirationDate: {type: Date, required: false},
   purchaseDate: {type: Date, default: Date.now},
   storageLocation: {type: String, enum: ['main', 'door', 'freezer', 'crisper', 'deli drawer', 'other'], default: 'main'},
   frequency: {type: String, enum: ['daily', 'weekly', 'monthly', 'rarely', null], default: null},
