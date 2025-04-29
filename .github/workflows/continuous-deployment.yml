@@ -1,0 +1,159 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+#          cache: 'npm'
+          
+      - name: Install front-end dependencies
+        working-directory: ./front-end
+        run: npm install
+      
+      - name: Build front-end
+        working-directory: ./front-end
+        run: |
+          npm run build
+          # Create .env file from secrets for front-end if needed
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" > .env
+      
+      - name: Install back-end dependencies
+        working-directory: ./back-end
+        run: npm ci
+      
+      - name: Run tests
+        working-directory: ./back-end
+        run: npm test
+      
+      - name: Create back-end .env file
+        working-directory: ./back-end
+        run: |
+          echo "PORT=${{ secrets.BACKEND_PORT }}" > .env
+          echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+      
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.DO_SSH_PRIVATE_KEY }}
+      
+      - name: Add Digital Ocean host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.DO_HOST }} >> ~/.ssh/known_hosts
+      
+      - name: Deploy to Digital Ocean
+        run: |
+          # Create deployment script
+          cat > deploy.sh << 'EOL'
+          #!/bin/bash
+          set -e
+
+          # Variables from GitHub secrets
+          APP_DIR="/var/www/smart-fridge"
+          
+          # Ensure app directory exists
+          mkdir -p $APP_DIR
+          
+          # Deploy backend
+          echo "Deploying backend..."
+          mkdir -p $APP_DIR/back-end
+          rsync -avzr --delete ./back-end/ root@${{ secrets.DO_HOST }}:$APP_DIR/back-end/
+          
+          # Deploy frontend
+          echo "Deploying frontend..."
+          mkdir -p $APP_DIR/front-end/build
+          rsync -avzr --delete ./front-end/build/ root@${{ secrets.DO_HOST }}:$APP_DIR/front-end/build/
+          
+          # Set up and restart backend service on Digital Ocean
+          ssh root@${{ secrets.DO_HOST }} << 'ENDSSH'
+          cd $APP_DIR/back-end
+          npm ci --production
+          
+          # Create PM2 ecosystem file if it doesn't exist
+          if [ ! -f ecosystem.config.js ]; then
+            echo "Creating PM2 ecosystem file..."
+            cat > ecosystem.config.js << 'ENDPM2'
+          module.exports = {
+            apps: [{
+              name: 'smart-fridge-api',
+              script: 'server.js',
+              env: {
+                NODE_ENV: 'production',
+              }
+            }]
+          }
+          ENDPM2
+          fi
+          
+          # Setup NGINX configuration for front-end if it doesn't exist
+          if [ ! -f /etc/nginx/sites-available/smart-fridge ]; then
+            echo "Setting up NGINX configuration..."
+            cat > /tmp/smart-fridge-nginx << 'ENDNGINX'
+          server {
+              listen 80;
+              server_name ${{ secrets.DOMAIN_NAME }};
+              
+              location / {
+                  root /var/www/smart-fridge/front-end/build;
+                  index index.html;
+                  try_files $uri $uri/ /index.html;
+              }
+              
+              location /api {
+                  proxy_pass http://localhost:${{ secrets.BACKEND_PORT }};
+                  proxy_http_version 1.1;
+                  proxy_set_header Upgrade $http_upgrade;
+                  proxy_set_header Connection 'upgrade';
+                  proxy_set_header Host $host;
+                  proxy_cache_bypass $http_upgrade;
+              }
+          }
+          ENDNGINX
+            sudo mv /tmp/smart-fridge-nginx /etc/nginx/sites-available/smart-fridge
+            sudo ln -sf /etc/nginx/sites-available/smart-fridge /etc/nginx/sites-enabled/
+            sudo nginx -t && sudo systemctl restart nginx
+          fi
+          
+          # Check if PM2 is installed globally, if not install it
+          if ! command -v pm2 &> /dev/null; then
+            echo "Installing PM2 globally..."
+            npm install -g pm2
+          fi
+          
+          # Start/restart the application
+          pm2 reload ecosystem.config.js || pm2 start ecosystem.config.js
+          
+          # Save PM2 process list and configure to start on boot
+          pm2 save
+          sudo env PATH=$PATH:/usr/bin pm2 startup systemd -u root --hp /root
+          
+          echo "Deployment completed successfully!"
+          ENDSSH
+          EOL
+          
+          # Make the script executable
+          chmod +x deploy.sh
+          
+          # Run the deployment script
+          ./deploy.sh
+      
+      - name: Verify deployment
+        run: |
+          curl --fail http://${{ secrets.DO_HOST }} || exit 1
+          curl --fail http://${{ secrets.DO_HOST }}/api || exit 1
