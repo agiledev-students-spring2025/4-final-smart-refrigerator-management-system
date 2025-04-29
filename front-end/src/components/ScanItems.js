@@ -13,14 +13,15 @@ const ScanItems = () => {
     expiryDate: '',
     category: '',
     storageLocation: '',
-    notes: ''
+    notes: '',
+    nonExpiring: false
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
@@ -34,7 +35,7 @@ const ScanItems = () => {
 
     const itemToSubmit = {
       ...formData,
-      expirationDate: formData.expiryDate,
+      expirationDate: formData.nonExpiring ? null : formData.expiryDate,
     };
 
     await addItem(itemToSubmit);
@@ -93,6 +94,31 @@ const ScanItems = () => {
             placeholder="e.g. 1 gallon, 12 count, 2 lbs"
           />
         </div>
+
+        <div className="form-group checkbox-group">
+          <label>
+            <input
+              type="checkbox"
+              name="nonExpiring"
+              checked={formData.nonExpiring}
+              onChange={handleChange}
+            />
+            This item never expires
+          </label>
+        </div>
+
+        {!formData.nonExpiring && (
+          <div className="form-group">
+            <label htmlFor="expiryDate">Expiry Date</label>
+            <input
+              type="date"
+              id="expiryDate"
+              name="expiryDate"
+              value={formData.expiryDate}
+              onChange={handleChange}
+            />
+          </div>
+        )}
 
         <div className="form-group">
           <label htmlFor="expiryDate">Expiry Date</label>

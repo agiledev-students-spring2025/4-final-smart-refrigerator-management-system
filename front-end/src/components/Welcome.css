@@ -6,15 +6,13 @@
     height: 100vh;
     background: linear-gradient(to bottom, #a5d7bea3 , #feecd3);
     text-align: center;
-    padding-top: 30px; /* Add padding to push content down */
+    padding-top: 30px;
 }
 
-
-/* Move the logo upward */
 .welcome-container #logo {
-    margin-bottom: 10px; /* Adjust to move closer or further from the text */
+    margin-bottom: 10px;
     position: relative;
-    top: -20px; /* Moves the logo up */
+    top: -20px;
 }
 
 .welcome-container h1 {
@@ -64,7 +62,6 @@
     text-align: center;
 }
 
-/* Add this specific style for the guest message */
 .guest-text {
     margin-bottom: 15px; 
 }

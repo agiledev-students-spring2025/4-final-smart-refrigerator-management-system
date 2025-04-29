@@ -113,6 +113,13 @@ export const InventoryProvider = ({ children }) => {
 
   const deleteItem = async (id) => {
     if (!token) return false;
+    
+    const isGuest = !token;
+    if (isGuest && inventory.length <= 1) {
+      setError("As a guest user, you cannot have an empty fridge. Please create an account to remove all items.");
+      return { restricted: true };
+    }
+    
     try {
       const res = await fetch(`${API_BASE_URL}/items/${id}`, {
         method: "DELETE",

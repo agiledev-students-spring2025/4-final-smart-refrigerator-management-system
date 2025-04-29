@@ -6,19 +6,20 @@ import './ItemDetails.css';
 const ItemDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { getItemById, updateItem, deleteItem } = useInventory();
+  const { getItemById, updateItem, deleteItem, isGuest, error, clearError } = useInventory();
   
   const [item, setItem] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [showGuestDeleteModal, setShowGuestDeleteModal] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     quantity: '',
     expirationDate: '',
     category: '',
     storageLocation: '',
-    notes: ''
+    notes: '',
+    nonExpiring: false
   });
-  
   
   useEffect(() => {
     const currentItem = getItemById(id);
@@ -30,30 +31,49 @@ const ItemDetails = () => {
         expirationDate: currentItem.expirationDate?.split('T')[0] || '',
         category: currentItem.category || '',
         storageLocation: currentItem.storageLocation || '',
-        notes: currentItem.notes || ''
+        notes: currentItem.notes || '',
+        nonExpiring: currentItem.nonExpiring || false
       });
     }    
   }, [id, getItemById]);
   
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateItem(id, formData);
-    setItem(prev => ({ ...prev, ...formData }));
+    
+    // Prepare the data for submission
+    const itemToSubmit = {
+      ...formData,
+      // If nonExpiring is true, set expirationDate to null
+      expirationDate: formData.nonExpiring ? null : formData.expirationDate
+    };
+    
+    updateItem(id, itemToSubmit);
+    setItem(prev => ({ ...prev, ...itemToSubmit }));
     setIsEditing(false);
   };
   
-  const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this item?')) {
-      deleteItem(id);
-      navigate('/inventory');
+  const handleDelete = async () => {
+    clearError(); // Clear any previous errors
+    
+    if (isGuest) {
+      const result = await deleteItem(id);
+      if (result && result.restricted) {
+        setShowGuestDeleteModal(true);
+        return;
+      }
+    } else {
+      if (window.confirm('Are you sure you want to delete this item?')) {
+        await deleteItem(id);
+        navigate('/inventory');
+      }
     }
   };
   
@@ -89,7 +109,7 @@ const ItemDetails = () => {
       <div className="item-details-content">
         <div className="item-image-container">
           <img 
-            src={`https://picsum.photos/seed/${item.id}/300/300`}
+            src={item.imageUrl || `https://picsum.photos/seed/${item._id}/300/300`}
             alt={item.name}
             className="item-detail-image"
           />
@@ -140,16 +160,30 @@ const ItemDetails = () => {
               />
             </div>
             
-            <div className="form-group">
-              <label htmlFor="expirationDate">Expiration Date</label>
-              <input
-                type="date"
-                id="expirationDate"
-                name="expirationDate"
-                value={formData.expirationDate}
-                onChange={handleChange}
-              />
+            <div className="form-group checkbox-group">
+              <label>
+                <input
+                  type="checkbox"
+                  name="nonExpiring"
+                  checked={formData.nonExpiring}
+                  onChange={handleChange}
+                />
+                This item never expires
+              </label>
             </div>
+            
+            {!formData.nonExpiring && (
+              <div className="form-group">
+                <label htmlFor="expirationDate">Expiration Date</label>
+                <input
+                  type="date"
+                  id="expirationDate"
+                  name="expirationDate"
+                  value={formData.expirationDate}
+                  onChange={handleChange}
+                />
+              </div>
+            )}
             
           <div className="form-group">
             <label htmlFor="storageLocation">Storage Location</label>
@@ -208,7 +242,7 @@ const ItemDetails = () => {
             
             <div className="info-row">
               <span className="info-label">Expiry Date:</span>
-              <span className="info-value">{formatDate(item.expirationDate)}</span>
+              <span className="info-value">{item.nonExpiring ? 'Never expires' : formatDate(item.expirationDate)}</span>
             </div>
             
             {item.category && (
@@ -253,6 +287,24 @@ const ItemDetails = () => {
           </div>
         )}
       </div>
+      
+      {showGuestDeleteModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Guest Account Restriction</h3>
+            <p>As a guest user, you cannot have an empty fridge.</p>
+            <p>Please create an account to remove all items.</p>
+            <div className="modal-buttons">
+              <button className="modal-button primary" onClick={() => navigate('/signup')}>
+                Create Account
+              </button>
+              <button className="modal-button secondary" onClick={() => setShowGuestDeleteModal(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
