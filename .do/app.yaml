@@ -45,4 +45,5 @@ databases:
   - name: mongodb-cluster
     engine: MONGODB
     production: true
-    version: "5.0"
+    cluster_name: PPDS
+    version: "8.0.8"
