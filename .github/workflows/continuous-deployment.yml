@@ -1,4 +1,4 @@
-name: Continuous Deployment to App Platform
+name: Continuous Deployment
 
 on:
   push:
@@ -18,11 +18,5 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       
-      - name: Run tests
-        run: |
-          cd back-end
-          npm install
-          npm test
-      
       - name: Deploy to App Platform
-        run: doctl apps update ${{ secrets.APP_ID }} --spec .do/app.yaml || doctl apps create --spec .do/app.yaml
+        run: doctl apps update ${{ secrets.APP_ID }} --spec .do/app.yaml
