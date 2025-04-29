@@ -74,7 +74,7 @@ export const InventoryProvider = ({ children }) => {
       });
       if (!res.ok) {
         const errorData = await res.json();
-        console.error("Add failed:", errorData);  // 🛠 see what backend returns
+        console.error("Add failed:", JSON.stringify(errorData, null, 2));
         throw new Error(errorData.message || "Add failed");
       }
       const { data: newItem } = await res.json();
