@@ -44,4 +44,5 @@ services:
 databases:
   - name: mongodb-cluster
     engine: MONGODB
+    production: true
     version: "5.0"
