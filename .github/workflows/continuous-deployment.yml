@@ -20,5 +20,8 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       
+      - name: Print current git branch
+        run: git branch --show-current
+        
       - name: Deploy to App Platform
         run: doctl apps update ${{ secrets.APP_ID }} --spec .do/app.yaml
