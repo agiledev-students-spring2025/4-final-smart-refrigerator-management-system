@@ -25,6 +25,7 @@ import Vegetarian from './components/Vegetarian';
 import AiRecipes from './components/AiRecipes'; 
 import Saved from './components/Saved';
 import FullRecipe from './components/FullRecipe';
+import StarterItems from './components/StarterItems';
 import './App.css';
 import {FaArrowLeft} from "react-icons/fa";
 
@@ -43,9 +44,7 @@ function App() {
 }
 
 function AppContent({ setUser }) {
-  const location = useLocation(); // Get current route
-
-  // Define pages where the navbar should be hidden
+  const location = useLocation();
   const hideNavbarRoutes = ["/", "/login", "/signup"];
   const navigate = useNavigate();
   const excludedPaths = ["/", "/login", "/signup", "/home", "/settings", "/analytics", "/inventory",
@@ -68,6 +67,7 @@ function AppContent({ setUser }) {
           <Route path="/inventory" element={<InventoryManagement/>}/>
           <Route path="/inventory/:id" element={<ItemDetails/>}/>
           <Route path="/scan" element={<ScanItems/>}/>
+          <Route path="/starter-items" element={<StarterItems/>}/>
           <Route path="/settings" element={<SettingProfile/>}/>
           <Route path="/Account-Setting" element={<AccountSetting/>}/>
           <Route path="/Fridge-Model" element={<FridgeSetup/>}/>
