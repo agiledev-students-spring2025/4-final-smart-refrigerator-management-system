@@ -77,8 +77,16 @@ router.post('/', [
   [
     check('name', 'Name is required').not().isEmpty(),
     check('category', 'Category is required').not().isEmpty(),
-    check('expirationDate', 'Expiration date is required').not().isEmpty(),
-  ]
+    check('expirationDate').custom((value, { req }) => {
+      if (!req.body.nonExpiring && !value) {
+        throw new Error('Expiration date is required for expiring items');
+      }
+      if (value && isNaN(Date.parse(value))) {
+        throw new Error('Invalid expiration date format');
+      }
+      return true;
+    }),
+      ]
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
