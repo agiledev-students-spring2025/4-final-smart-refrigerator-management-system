@@ -2,7 +2,7 @@ name: smart-fridge-management-system
 services:
   - name: backend
     github:
-      branch: main
+      branch: master
       deploy_on_push: true
       repo: agiledev-students-spring2025/4-final-smart-refrigerator-management-system
     source_dir: back-end
