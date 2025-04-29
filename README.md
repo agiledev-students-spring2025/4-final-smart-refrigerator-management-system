@@ -1,6 +1,6 @@
 # Smart Refrigerator Management System (SRMS)
-![CI Build](https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system/actions/workflows/ci.yml/badge.svg)
-![Deployment Status](https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system/actions/workflows/deploy.yml/badge.svg)
+![CI Build](https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system/actions/workflows/continuous-integration.yml/badge.svg)
+![Deployment Status](https://github.com/agiledev-students-spring2025/4-final-smart-refrigerator-management-system/actions/workflows/continuous-deployment.yml/badge.svg)
 ## Product Vision Statement
 
 **Sprint 0:**
