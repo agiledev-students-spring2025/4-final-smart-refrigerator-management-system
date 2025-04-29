@@ -121,17 +121,6 @@ const ScanItems = () => {
         )}
 
         <div className="form-group">
-          <label htmlFor="expiryDate">Expiry Date</label>
-          <input
-            type="date"
-            id="expiryDate"
-            name="expiryDate"
-            value={formData.expiryDate}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-group">
           <label htmlFor="storageLocation">Storage Location <span className="required">*</span></label>
           <select
             id="storageLocation"
