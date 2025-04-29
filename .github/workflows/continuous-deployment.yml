@@ -23,7 +23,7 @@ jobs:
       - name: Checkout main explicitly
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: master
 
       - name: Deploy to App Platform
         run: doctl apps update ${{ secrets.APP_ID }} --spec .do/app.yaml
