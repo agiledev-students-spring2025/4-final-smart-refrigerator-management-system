@@ -8,6 +8,7 @@ import API_BASE_URL from "../api";
 const Home = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState("");
+    const [showStarterItemsPrompt, setShowStarterItemsPrompt] = useState(false);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -68,19 +69,28 @@ const Home = () => {
         Empty-fridge overlay
     ─────────────────────── */
     const [showEmptyMsg, setShowEmptyMsg] = useState(false);
-    useEffect(() => setShowEmptyMsg(totalItems === 0), [totalItems]);
+    
+    useEffect(() => {
+        if (totalItems === 0 && !loading) {
+            setShowEmptyMsg(true);
+            setShowStarterItemsPrompt(true);
+        } else {
+            setShowEmptyMsg(false);
+            setShowStarterItemsPrompt(false);
+        }
+    }, [totalItems, loading]);
 
     /* ───────────────────────
         Recipe recommendations
     ─────────────────────── */
     const [recipes, setRecipes] = useState([]);
     useEffect(() => {
-    fetch(`${API_BASE_URL}/recipes`)
-        .then((r) => r.json())
-        .then((data) => {
-        if (data.status === "success") setRecipes(data.data);
-        })
-        .catch((e) => console.error("Error fetching recipes:", e));
+        fetch(`${API_BASE_URL}/recipes`)
+            .then((r) => r.json())
+            .then((data) => {
+                if (data.status === "success") setRecipes(data.data);
+            })
+            .catch((e) => console.error("Error fetching recipes:", e));
     }, []);
 
   /* ───────────────────────
@@ -123,8 +133,9 @@ const Home = () => {
         {loading ? null : showEmptyMsg && (
           <div className="overlay">
             <div className="overlay-card">
-              <p>Your fridge is empty! Add some food to get started.</p>
-              <button onClick={() => setShowEmptyMsg(false)}>Got it</button>
+              <p>Your fridge is empty! Would you like to add some common items?</p>
+              <button onClick={() => navigate("/starter-items")} className="starter-items-button">Add Starter Items</button>
+              <button onClick={() => setShowEmptyMsg(false)} className="close-button">Not Now</button>
             </div>
           </div>
         )}
@@ -155,6 +166,19 @@ const Home = () => {
             </Link>
           </motion.div>
         </div>
+        
+        {showStarterItemsPrompt && (
+          <motion.div 
+            className="starter-items-prompt"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <Link to="/starter-items" className="starter-items-link">
+              Add Common Items to Your Inventory
+            </Link>
+          </motion.div>
+        )}
       </motion.div>
 
       {/* recipe recommendations */}
@@ -167,7 +191,7 @@ const Home = () => {
         <h2>Recipe Recommendations:</h2>
         <div className="recipe-grid">
           {recipes.length ? (
-            recipes.map((r) => (
+            recipes.slice(0, 4).map((r) => (
               <motion.div
                 key={r._id}
                 className="recipe-item"
