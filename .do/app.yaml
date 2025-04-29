@@ -1,0 +1,47 @@
+name: smart-fridge-management-system
+services:
+  - name: backend
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: agiledev-students-spring2025/4-final-smart-refrigerator-management-system
+    source_dir: back-end
+    http_port: 5001
+    build_command: npm install
+    run_command: npm start
+    envs:
+      - key: MONGO_URI
+        scope: RUN_TIME
+        value: ${MONGO_URI}
+      - key: JWT_SECRET
+        scope: RUN_TIME
+        value: ${JWT_SECRET}
+      - key: NODE_ENV
+        scope: RUN_TIME
+        value: production
+    health_check:
+      http_path: /
+      initial_delay_seconds: 10
+    routes:
+      - path: /api
+  
+  - name: frontend
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: agiledev-students-spring2025/4-final-smart-refrigerator-management-system
+    source_dir: front-end
+    build_command: npm install && npm run build
+    environment_slug: node-js
+    envs:
+      - key: REACT_APP_API_URL
+        scope: BUILD_TIME
+        value: ${_self.HOSTNAME}/api
+    routes:
+      - path: /
+
+databases:
+  - name: mongodb-cluster
+    engine: mongodb
+    cluster_name: smart-fridge-mongodb
+    version: "5.0"
