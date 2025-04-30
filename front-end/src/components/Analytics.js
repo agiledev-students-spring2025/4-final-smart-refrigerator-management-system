@@ -14,6 +14,7 @@ const Analytics = () => {
     const [mostUsed, setMostUsed] = useState([]);
     const [leastUsed, setLeastUsed] = useState([]);
     const [categoryItemMap, setCategoryItemMap] = useState({});
+    const [nonExpiringCount, setNonExpiringCount] = useState(0);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,9 +27,11 @@ const Analytics = () => {
                     }
                 });
                 const data = await res.json();
+                console.log("📦 Full analytics data:", data);
                 setTotalItems(data.totalItems);
                 setExpiringSoonCount(data.expiringSoon);
                 setExpiredCount(data.expired);
+                setNonExpiringCount(data.nonExpiring || 0);
 
                 const labels = Object.keys(data.byCategory);
                 const values = labels.map(label => data.byCategory[label].length);
@@ -86,6 +89,7 @@ const Analytics = () => {
                 <p><strong>Total Items:</strong> {totalItems}</p>
                 <p><strong>Expiring Soon (≤7 days):</strong> {expiringSoonCount}</p>
                 <p><strong>Expired Items:</strong> {expiredCount}</p>
+                <p><strong>Non-Expiring Items:</strong> {nonExpiringCount}</p>
             </div>
 
             {/* Items by Category (Pie Chart) */}
