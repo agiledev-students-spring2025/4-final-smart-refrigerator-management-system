@@ -6,92 +6,100 @@ import "./Home.css";
 import API_BASE_URL from "../api";
 
 const Home = () => {
-    const navigate = useNavigate();
-    const [userName, setUserName] = useState("");
-    const [showStarterItemsPrompt, setShowStarterItemsPrompt] = useState(false);
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const [showStarterItemsPrompt, setShowStarterItemsPrompt] = useState(false);
 
-    useEffect(() => {
-        const fetchUserProfile = async () => {
-            const token = localStorage.getItem("token");
-            if (!token) {
-                setUserName("Guest");
-                return;
-            }
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setUserName("Guest");
+        return;
+      }
 
-            try {
-                const res = await fetch(`${API_BASE_URL}/profile`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+      try {
+        const res = await fetch(`${API_BASE_URL}/profile`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-                if (res.ok) {
-                    const data = await res.json();
-                    setUserName(data.user.name);
-                } else {
-                    localStorage.removeItem("token");
-                    navigate("/login");
-                }
-            } catch (err) {
-                console.error("Error fetching profile:", err);
-                localStorage.removeItem("token");
-                navigate("/login");
-            }
-        };
-
-        fetchUserProfile();
-    }, [navigate]);
-
-    /* ───────────────────────
-        Inventory statistics
-    ─────────────────────── */
-    const { inventory, loading } = useInventory();
-    const [expiringSoon, setExpiringSoon] = useState(0);
-
-    useEffect(() => {
-        const today = new Date();
-        const soon  = new Date();
-        soon.setDate(today.getDate() + 7);
-
-        const countSoon = inventory.filter(
-            (item) =>
-            item.expirationDate &&
-            new Date(item.expirationDate) >= today &&
-            new Date(item.expirationDate) <= soon
-        ).length;
-
-        setExpiringSoon(countSoon);
-    }, [inventory]);
-
-    const totalItems = inventory.length;
-
-    /* ───────────────────────
-        Empty-fridge overlay
-    ─────────────────────── */
-    const [showEmptyMsg, setShowEmptyMsg] = useState(false);
-    
-    useEffect(() => {
-        if (totalItems === 0 && !loading) {
-            setShowEmptyMsg(true);
-            setShowStarterItemsPrompt(true);
+        if (res.ok) {
+          const data = await res.json();
+          setUserName(data.user.name);
         } else {
-            setShowEmptyMsg(false);
-            setShowStarterItemsPrompt(false);
+          localStorage.removeItem("token");
+          navigate("/login");
         }
-    }, [totalItems, loading]);
+      } catch (err) {
+        console.error("Error fetching profile:", err);
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+    };
 
-    /* ───────────────────────
-        Recipe recommendations
-    ─────────────────────── */
-    const [recipes, setRecipes] = useState([]);
-    useEffect(() => {
-        fetch(`${API_BASE_URL}/recipes`)
-            .then((r) => r.json())
-            .then((data) => {
-                if (data.status === "success") setRecipes(data.data);
-            })
-            .catch((e) => console.error("Error fetching recipes:", e));
-    }, []);
+    fetchUserProfile();
+  }, [navigate]);
+
+  /* ───────────────────────
+      Inventory statistics
+  ─────────────────────── */
+  const { inventory, loading } = useInventory();
+  const [expiringSoon, setExpiringSoon] = useState(0);
+
+  useEffect(() => {
+    const today = new Date();
+    const soon = new Date();
+    soon.setDate(today.getDate() + 7);
+
+    const countSoon = inventory.filter(
+      (item) =>
+        item.expirationDate &&
+        new Date(item.expirationDate) >= today &&
+        new Date(item.expirationDate) <= soon
+    ).length;
+
+    setExpiringSoon(countSoon);
+  }, [inventory]);
+
+  const totalItems = inventory.length;
+
+  /* ───────────────────────
+      Empty-fridge overlay
+  ─────────────────────── */
+  const [showEmptyMsg, setShowEmptyMsg] = useState(false);
+
+  useEffect(() => {
+    if (totalItems === 0 && !loading) {
+      setShowEmptyMsg(true);
+      setShowStarterItemsPrompt(true);
+    } else {
+      setShowEmptyMsg(false);
+      setShowStarterItemsPrompt(false);
+    }
+  }, [totalItems, loading]);
+
+  /* ───────────────────────
+      Recipe recommendations
+  ─────────────────────── */
+  const [recipes, setRecipes] = useState([]);
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/recipes`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.status === "success") {
+          const filteredRecipes = data.data.filter((recipe) => {
+            // Check if any ingredient in the recipe exists in the fridge
+            return recipe.ingredients.some((ingredient) =>
+              inventory.some((item) => item.name.toLowerCase() === ingredient.name.toLowerCase())
+            );
+          });
+          setRecipes(filteredRecipes);
+        }
+      })
+      .catch((e) => console.error("Error fetching recipes:", e));
+  }, [inventory]);
 
   /* ───────────────────────
      UI
@@ -166,9 +174,9 @@ const Home = () => {
             </Link>
           </motion.div>
         </div>
-        
+
         {showStarterItemsPrompt && (
-          <motion.div 
+          <motion.div
             className="starter-items-prompt"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

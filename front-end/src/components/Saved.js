@@ -14,6 +14,9 @@ function RecipeSuggestions() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Get the logged-in user's email from localStorage
+  const email = localStorage.getItem("userEmail");
+
   // Fetch recipes from the backend
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -22,7 +25,7 @@ function RecipeSuggestions() {
         const data = await response.json();
 
         if (response.ok) {
-          setRecipes(data.data); 
+          setRecipes(data.data); // Assuming the recipes are under data.data
         } else {
           setError('Failed to load recipes');
         }
@@ -48,7 +51,7 @@ function RecipeSuggestions() {
 
   // Filter recipes based on favorite status, search term, and filter
   const filteredRecipes = recipes
-    .filter(recipe => recipe.favorite === true) 
+    .filter(recipe => recipe.favorite && recipe.favorite.includes(email)) // Only include recipes favorited by the logged-in user
     .filter(recipe => {
       const matchesSearch = recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesFilter = selectedFilter

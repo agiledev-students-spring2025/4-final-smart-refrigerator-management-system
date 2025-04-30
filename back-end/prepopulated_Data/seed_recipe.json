@@ -46,8 +46,8 @@
       "6. Add to baking dish and distribute shreeded cheese on top evenly",
       "7. Cook in oven on bake 365 for 25 minutes"
     ],
-    "imageUrl": "https://picsum.photos/200/200",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1701484185547-a71576b65e1a?q=80&w=2162&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D0",
+    "favorite": []
   },
   {
     "id": "2",
@@ -77,8 +77,8 @@
       "3. Put yams in butter and then coat with dry mixture",
       "4. Bake yams for 5 minutes"
     ],
-    "imageUrl": "https://picsum.photos/200/300",
-    "favorite": false
+    "imageUrl": "https://www.simplyrecipes.com/thmb/RTggMj1bDPwJSK94_0NeTHnURmg=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Candied-Yams-LEAD-11-ba153376870143aead927803e68f7e20.jpg",
+    "favorite": []
   },
   {
     "id": "3",
@@ -93,7 +93,7 @@
         "quantity": "1 cup"
       },
       {
-        "name": "2 Egg Yolks",
+        "name": "Egg Yolks",
         "quantity": "2"
       },
       {
@@ -110,8 +110,8 @@
       "5. Let cool in firdge for 3 hours",
       "6. Add sugar on top and lightly scorch to taste"
     ],
-    "imageUrl": "https://picsum.photos/200/500",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1615234435691-3b7bae98085e?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "4",
@@ -146,8 +146,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/400",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1622973536968-3ead9e780960?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "5",
@@ -174,8 +174,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/200",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1528736235302-52922df5c122?q=80&w=2154&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "6",
@@ -210,8 +210,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/250",
-    "favorite": false
+    "imageUrl": "https://www.momontimeout.com/wp-content/uploads/2018/11/chicken-stir-fry-733x1103.jpg",
+    "favorite": []
   },
   {
     "id": "7",
@@ -246,8 +246,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/300",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "8",
@@ -282,8 +282,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/350",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1618449840665-9ed506d73a34?q=80&w=2187&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "9",
@@ -318,8 +318,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/400",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1506084868230-bb9d95c24759?q=80&w=2187&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "10",
@@ -354,8 +354,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/200",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1632217471220-a661da2ae319?q=80&w=2187&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "11",
@@ -390,8 +390,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/250",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1680137248903-7af5d51a3350?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "12",
@@ -426,8 +426,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/300",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=2128&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "13",
@@ -462,8 +462,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/350",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "14",
@@ -498,8 +498,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/400",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1637361874063-e5e415d7bcf7?q=80&w=2187&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "15",
@@ -534,8 +534,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/200",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1625943553852-781c6dd46faa?q=80&w=2090&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "16",
@@ -570,8 +570,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/250",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?q=80&w=2128&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "17",
@@ -606,8 +606,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/300",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1673646960062-9aeb2188335f?q=80&w=2065&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "18",
@@ -642,8 +642,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/350",
-    "favorite": false
+    "imageUrl": "https://images.unsplash.com/photo-1484723091739-30a097e8f929?q=80&w=1547&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": []
   },
   {
     "id": "19",
@@ -678,8 +678,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/400",
-    "favorite": false
+    "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/baked-ziti-recipe-67aeb8476814e.jpeg?crop=0.519xw:0.778xh;0.235xw,0.0561xh&resize=1024:*",
+    "favorite": []
   },
   {
     "id": "20",
@@ -714,8 +714,8 @@
       "4. Simmer or bake as needed",
       "5. Serve and enjoy"
     ],
-    "imageUrl": "https://picsum.photos/200/200",
-    "favorite": false
+    "imageUrl": "https://bellyfull.net/wp-content/uploads/2021/02/Chicken-Alfredo-blog-4.jpg",
+    "favorite": []
   },
   {
     "id": "21",
@@ -735,8 +735,8 @@
       "4. Bake at 375°F for 20 minutes.",
       "5. Serve hot."
     ],
-    "imageUrl": "https://picsum.photos/200/201",
-    "favorite": false,
+    "imageUrl": "https://www.dinneratthezoo.com/wp-content/uploads/2018/05/bacon-wrapped-chicken-4-1.jpg",
+    "favorite": [],
     "filter": "keto"
   },
   {
@@ -757,8 +757,8 @@
       "4. Combine with cauliflower.",
       "5. Serve warm."
     ],
-    "imageUrl": "https://picsum.photos/200/202",
-    "favorite": false,
+    "imageUrl": "https://images.unsplash.com/photo-1707870678076-40ba56a65ece?q=80&w=2187&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "favorite": [],
     "filter": "keto"
   },
   {
@@ -779,8 +779,8 @@
       "4. Add eggs on top, season with salt and chili flakes.",
       "5. Serve immediately."
     ],
-    "imageUrl": "https://picsum.photos/200/203",
-    "favorite": false,
+    "imageUrl": "https://www.eatingbirdfood.com/wp-content/uploads/2023/04/hard-boiled-egg-and-avocado-bowl-hero.jpg",
+    "favorite": [],
     "filter": "keto"
   },
   {
@@ -801,8 +801,8 @@
       "4. Top with mozzarella cheese.",
       "5. Bake at 375°F for 30 minutes."
     ],
-    "imageUrl": "https://picsum.photos/200/204",
-    "favorite": false,
+    "imageUrl": "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2019/09/Zucchini-Lasagna-13.jpg",
+    "favorite": [],
     "filter": "keto"
   },
   {
@@ -823,8 +823,8 @@
       "4. Top with grated parmesan.",
       "5. Fold and serve."
     ],
-    "imageUrl": "https://picsum.photos/200/205",
-    "favorite": false,
+    "imageUrl": "https://nocrumbsleft.net/wp-content/uploads/2023/10/caesar-wrap-cross-section-closeup.jpg",
+    "favorite": [],
     "filter": "keto"
   }, 
   {
@@ -845,8 +845,8 @@
       "4. Serve mushrooms over steak.",
       "5. Enjoy warm."
     ],
-    "imageUrl": "https://picsum.photos/200/206",
-    "favorite": false,
+    "imageUrl": "https://i0.wp.com/baconandvodka.com/wp-content/uploads/2019/11/20191028_174820-2-scaled.jpg?w=2400&ssl=1",
+    "favorite": [],
     "filter": "keto"
   },
   {
@@ -867,8 +867,8 @@
       "4. Garnish with extra cilantro.",
       "5. Serve chilled."
     ],
-    "imageUrl": "https://picsum.photos/200/207",
-    "favorite": false,
+    "imageUrl": "https://healthynibblesandbits.com/wp-content/uploads/2014/09/Guacamole-Deviled-Eggs-2-1.jpg",
+    "favorite": [],
     "filter": "keto"
   },
   {
@@ -889,8 +889,8 @@
       "4. Sprinkle with cinnamon.",
       "5. Sip and energize."
     ],
-    "imageUrl": "https://picsum.photos/200/208",
-    "favorite": false,
+    "imageUrl": "https://media.post.rvohealth.io/wp-content/uploads/2019/11/coffee-butter-bulletproof-1200x628-facebook.jpg",
+    "favorite": [],
     "filter": "keto"
     },
 
@@ -912,8 +912,8 @@
         "4. Toss gently.",
         "5. Serve immediately."
       ],
-      "imageUrl": "https://picsum.photos/200/210",
-      "favorite": false,
+      "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2018/10/Cucumber-Salad-4.jpg",
+      "favorite": [],
       "filter": "vegan"
     },
     {
@@ -934,8 +934,8 @@
         "4. Cook until soft.",
         "5. Garnish with cilantro."
       ],
-      "imageUrl": "https://picsum.photos/200/211",
-      "favorite": false,
+      "imageUrl": "https://www.laurafuentes.com/wp-content/uploads/2022/08/Coconut-cauliflower-rice_post_01.jpg",
+      "favorite": [],
       "filter": "vegan"
     },
     {
@@ -956,8 +956,8 @@
         "4. Stuff mixture into avocado halves.",
         "5. Serve fresh."
       ],
-      "imageUrl": "https://picsum.photos/200/212",
-      "favorite": false,
+      "imageUrl": "https://www.allrecipes.com/thmb/s-Ap8NMfCNGCjDSHw3idPdVDzwI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/245863-Chicken-Stuffed-Baked-Avocados-DDMFS-4x3-124-7d71af882f6c4c52bbc9a380cc51f7d8.jpg",
+      "favorite": [],
       "filter": "vegan"
     },
     {
@@ -978,8 +978,8 @@
         "4. Stir again before serving.",
         "5. Top with berries if desired."
       ],
-      "imageUrl": "https://picsum.photos/200/213",
-      "favorite": false,
+      "imageUrl": "https://www.wellplated.com/wp-content/uploads/2020/04/Coconut-Chia-Pudding-Best-Recipe.jpg",
+      "favorite": [],
       "filter": "vegan"
     },
     {
@@ -1000,8 +1000,8 @@
         "4. Serve raw or lightly sautéed.",
         "5. Top with hemp seeds if desired."
       ],
-      "imageUrl": "https://picsum.photos/200/214",
-      "favorite": false,
+      "imageUrl": "https://www.eatyourselfskinny.com/wp-content/uploads/2016/02/avocado-pesto-7.jpg",
+      "favorite": [],
       "filter": "vegan"
     },
     {
@@ -1022,8 +1022,8 @@
         "4. Blend until creamy.",
         "5. Season and serve hot."
       ],
-      "imageUrl": "https://picsum.photos/200/215",
-      "favorite": false,
+      "imageUrl": "https://www.allrecipes.com/thmb/5O8yxoxCEZ6QM1Y9CVwy3sm_Yvs=/0x512/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/13313-best-cream-of-broccoli-soup-AllrecipesMagazine-4x3-495e6329745545a28c2a9b4e6ee3fab6.jpg",
+      "favorite": [],
       "filter": "vegan"
     },
     {
@@ -1044,8 +1044,8 @@
         "4. Freeze for 1 hour.",
         "5. Pop out and store in fridge."
       ],
-      "imageUrl": "https://picsum.photos/200/216",
-      "favorite": false,
+      "imageUrl": "https://chocolatecoveredkatie.com/wp-content/uploads/2018/07/Chocolate-Keto-Fat-Bombs.jpg",
+      "favorite": [],
       "filter": "vegan"
     },
     {
@@ -1066,8 +1066,8 @@
         "4. Chill before serving.",
         "5. Enjoy fresh."
       ],
-      "imageUrl": "https://picsum.photos/200/220",
-      "favorite": false,
+      "imageUrl": "https://www.stuckonsweet.com/wp-content/uploads/2013/04/Caprese-Salad-Skewers-1.jpg",
+      "favorite": [],
       "filter": "vegetarian"
     },
     {
@@ -1088,8 +1088,8 @@
         "4. Season with salt and pepper.",
         "5. Serve hot."
       ],
-      "imageUrl": "https://picsum.photos/200/221",
-      "favorite": false,
+      "imageUrl": "https://cookieandkate.com/images/2019/01/best-lentil-soup-recipe-4.jpg",
+      "favorite": [],
       "filter": "vegetarian"
     },
     {
@@ -1110,8 +1110,8 @@
         "4. Sprinkle with salt and parsley.",
         "5. Serve warm."
       ],
-      "imageUrl": "https://picsum.photos/200/222",
-      "favorite": false,
+      "imageUrl": "https://www.skinnytaste.com/wp-content/uploads/2022/11/Garlic-Butter-Mushrooms-8.jpg",
+      "favorite": [],
       "filter": "vegetarian"
     },
     {
@@ -1132,8 +1132,8 @@
         "4. Drain excess oil.",
         "5. Serve with hummus or sauce."
       ],
-      "imageUrl": "https://picsum.photos/200/223",
-      "favorite": false,
+      "imageUrl": "https://www.realsimple.com/thmb/0RXecQWAG0gBqgIV3uEkcD3JhBs=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/1023COO-falafel-bites-ad6de43586164252ab670be6b5ad4750.jpg",
+      "favorite": [],
       "filter": "vegetarian"
     },
     {
@@ -1154,8 +1154,8 @@
         "4. Bake at 375°F for 25 minutes.",
         "5. Serve hot."
       ],
-      "imageUrl": "https://picsum.photos/200/224",
-      "favorite": false,
+      "imageUrl": "https://www.budgetbytes.com/wp-content/uploads/2023/08/Stuffed-Bell-Peppers-V2.jpg",
+      "favorite": [],
       "filter": "vegetarian"
     },
     {
@@ -1176,8 +1176,8 @@
         "4. Stir until cooked.",
         "5. Sprinkle with feta and serve."
       ],
-      "imageUrl": "https://picsum.photos/200/225",
-      "favorite": false,
+      "imageUrl": "https://monkeyandmekitchenadventures.com/wp-content/uploads/2019/07/Veggie-Breakfast-Scramble_04.jpg",
+      "favorite": [],
       "filter": "vegetarian"
     }
     

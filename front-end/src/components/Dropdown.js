@@ -13,7 +13,7 @@ function Dropdown({ onSelect }) {
     'Keto',
     'Vegan',
     'Vegetarian',
-    'Custom Entry'
+    'All Recipes'
   ];
 
   // Handle change event when an option is selected
@@ -36,42 +36,26 @@ function Dropdown({ onSelect }) {
         navigate('/vegetarian');
     }
 
+    if (value === 'All Recipes') {
+      navigate('/allrecipes');
+    }
     
-  }
-
-  //custom might require AI to recognize needs of category so backend/database dietary restrictions (?)
-  // Handle change event for custom input
-  function handleCustomInputChange(event) {
-    setCustomOption(event.target.value);
-    if (onSelect) onSelect(event.target.value);
   }
 
   return (
     <div className="dropdown-container">
-      <h2>Set Filter</h2>
+      <h2>By Category</h2>
       <select
         value={selectedOption}
         onChange={handleSelectChange}
         className="dropdown-select"
       >
-        <option value="" disabled>Set filter</option> {/* Default option */}
+        <option value="" disabled>Select Category</option> 
         {options.map((option, index) => (
           <option key={index} value={option}>{option}</option> 
         ))}
       </select>
-
-      {/* If "Custom Entry" is selected, show an input field */}
-      {selectedOption === 'Custom Entry' && (
-        <div>
-          <input
-            type="text"
-            value={customOption}
-            onChange={handleCustomInputChange}
-            className="custom-input"
-            placeholder="Enter your custom option"
-          />
-        </div>
-      )}
+      
     </div>
   );
 }

@@ -13,7 +13,7 @@ const RecipeSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
   },
-  favorite: {type: Boolean, default: false},
+  favorite: {type: [String], default: []},
   filter: { type: String}
 });
 
