@@ -65,7 +65,7 @@ const Analytics = () => {
     }, []);
 
     const getDaysUntilExpiration = (expirationDate) => {
-        if (!expirationDate) return "Already Expired";
+        if (!expirationDate) return "No Expiration";
         const today = new Date();
         const expiry = new Date(expirationDate);
         const diff = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
