@@ -155,7 +155,7 @@ This application is deployed on a **DigitalOcean Droplet** and follows all produ
 
 ### - Live Production Deployment
 
-APP URL: https://smart-fridge-management-system-n7sfo.ondigitalocean.app/
+APP URL: https://new-fridge-9qc4v.ondigitalocean.app/
 
 Any changes pushed to the main branch are automatically deployed to our Digital Ocean droplet.
 
