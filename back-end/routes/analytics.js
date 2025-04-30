@@ -22,6 +22,8 @@ router.get("/", verifyToken, async (req, res) => {
             item.expirationDate && new Date(item.expirationDate) < today
         ).length;
 
+        const nonExpiringCount = items.filter(item => !item.expirationDate).length;
+
         const byCategory = {};
         items.forEach(item => {
             const category = item.category || "other";
@@ -40,7 +42,7 @@ router.get("/", verifyToken, async (req, res) => {
         const mostUsed = sortedExpirable.slice(0, 4); //closest to expiring
         const leastUsed = sortedExpirable.slice(-4); //farthest from expiration
 
-        res.json({ totalItems, expiringSoon, expired, byCategory, mostUsed, leastUsed, items });
+        res.json({ totalItems, expiringSoon, expired, nonExpiringCount ,byCategory, mostUsed, leastUsed, items });
 
     } catch (err) {
         console.error("Analytics error:", err);
