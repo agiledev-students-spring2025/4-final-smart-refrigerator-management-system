@@ -15,8 +15,20 @@ const recommendationsRoutes = require('./routes/recommendations');
 
 
 app.use(express.json());
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://new-fridge-9qc4v.ondigitalocean.app"
+];
+
 app.use(cors({
-  origin: "http://localhost:3000", // Allow requests from your React app
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }, // Allow requests from your React app
   methods: ["GET", "POST", "PUT", "DELETE"], // Allowed request methods
   allowedHeaders: ["Content-Type", "Authorization"] // add "Authorization"
 }));
