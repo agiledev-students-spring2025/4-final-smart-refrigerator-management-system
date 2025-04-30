@@ -45,8 +45,11 @@ const Analytics = () => {
 
                 setCategoryItemMap(data.byCategory); // sets up tooltip data
 
-                setMostUsed(data.mostUsed || []);
-                setLeastUsed(data.leastUsed || []);
+                const filteredMostUsed = (data.mostUsed || []).filter(item => item.expirationDate);
+                const filteredLeastUsed = (data.leastUsed || []).filter(item => item.expirationDate);
+
+                setMostUsed(filteredMostUsed);
+                setLeastUsed(filteredLeastUsed);
             } catch (err) {
                 console.warn("⚠️ Analytics API not reachable — fallback to empty data.");
                 setTotalItems(0);
