@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 import API_BASE_URL from "../api";
 
+console.log("API base URL:", API_BASE_URL);
 
 function Login({ setUser }) {
     const [email, setEmail] = useState("");
