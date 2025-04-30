@@ -78,7 +78,7 @@
       "4. Bake yams for 5 minutes"
     ],
     "imageUrl": "https://picsum.photos/200/300",
-    "favorite": false
+    "favorite": []
   },
   {
     "id": "3",
@@ -93,7 +93,7 @@
         "quantity": "1 cup"
       },
       {
-        "name": "2 Egg Yolks",
+        "name": "Egg Yolks",
         "quantity": "2"
       },
       {

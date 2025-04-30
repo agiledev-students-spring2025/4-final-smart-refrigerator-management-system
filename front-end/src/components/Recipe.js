@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Recipe.css';
 
 function Recipe({  _id, name, time, imageUrl }) {
-  console.log('🔗 Linking to recipe ID:', _id);  // 👈 Add this
+  console.log(' Linking to recipe ID:', _id);  
   
   return (
     <Link to={`/recipe/${_id}`} className="recipe">

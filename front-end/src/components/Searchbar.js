@@ -23,7 +23,7 @@ function Searchbar({ onSearch }) {
           type="text"
           value={searchTerm}
           onChange={handleInputChange}
-          placeholder="Search bar (e.g., 'Pasta', 'Chicken Stir-fry' )"
+          placeholder="Search All Recipes(by ingredient or name )"
           className="search-input"
         />
         <button type="submit" className="search-button">Search</button>

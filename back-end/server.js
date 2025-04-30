@@ -12,6 +12,7 @@ let listener;
 // First connect to MongoDB, then start server
 connectDB().then(async() => {
   console.log('MongoDB connected, seeding starter items...');
+  //await seedRecipes();  // This will insert the recipes
 
   listener = server.listen(port, function () {
     console.log(`Server running on port: ${port}`);
