@@ -1,7 +1,8 @@
-#!/usr/bin/env node
 require('dotenv').config();
 const server = require("./app") // load up the web server
 const connectDB = require('./mongo');
+const seedRecipes = require('./utils/seedRecipe');
+
 
 const port =  process.env.PORT || 5001// the port to listen to for incoming requests
 

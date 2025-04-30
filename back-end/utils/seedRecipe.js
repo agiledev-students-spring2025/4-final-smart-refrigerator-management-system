@@ -22,4 +22,4 @@ const seedRecipes = async () => {
   }
 };
 
-module.exports = seedRecipes;
+module.exports = seedRecipes; // Ensure it's being exported correctly

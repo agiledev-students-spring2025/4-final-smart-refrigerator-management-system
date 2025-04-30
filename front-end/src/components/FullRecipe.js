@@ -46,7 +46,7 @@ function FullRecipe() {
   }, [id, currentUserEmail]);
   
   // Handle favorite toggle
-  const toggleFavorite = async () => {
+  /*const toggleFavorite = async () => {
     try {
       const updatedFavoriteArray = [...recipe.favorite];  // Shallow copy to avoid mutation
   
@@ -69,11 +69,81 @@ function FullRecipe() {
     } catch (err) {
       console.error("Error toggling favorite:", err);
     }
-  };
+  };*/
   
+  
+  const toggleFavorite = async () => {
+    if (!recipe || !recipe.favorite) return;
+  
+    try {
+      const updatedFavoriteArray = [...recipe.favorite]; // Shallow copy to avoid mutation
+  
+      if (updatedFavoriteArray.includes(currentUserEmail)) {
+        // Remove email from favorites
+        const index = updatedFavoriteArray.indexOf(currentUserEmail);
+        if (index > -1) {
+          updatedFavoriteArray.splice(index, 1);
+        }
+      } else {
+        // Add email to favorites
+        updatedFavoriteArray.push(currentUserEmail);
+      }
+  
+      console.log("Updated favorite array before sending to server:", updatedFavoriteArray);
+      
+      // Clean the array: remove any invalid values
+      const cleanedFavoriteArray = updatedFavoriteArray.filter(email => email && typeof email === 'string');
+      
+      // Call updateFavoriteArray to send to backend
+      await updateFavoriteArray(cleanedFavoriteArray);
+    } catch (err) {
+      console.error("Error toggling favorite:", err);
+    }
+  };
   
   // Function to update the favorite list in the backend
   const updateFavoriteArray = async (updatedFavoriteArray) => {
+    try {
+      console.log("Sending updated favorite array to backend:", updatedFavoriteArray);
+  
+      const response = await fetch(`${API_BASE_URL}/recipes/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          favoriteEmail: currentUserEmail, // Send only the current user's email to backend
+        }),
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        const updatedRecipe = result.data;
+  
+        console.log("Backend response with updated recipe:", updatedRecipe);
+  
+        // Ensure that favorite is always an array (in case it's empty or undefined)
+        const updatedFavoriteArray = Array.isArray(updatedRecipe.favorite) ? updatedRecipe.favorite : [];
+  
+        // Update the recipe with the new favorite array returned from the backend
+        setRecipe(prevRecipe => ({
+          ...prevRecipe,
+          favorite: updatedFavoriteArray,
+        }));
+  
+        // Update the heart icon based on the new favorite array
+        setIsFavorite(updatedFavoriteArray.includes(currentUserEmail));
+  
+        console.log("Updated state after toggling favorite:", updatedFavoriteArray);
+      } else {
+        console.error("Failed to update favorite:", result);
+      }
+    } catch (err) {
+      console.error("Error updating favorite array:", err);
+    }
+  };
+  
+  
+  /*const updateFavoriteArray = async (updatedFavoriteArray) => {
     try {
       const response = await fetch(`${API_BASE_URL}/recipes/${id}`, {
         method: 'PUT',
@@ -97,7 +167,7 @@ function FullRecipe() {
     } catch (err) {
       console.error("Error updating favorite array:", err);
     }
-  };
+  };*/
 
   
   // Display loading message or error
