@@ -19,7 +19,7 @@ router.get("/", verifyToken, async (req, res) => {
         ).length;
 
         const expired = items.filter(item =>
-            item.expirationDate < today
+            item.expirationDate && new Date(item.expirationDate) < today
         ).length;
 
         const byCategory = {};
@@ -29,16 +29,18 @@ router.get("/", verifyToken, async (req, res) => {
             byCategory[category].push(item.name);
         });
 
-        const sorted = [...items].sort((a, b) => {
+        const expirableItems = items.filter(item => item.expirationDate);
+
+        const sortedExpirable = [...expirableItems].sort((a, b) => {
             const expiryA = new Date(a.expirationDate);
             const expiryB = new Date(b.expirationDate);
             return expiryA - expiryB || parseInt(a.quantity) - parseInt(b.quantity);
         });
 
-        const mostUsed = sorted.slice(0, 4); //closest to expiring
-        const leastUsed = sorted.slice(-4); //farthest from expiration
+        const mostUsed = sortedExpirable.slice(0, 4); //closest to expiring
+        const leastUsed = sortedExpirable.slice(-4); //farthest from expiration
 
-        res.json({ totalItems, expiringSoon, expired, byCategory, mostUsed, leastUsed });
+        res.json({ totalItems, expiringSoon, expired, byCategory, mostUsed, leastUsed, items });
 
     } catch (err) {
         console.error("Analytics error:", err);
