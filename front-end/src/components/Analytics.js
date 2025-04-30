@@ -65,10 +65,13 @@ const Analytics = () => {
     }, []);
 
     const getDaysUntilExpiration = (expirationDate) => {
-        if (!expirationDate) return null;
+        if (!expirationDate) return "Already Expired";
         const today = new Date();
         const expiry = new Date(expirationDate);
-        return Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+        const diff = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+        if (diff < 0) return "Expired";
+        if (diff === 0) return "Today";
+        return `Expires in: ${diff} day(s)`;
     };
 
     return (
@@ -127,9 +130,7 @@ const Analytics = () => {
                                     <img src={item.imageUrl || "https://picsum.photos/100"} alt={item.name}/>
                                 </div>
                                 <p><strong>{item.name}</strong></p>
-                                <p>Expires
-                                    in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
-                                <p>Qty: {item.quantity}</p>
+                                <p>{getDaysUntilExpiration(item.expirationDate)}</p>
                             </div>
                         </Link>
                     ))}
@@ -151,8 +152,7 @@ const Analytics = () => {
                                         <img src={item.imageUrl || "https://picsum.photos/100"} alt={item.name}/>
                                     </div>
                                     <p><strong>{item.name}</strong></p>
-                                    <p>Expires
-                                        in: {getDaysUntilExpiration(item.expirationDate) < 0 ? "Expired" : `${getDaysUntilExpiration(item.expirationDate)} days`}</p>
+                                    <p>{getDaysUntilExpiration(item.expirationDate)}</p>
                                     <p>Qty: {item.quantity}</p>
                                 </div>
                             </Link>
