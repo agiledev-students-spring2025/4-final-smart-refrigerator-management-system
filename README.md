@@ -155,7 +155,7 @@ This application is deployed on a **DigitalOcean Droplet** and follows all produ
 
 ### - Live Production Deployment
 
-API URL: https://smart-fridge-management-system-n7sfo.ondigitalocean.app/
+APP URL: https://smart-fridge-management-system-n7sfo.ondigitalocean.app/
 
 Any changes pushed to the main branch are automatically deployed to our Digital Ocean droplet.
 
@@ -237,6 +237,10 @@ The application uses MongoDB with the following main collections:
 - GET /api/analytics: Get inventory analytics
 - GET /api/waste: Get waste pattern data
 - GET /api/recommendations: Get shopping recommendations
+
+### Settings
+- POST /api/Account-Setting/:field : update account setting update based on updated field (ex. name)
+- POST /api/Fridge-Model: update account fridge model
 
 
 ## Troubleshooting
