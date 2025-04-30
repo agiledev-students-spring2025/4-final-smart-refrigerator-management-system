@@ -1,22 +1,14 @@
+version: "3.9"
+
 services:
   frontend:
     build: ./front-end
     ports:
-      - "3000:3000"
-    volumes:
-      - ./front-end:/app
-      - /app/node_modules
-    stdin_open: true
-    tty: true
-    environment:
-      - CHOKIDAR_USEPOLLING=true  # for Mac/Windows live reload
+      - "3000:80"  # Expose Nginx on port 3000
 
   backend:
     build: ./back-end
     ports:
       - "5001:5001"
-    volumes:
-      - ./back-end:/app
-      - /app/node_modules
     env_file:
       - ./back-end/.env
