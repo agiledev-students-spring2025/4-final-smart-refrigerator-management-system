@@ -1,6 +1,6 @@
 import "./AccountSetting.css"
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -255,9 +255,6 @@ export default function AccountSetting () {
             changeText="password"
             onSave={handlePasswordSave}
             />
-            <div>
-                <p>getting error? navigate to <Link to="/Help-Support">help & support</Link></p>
-            </div>
         </div>
     )
 }

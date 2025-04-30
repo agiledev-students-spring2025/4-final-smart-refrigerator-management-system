@@ -7,11 +7,11 @@ function HelpSupport() {
     const faqs = [
         {
             question: "How do I update my profile?",
-            answer: "Go to your Account Settings and click on 'Edit Profile'."
+            answer: "Navigate to Account Settings and edit desired information."
         },
         {
             question: "How do I reset my password?",
-            answer: "Click on 'Forgot Password' on the login screen and follow the instructions."
+            answer: "Navigate to Account Settings and see at the bottom for reseting password."
         },
         {
             question: "How can I delete my account?",
@@ -20,6 +20,10 @@ function HelpSupport() {
         {
             question: "How do I manage my dietary preferences?",
             answer: "Go to Settings > Dietary Preferences and customize your selections."
+        },
+        {
+            question: "My questions are not here / I want to give feedback",
+            answer: "Please contact support at help@smartfridge.com"
         }
     ];
 
